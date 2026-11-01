@@ -428,6 +428,49 @@ Comprobar la convergencia (hipótesis del método), convertir a sistema de prime
 
 
 \section{Parcial II}
+
+
+\begin{ejer}
+    [5.5.1 (ii)] Consideremos $m = 2$, dado por $y = [u, v]^T$ y $f(y) = \left(\begin{smallmatrix} uv \\ u + v \end{smallmatrix} \right)$.
+\end{ejer}
+\begin{sol}
+    \begin{itemize}
+    \item \textbf{Orden 1:} $y^{(1)} = f(y) = \begin{pmatrix} uv \\ u + v \end{pmatrix}$
+    \item \textbf{Orden 2:} Matriz Jacobiana $J(y)$ multiplicada por $f(y)$:
+    \[
+    y^{(2)} = \{f\} = f^{(1)}(f) = \begin{pmatrix} v & u \\ 1 & 1 \end{pmatrix} \begin{pmatrix} uv \\ u + v \end{pmatrix} = \begin{pmatrix} uv^2 + u^2 + uv \\ uv + u + v \end{pmatrix}
+    \]
+    \item \textbf{Orden 3:} Descomposición $y^{(3)} = \{f^2\} + \{\{f\}\}$:
+    \begin{enumerate}
+        \item \textit{Término $\{f^2\} = f^{(2)}(f, f)$:} Usando derivadas de 2º orden. Para $\!^1 f=uv$, las derivadas no nulas son cruzadas. Para $\!^2 f=u+v$ son nulas:
+        \[
+        f^{(2)}(f, f) = \begin{pmatrix} 0(uv)^2 + 2(1)(uv)(u+v) + 0(u+v)^2 \\ 0 \end{pmatrix} = \begin{pmatrix} 2uv(u+v) \\ 0 \end{pmatrix}
+        \]
+        \item \textit{Término $\{\{f\}\} = f^{(1)}(f^{(1)}(f))$:} Aplicando la Jacobiana al vector de orden 2:
+        \[
+        f^{(1)}(\{f\}) = \begin{pmatrix} v & u \\ 1 & 1 \end{pmatrix} \begin{pmatrix} uv^2 + u^2 + uv \\ uv + u + v \end{pmatrix} = \begin{pmatrix} v^3u + 2u^2v + uv^2 + u^2 + uv \\ uv^2 + u^2 + 2uv + u + v \end{pmatrix}
+        \]
+    \end{enumerate}
+    Sumando ambos términos se obtiene la tercera derivada total exacta $y^{(3)}$ del sistema.
+\end{itemize}
+\end{sol}
+\begin{ejer}
+    [5.5.1 (iii)] Sistema Tridimensional (Cálculo tensorial). Consideremos $m = 3$, dado por $y = [u, v, w]^T$ y $f(y) = \left( \begin{smallmatrix} uvw \\ u(v+w) \\ v(v+w)  \end{smallmatrix}\right)$.
+\end{ejer}
+\begin{sol}
+\begin{itemize}
+    \item Derivadas de 1$^{er}$ orden (Jacobiana): ${\!^1}f_1 = vw, \, {\!^1}f_2 = uw, \, {\!^1}f_3 = uv \dots$
+    \item Derivadas de 2º orden (${^i}f_{jk}$): Para $f^1$, solo las cruzadas no son nulas (${\!^1}f_{12}=w$, etc). Para $f^2$, ${^2}f_{12}={^2}f_{13}=1$. Para $f^3$, ${^3}f_{22}=2, {^3}f_{23}=1, {^3}f_{32}=1$.
+    \item La primera diferencial elemental $\{f\}$ es:
+    $$ \{f\} = \begin{pmatrix} 
+        (vw)(uvw) + (uw)(u(v+w)) + (uv)(v(v+w)) \\ 
+        (v+w)(uvw) + u(u(v+w)) + u(v(v+w)) \\ 
+        0 + (2v+w)(u(v+w)) + v(v(v+w))
+    \end{pmatrix} $$
+\end{itemize}
+\end{sol}
+
+
 \begin{ejer}
 Calcular la expresi\'on del siguiente \'arbol complejo
 $$\begin{forest}

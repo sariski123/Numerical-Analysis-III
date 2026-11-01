@@ -346,6 +346,40 @@ Notemos que (5.24) se puede escribir como $y^{(2)} = \partial f / (\partial y) f
 
 Claramente no podemos seguir así para evaluar derivadas aún más altas (y todavía no hemos considerado el caso de un $m$ general). Una mejor notación es esencial, y de hecho se necesita más que una notación; necesitamos descubrir una \textit{estructura} para estas derivadas superiores. (En cuanto a la cuestión de la notación, se debe advertir al lector que en las siguientes secciones cambiaremos (y simplificaremos) continuamente la notación; la pauta será que tan pronto como nos familiaricemos con una notación particular, intentaremos simplificarla aún más).
 
+
+\subsection{Derivadas de Fréchet y diferenciales elementales}
+
+Dada la notación para un sistema de ecuaciones diferenciales autónomo $y' = f(y)$, definimos el vector de variables $y = [\, \!^1y, \!^2y, \dots, \!^my]^T$ y el campo vectorial $f = [\, \!^1f, \!^2f, \dots, \!^mf]^T$.
+Definimos las derivadas parciales con la notación por componentes:
+$$ {\!^i}f_j = \frac{\partial \!x^if}{\partial \!x^jy}, \quad {\!^i}f_{jk} = \frac{\partial^2 {\!^i}f}{\partial \!^jy \partial \!^ky} $$
+
+\begin{defi}[$M$-ésima Derivada de Fréchet]
+Sea $z, f(z) \in \mathbb{R}^m$. La $M$-ésima derivada de Fréchet de $f$, denotada por $f^{(M)}(z)$, es un operador multilineal sobre $\mathbb{R}^m \times \dots \times \mathbb{R}^m$ ($M$ veces), lineal en cada uno de sus operandos, cuya expresión por componentes es:
+\[
+f^{(M)}(z)(K_1, K_2, \dots, K_M) = \sum_{i=1}^{m} \sum_{j_1=1}^{m} \dots \sum_{j_M=1}^{m} {^i}f_{j_1 j_2 \dots j_M} \left(^{j_1}K_1\right) \left(^{j_2}K_2\right) \dots \left(^{j_M}K_M\right) e_i
+\]
+Donde $K_t = \left[ {\!^1}K_t, \dots, {^m}K_t \right]^T \in \mathbb{R}^m$ son los vectores operandos, ${^i}f_{j_1 j_2 \dots j_M}$ son las derivadas parciales de orden $M$, y $e_i$ es el $i$-ésimo vector canónico en $\mathbb{R}^m$.
+\end{defi}
+
+\subsubsection*{Desarrollo de las Derivadas Totales hasta el Orden 3}
+Mediante la notación de Fréchet con llaves $\{\}$, las derivadas totales de la solución exacta $y^{(q)}$ se descomponen de forma limpia como combinaciones lineales de \textit{diferenciales elementales}:
+
+\begin{itemize}
+    \item \textbf{Orden 1:} $y^{(1)} = f = \{\tau\}$
+    \item \textbf{Orden 2:} 
+    $$y^{(2)} = \frac{d}{dt} y^{(1)} = \frac{\partial f}{\partial y} \frac{dy}{dt} = \frac{\partial f}{\partial y} f = f^{(1)}(f) = \{f\}$$
+    *(Corresponde a la matriz Jacobiana multiplicada por $f$)*.
+    \item \textbf{Orden 3:} 
+    Aplicando la regla de la cadena multivariable:
+    $$y^{(3)} = \frac{d}{dt} y^{(2)} = f^{(2)}(f, f) + f^{(1)}(f^{(1)}(f)) = \{f^2\} + \{f\}_2$$
+    Donde el término bilineal $f^{(2)}(k_1, k_2)$ se construye con las matrices Hessianas (derivadas segundas).
+\end{itemize}
+
+
+
+
+
+
 Pongamos ahora $m = 2$, y veamos si podemos interpretar los resultados (5.24) y (5.25) de la sección anterior en términos de derivadas de Fréchet.
 
 \textbf{Caso $M = 1$}
@@ -405,33 +439,6 @@ es un diferencial elemental de orden
 \end{defi}
 El análisis tradicional del error mediante la expansión en series de Taylor multivariable se vuelve inmanejable para órdenes superiores a 3 en sistemas de ecuaciones. La Teoría de Butcher introduce una notación matemática y gráfica que simplifica drásticamente este proceso mediante el uso de derivadas de Fréchet y su correspondencia biunívoca con árboles enraizados.
 
-\subsection{Derivadas de Fréchet y diferenciales elementales}
-
-Dada la notación para un sistema de ecuaciones diferenciales autónomo $y' = f(y)$, definimos el vector de variables $y = [\, \!^1y, \!^2y, \dots, \!^my]^T$ y el campo vectorial $f = [\, \!^1f, \!^2f, \dots, \!^mf]^T$.
-Definimos las derivadas parciales con la notación por componentes:
-$$ {\!^i}f_j = \frac{\partial \!x^if}{\partial \!x^jy}, \quad {\!^i}f_{jk} = \frac{\partial^2 {\!^i}f}{\partial \!^jy \partial \!^ky} $$
-
-\begin{defi}[$M$-ésima Derivada de Fréchet]
-Sea $z, f(z) \in \mathbb{R}^m$. La $M$-ésima derivada de Fréchet de $f$, denotada por $f^{(M)}(z)$, es un operador multilineal sobre $\mathbb{R}^m \times \dots \times \mathbb{R}^m$ ($M$ veces), lineal en cada uno de sus operandos, cuya expresión por componentes es:
-\[
-f^{(M)}(z)(K_1, K_2, \dots, K_M) = \sum_{i=1}^{m} \sum_{j_1=1}^{m} \dots \sum_{j_M=1}^{m} {^i}f_{j_1 j_2 \dots j_M} \left(^{j_1}K_1\right) \left(^{j_2}K_2\right) \dots \left(^{j_M}K_M\right) e_i
-\]
-Donde $K_t = \left[ {\!^1}K_t, \dots, {^m}K_t \right]^T \in \mathbb{R}^m$ son los vectores operandos, ${^i}f_{j_1 j_2 \dots j_M}$ son las derivadas parciales de orden $M$, y $e_i$ es el $i$-ésimo vector canónico en $\mathbb{R}^m$.
-\end{defi}
-
-\subsubsection*{Desarrollo de las Derivadas Totales hasta el Orden 3}
-Mediante la notación de Fréchet con llaves $\{\}$, las derivadas totales de la solución exacta $y^{(q)}$ se descomponen de forma limpia como combinaciones lineales de \textit{diferenciales elementales}:
-
-\begin{itemize}
-    \item \textbf{Orden 1:} $y^{(1)} = f = \{\tau\}$
-    \item \textbf{Orden 2:} 
-    $$y^{(2)} = \frac{d}{dt} y^{(1)} = \frac{\partial f}{\partial y} \frac{dy}{dt} = \frac{\partial f}{\partial y} f = f^{(1)}(f) = \{f\}$$
-    *(Corresponde a la matriz Jacobiana multiplicada por $f$)*.
-    \item \textbf{Orden 3:} 
-    Aplicando la regla de la cadena multivariable:
-    $$y^{(3)} = \frac{d}{dt} y^{(2)} = f^{(2)}(f, f) + f^{(1)}(f^{(1)}(f)) = \{f^2\} + \{f\}_2$$
-    Donde el término bilineal $f^{(2)}(k_1, k_2)$ se construye con las matrices Hessianas (derivadas segundas).
-\end{itemize}
 
 
 
@@ -446,45 +453,6 @@ Mediante la notación de Fréchet con llaves $\{\}$, las derivadas totales de la
 
 
 
-\begin{ejer}
-    [5.5.1 (ii)] Consideremos $m = 2$, dado por $y = [u, v]^T$ y $f(y) = \left(\begin{smallmatrix} uv \\ u + v \end{smallmatrix} \right)$.
-\end{ejer}
-\begin{sol}
-    \begin{itemize}
-    \item \textbf{Orden 1:} $y^{(1)} = f(y) = \begin{pmatrix} uv \\ u + v \end{pmatrix}$
-    \item \textbf{Orden 2:} Matriz Jacobiana $J(y)$ multiplicada por $f(y)$:
-    \[
-    y^{(2)} = \{f\} = f^{(1)}(f) = \begin{pmatrix} v & u \\ 1 & 1 \end{pmatrix} \begin{pmatrix} uv \\ u + v \end{pmatrix} = \begin{pmatrix} uv^2 + u^2 + uv \\ uv + u + v \end{pmatrix}
-    \]
-    \item \textbf{Orden 3:} Descomposición $y^{(3)} = \{f^2\} + \{\{f\}\}$:
-    \begin{enumerate}
-        \item \textit{Término $\{f^2\} = f^{(2)}(f, f)$:} Usando derivadas de 2º orden. Para $\!^1 f=uv$, las derivadas no nulas son cruzadas. Para $\!^2 f=u+v$ son nulas:
-        \[
-        f^{(2)}(f, f) = \begin{pmatrix} 0(uv)^2 + 2(1)(uv)(u+v) + 0(u+v)^2 \\ 0 \end{pmatrix} = \begin{pmatrix} 2uv(u+v) \\ 0 \end{pmatrix}
-        \]
-        \item \textit{Término $\{\{f\}\} = f^{(1)}(f^{(1)}(f))$:} Aplicando la Jacobiana al vector de orden 2:
-        \[
-        f^{(1)}(\{f\}) = \begin{pmatrix} v & u \\ 1 & 1 \end{pmatrix} \begin{pmatrix} uv^2 + u^2 + uv \\ uv + u + v \end{pmatrix} = \begin{pmatrix} v^3u + 2u^2v + uv^2 + u^2 + uv \\ uv^2 + u^2 + 2uv + u + v \end{pmatrix}
-        \]
-    \end{enumerate}
-    Sumando ambos términos se obtiene la tercera derivada total exacta $y^{(3)}$ del sistema.
-\end{itemize}
-\end{sol}
-\begin{ejer}
-    [5.5.1 (iii)] Sistema Tridimensional (Cálculo tensorial). Consideremos $m = 3$, dado por $y = [u, v, w]^T$ y $f(y) = \left( \begin{smallmatrix} uvw \\ u(v+w) \\ v(v+w)  \end{smallmatrix}\right)$.
-\end{ejer}
-\begin{sol}
-\begin{itemize}
-    \item Derivadas de 1$^{er}$ orden (Jacobiana): ${\!^1}f_1 = vw, \, {\!^1}f_2 = uw, \, {\!^1}f_3 = uv \dots$
-    \item Derivadas de 2º orden (${^i}f_{jk}$): Para $f^1$, solo las cruzadas no son nulas (${\!^1}f_{12}=w$, etc). Para $f^2$, ${^2}f_{12}={^2}f_{13}=1$. Para $f^3$, ${^3}f_{22}=2, {^3}f_{23}=1, {^3}f_{32}=1$.
-    \item La primera diferencial elemental $\{f\}$ es:
-    $$ \{f\} = \begin{pmatrix} 
-        (vw)(uvw) + (uw)(u(v+w)) + (uv)(v(v+w)) \\ 
-        (v+w)(uvw) + u(u(v+w)) + u(v(v+w)) \\ 
-        0 + (2v+w)(u(v+w)) + v(v(v+w))
-    \end{pmatrix} $$
-\end{itemize}
-\end{sol}
 
 \subsection{Árboles enraizados y representación visual}
 
