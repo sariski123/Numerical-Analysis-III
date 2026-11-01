@@ -307,10 +307,10 @@ $$\begin{aligned} k_3 = f &+ h \{c_3 f_x + [(c_3 - a_{32})k_1 + a_{32}k_2]f_y\} 
 % ---------------------------------------------------------
 
 \section{Teoría de Butcher: Derivadas de Fréchet, \'arboles y correspondencia} 
-\subsection{Introducci\'on} \footnote{Lambert p. 157-162}
+\subsection{Introducci\'on} 
 %Las ideas que estamos a punto de describir se remontan a un artículo de Merson (1957), pero su desarrollo en una teoría importante se debe a J. C. Butcher, en una larga serie de artículos que comenzaron a mediados de la década de 1960. El lector que desee ver una descripción completa de la teoría puede consultar el libro de Butcher (1987) que, dicho sea de paso, contiene la bibliografía disponible más completa sobre el tema de los métodos numéricos para ecuaciones diferenciales ordinarias, con unas 2000 entradas. En las secciones siguientes presentaremos solo una versión simplificada de la teoría, con el objetivo de permitir al lector utilizar la teoría para establecer las condiciones de orden (y la estructura del error de truncamiento local) y apreciar algunas de las consecuencias. En particular, no daremos ninguna prueba de los teoremas involucrados, y nuestro tratamiento de los aspectos algebraicos no será riguroso (¡posiblemente hasta el punto de ofender a algunos lectores!).
 
-Recordemos que, si bien hay una pérdida de generalidad al asumir que el problema de valor inicial \textit{escalar} es autónomo, no hay tal pérdida en el caso de un problema que involucra un sistema de ecuaciones diferenciales ordinarias. Ahora estamos tratando con sistemas, y se logra una simplificación útil asumiendo la forma autónoma
+\footnote{Lambert p. 157-162}Recordemos que, si bien hay una pérdida de generalidad al asumir que el problema de valor inicial \textit{escalar} es autónomo, no hay tal pérdida en el caso de un problema que involucra un sistema de ecuaciones diferenciales ordinarias. Ahora estamos tratando con sistemas, y se logra una simplificación útil asumiendo la forma autónoma
 \begin{equation}
 y' = f(y), \quad y(a) = \eta, \qquad f : \mathbb{R}^m \to \mathbb{R}^m, \quad m > 1 \tag{5.22}
 \end{equation}
@@ -417,8 +417,7 @@ y^{(3)} = f^{(2)}(f, f) + f^{(1)}(f^{(1)}(f)) \tag{5.33}
 \end{equation}
 Comparando esto con la última de (5.23) (el resultado correspondiente para el caso escalar) vemos que hemos logrado una generalización que parece natural; es sencillo demostrar que cuando $m = 1$, $f^{(2)}(f, f)$ se reduce a $f_{yy} f^2$ y $f^{(1)}(f^{(1)}(f))$ a $f_y^2 f$.
 
-Por supuesto, hemos probado los resultados (5.30) y (5.33) sólo para el caso $m = 2$, pero no es difícil ver que se cumplirán para todo $m$. Así, hemos visto que $y^{(2)}$ es una única derivada de Fréchet de orden 1 y que $y^{(3)}$ es una combinación lineal de derivadas de Fréchet de órdenes 1 y 2. En general, $y^{(p)}$ resulta ser una combinación lineal de derivadas de Fréchet de órdenes hasta $p - 1$. Los componentes en tales combinaciones lineales se llaman \textit{diferenciales elementales}; son las contrapartes para sistemas de términos como $F$ y $G$ (véase (5.15)) para problemas escalares, y son los bloques de construcción naturales para los métodos de Runge-Kutta. Se definen recursivamente de la siguiente manera:
-
+Por supuesto, hemos probado los resultados (5.30) y (5.33) sólo para el caso $m = 2$, pero no es difícil ver que se cumplirán para todo $m$. Así, hemos visto que $y^{(2)}$ es una única derivada de Fréchet de orden 1 y que $y^{(3)}$ es una combinación lineal de derivadas de Fréchet de órdenes 1 y 2. En general, $y^{(p)}$ resulta ser una combinación lineal de derivadas de Fréchet de órdenes hasta $p - 1$. Los componentes en tales combinaciones lineales se llaman \textit{diferenciales elementales}; son las contrapartes para sistemas de términos como $F=f_x+ff_y$ y $G=f_{xx}+2ff_{xy}+f^2 f_{yy}$  para problemas escalares, y son los bloques de construcción naturales para los métodos de Runge-Kutta. Se definen recursivamente de la siguiente manera.d
 \begin{defi} Los \textit{diferenciales elementales} $F_s : \mathbb{R}^m \to \mathbb{R}^m$ de $f$ y su orden se definen recursivamente por
 \begin{itemize}
  \item [(i)] $f$ es el único diferencial elemental de orden 1, y 
