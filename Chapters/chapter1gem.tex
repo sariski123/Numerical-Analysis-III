@@ -337,7 +337,7 @@ y
 \!^1 y^{(3)} &= \!^1 f_{11} (\, \!^1 f)^2 + \!^1 f_{12} (\, \!^1 f)(\, \!^2 f) + \!^1 f_1 \left[\, \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (\, \!^2 f)\right] \\
 &\quad + \!^1 f_{21} (\, \!^2 f)(\, \!^1 f) + \!^1 f_{22} (\, \!^2 f)^2 + \!^1 f_2 \left[\, \!^2 f_1 (\, \!^1 f) + \!^2 f_2 (\, \!^2 f)\right] \\
 \!^2 y^{(3)} &= \!^2 f_{11} (\, \!^1 f)^2 + \!^2 f_{12} (\, \!^1 f)(^2 f) +\!^2 f_1 \left[\, \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (^2 f)\right] \\
-&\quad +\!^2 f_{21} (^2 f)(\!^1 f) +\!^2 f_{22} (^2 f)^2 +\!^2 f_2 \left[^2 f_1 (\, \!^1 f) +\!^2 f_2 (^2 f)\right].
+&\quad +\!^2 f_{21} (^2 f)(\!^1 f) +\!^2 f_{22} (^2 f)^2 +\!^2 f_2 \left[^2 f_1 (\, \!^1 f) +\!^2 f_2 (^2 f)\right]
 \end{aligned}
 \right\} \tag{5.25}
 \end{equation}
@@ -351,24 +351,24 @@ Claramente no podemos seguir así para evaluar derivadas aún más altas (y toda
 
 Dada la notación para un sistema de ecuaciones diferenciales autónomo $y' = f(y)$, definimos el vector de variables $y = [\, \!^1y, \!^2y, \dots, \!^my]^T$ y el campo vectorial $f = [\, \!^1f, \!^2f, \dots, \!^mf]^T$.
 Definimos las derivadas parciales con la notación por componentes:
-$$ {\!^i}f_j = \frac{\partial \!x^if}{\partial \!x^jy}, \quad {\!^i}f_{jk} = \frac{\partial^2 {\!^i}f}{\partial \!^jy \partial \!^ky} $$
+$$ {\!^i}f_j = \frac{\partial \, \!^if}{\partial \, \!^jy}, \quad {\!^i}f_{jk} = \frac{\partial^2 \, {\!^i}f}{\partial \, \!^jy \, \partial \, \!^ky} $$
 
 \begin{defi}[$M$-ésima Derivada de Fréchet]
 Sea $z, f(z) \in \mathbb{R}^m$. La $M$-ésima derivada de Fréchet de $f$, denotada por $f^{(M)}(z)$, es un operador multilineal sobre $\mathbb{R}^m \times \dots \times \mathbb{R}^m$ ($M$ veces), lineal en cada uno de sus operandos, cuya expresión por componentes es:
 \[
 f^{(M)}(z)(K_1, K_2, \dots, K_M) = \sum_{i=1}^{m} \sum_{j_1=1}^{m} \dots \sum_{j_M=1}^{m} {^i}f_{j_1 j_2 \dots j_M} \left(^{j_1}K_1\right) \left(^{j_2}K_2\right) \dots \left(^{j_M}K_M\right) e_i
 \]
-Donde $K_t = \left[ {\!^1}K_t, \dots, {^m}K_t \right]^T \in \mathbb{R}^m$ son los vectores operandos, ${^i}f_{j_1 j_2 \dots j_M}$ son las derivadas parciales de orden $M$, y $e_i$ es el $i$-ésimo vector canónico en $\mathbb{R}^m$.
+Donde $K_t = \left[ \, {\!^1}K_t, \dots, {\!^m}K_t \right]^T \in \mathbb{R}^m$ son los vectores operandos, ${\!^i}f_{j_1 j_2 \dots j_M}$ son las derivadas parciales de orden $M$, y $e_i$ es el $i$-ésimo vector canónico en $\mathbb{R}^m$.
 \end{defi}
 
-\subsubsection*{Desarrollo de las Derivadas Totales hasta el Orden 3}
+\subsubsection*{Desarrollo de las derivadas totales hasta orden 3}
 Mediante la notación de Fréchet con llaves $\{\}$, las derivadas totales de la solución exacta $y^{(q)}$ se descomponen de forma limpia como combinaciones lineales de \textit{diferenciales elementales}:
 
 \begin{itemize}
-    \item \textbf{Orden 1:} $y^{(1)} = f = \{\tau\}$
+    \item \textbf{Orden 1:} $y^{(1)} = f$
     \item \textbf{Orden 2:} 
     $$y^{(2)} = \frac{d}{dt} y^{(1)} = \frac{\partial f}{\partial y} \frac{dy}{dt} = \frac{\partial f}{\partial y} f = f^{(1)}(f) = \{f\}$$
-    *(Corresponde a la matriz Jacobiana multiplicada por $f$)*.
+    (Corresponde a la matriz Jacobiana multiplicada por $f$)
     \item \textbf{Orden 3:} 
     Aplicando la regla de la cadena multivariable:
     $$y^{(3)} = \frac{d}{dt} y^{(2)} = f^{(2)}(f, f) + f^{(1)}(f^{(1)}(f)) = \{f^2\} + \{f\}_2$$
@@ -376,16 +376,11 @@ Mediante la notación de Fréchet con llaves $\{\}$, las derivadas totales de la
 \end{itemize}
 
 
-
-
-
-
 Pongamos ahora $m = 2$, y veamos si podemos interpretar los resultados (5.24) y (5.25) de la sección anterior en términos de derivadas de Fréchet.
 
 \textbf{Caso $M = 1$}
 \begin{align}
-f^{(1)}(z)(K_1) &= \sum_{i=1}^2 \sum_{j_1=1}^2 {}^i f_{j_1} ({}^{j_1} K_1) e_i \nonumber \\
-&= \begin{bmatrix} \!^1 f_1 (\, \!^1 K_1) + \!^1 f_2 (^2 K_1) \\\!^2 f_1 (\, \!^1 K_1) +\!^2 f_2 (^2 K_1) \end{bmatrix} \tag{5.28}
+f^{(1)}(z)(K_1) &= \sum_{i=1}^2 \sum_{j_1=1}^2 {}^i f_{j_1} ({}^{j_1} K_1) e_i = \begin{bmatrix} \!^1 f_1 (\, \!^1 K_1) + \!^1 f_2 (^2 K_1) \\\!^2 f_1 (\, \!^1 K_1) +\!^2 f_2 (^2 K_1) \end{bmatrix} \tag{5.28}
 \end{align}
 donde
 \[
@@ -405,20 +400,20 @@ Así, la segunda derivada de $y$ es la primera derivada de Fréchet de $f$ opera
 \textbf{Caso $M = 2$}
 \begin{align*}
 f^{(2)}(z)(K_1, K_2) &= \sum_{i=1}^2 \sum_{j_1=1}^2 \sum_{j_2=1}^2 \,^i f_{j_1 j_2} ({}^{j_1} K_1) ({}^{j_2} K_2) e_i \\
-&= \begin{bmatrix} \!^1 f_{11} (\, \!^1 K_1)(\!^1 K_2) + \!^1 f_{12} (\, \!^1 K_1)(^2 K_2) + \!^1 f_{21} (^2 K_1)(\!^1 K_2) + \!^1 f_{22} (^2 K_1)(^2 K_2) \\ \!^2 f_{11} (\, \!^1 K_1)(\,\!^1 K_2) + \!^2 f_{12} (\, \!^1 K_1)(^2 K_2) + \!^2 f_{21} (\,\!^2 K_1)(\!^1 K_2) + \!^2 f_{22} (^2 K_1)(^2 K_2) \end{bmatrix}.
+&= \begin{bmatrix} \!^1 f_{11} (\, \!^1 K_1)(\!^1 K_2) + \!^1 f_{12} (\, \!^1 K_1)(^2 K_2) + \!^1 f_{21} (^2 K_1)(\!^1 K_2) + \!^1 f_{22} (^2 K_1)(^2 K_2) \\ \!^2 f_{11} (\, \!^1 K_1)(\,\!^1 K_2) + \!^2 f_{12} (\, \!^1 K_1)(^2 K_2) + \!^2 f_{21} (\,\!^2 K_1)(\!^1 K_2) + \!^2 f_{22} (^2 K_1)(^2 K_2) \end{bmatrix}
 \end{align*}
 Reemplazamos $z$ por $y$ y ponemos $K_1 = K_2 = f$ para obtener
 \begin{equation}
-f^{(2)}(y)(f(y), f(y)) = \begin{bmatrix} \!^1 f_{11} (\, \!^1 f)^2 + 2(\!^1 f_{12})(\!^1 f)(^2 f) + \!^1 f_{22} (^2 f)^2 \\ \!^2 f_{11} (\, \!^1 f)^2 + 2(^2 f_{12})(\!^1 f)(^2 f) + \!^2 f_{22} (^2 f)^2 \end{bmatrix}, \tag{5.31}
+f^{(2)}(y)(f(y), f(y)) = \begin{bmatrix} \!^1 f_{11} (\, \!^1 f)^2 + 2(\,\!^1 f_{12})(\,\!^1 f)(^2 f) + \!^1 f_{22} (^2 f)^2 \\ \!^2 f_{11} (\, \!^1 f)^2 + 2(\,^2 f_{12})(\,\!^1 f)(^2 f) + \!^2 f_{22} (^2 f)^2 \end{bmatrix} \tag{5.31}
 \end{equation}
 donde la notación del lado izquierdo indica que las derivadas parciales son con respecto a los componentes de $y$, no de $z$. Al comparar con (5.25), vemos que el lado derecho de (5.31) representa algunos, pero no todos, de los términos del lado derecho de (5.25), y que obtenemos $y^{(3)}$ sumando al lado derecho de (5.31) el vector
 \begin{equation}
-\begin{bmatrix} \!^1 f_1 [\, \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (^2 f)] + \!^1 f_2 [^2 f_1 (\, \!^1 f) + \!^2 f_2 (^2 f)] \\ \!^2 f_1 [\, \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (^2 f)] + \!^2 f_2 [^2 f_1 (\, \!^1 f) + \!^2 f_2 (^2 f)] \end{bmatrix}. \tag{5.32}
+\begin{bmatrix} \!^1 f_1 [\, \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (^2 f)] + \!^1 f_2 [^2 f_1 (\, \!^1 f) + \!^2 f_2 (^2 f)] \\ \!^2 f_1 [\, \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (^2 f)] + \!^2 f_2 [^2 f_1 (\, \!^1 f) + \!^2 f_2 (^2 f)] \end{bmatrix} \tag{5.32}
 \end{equation}
 
 Ahora bien, si en (5.29) reemplazamos el operando $f(y)$ por el operando $f^{(1)}(y)(f(y))$ (dado por la propia (5.29)), el resultado es precisamente (5.32). Por tanto, acortando la notación como en (5.30), (5.25) se puede escribir como
 \begin{equation}
-y^{(3)} = f^{(2)}(f, f) + f^{(1)}(f^{(1)}(f)). \tag{5.33}
+y^{(3)} = f^{(2)}(f, f) + f^{(1)}(f^{(1)}(f)) \tag{5.33}
 \end{equation}
 Comparando esto con la última de (5.23) (el resultado correspondiente para el caso escalar) vemos que hemos logrado una generalización que parece natural; es sencillo demostrar que cuando $m = 1$, $f^{(2)}(f, f)$ se reduce a $f_{yy} f^2$ y $f^{(1)}(f^{(1)}(f))$ a $f_y^2 f$.
 
@@ -426,7 +421,7 @@ Por supuesto, hemos probado los resultados (5.30) y (5.33) sólo para el caso $m
 
 \begin{defi} Los \textit{diferenciales elementales} $F_s : \mathbb{R}^m \to \mathbb{R}^m$ de $f$ y su orden se definen recursivamente por
 \begin{itemize}
- \item [(i)] $f$ es el único diferencial elemental de orden 1, y \\
+ \item [(i)] $f$ es el único diferencial elemental de orden 1, y 
  \item [(ii)] si $F_s, s = 1, 2, \dots, M$ son diferenciales elementales de órdenes $r_s$ respectivamente, entonces la derivada de Fréchet
 \begin{equation}
 f^{(M)}(F_1, F_2, \dots, F_M) \tag{5.34}
@@ -500,7 +495,7 @@ etc. no se consideran etiquetados esencialmente diferentes, y $\alpha(t_1) = 1$.
 t_2 = [\tau[\tau]] = \vcenter{\hbox{\begin{forest}
   for tree={grow=north, circle, fill=black, inner sep=1pt, minimum size=2.5pt, l sep=10pt, s sep=8pt}
   [ [ ] [ [ ] ] ]
-\end{forest}}} . \quad \text{Entonces} \quad 
+\end{forest}}} \, . \quad \text{Entonces} \quad 
 \vcenter{\hbox{\begin{forest}
   for tree={grow=north, circle, fill=black, inner sep=1pt, minimum size=2.5pt, l sep=10pt, s sep=8pt}
   [ , label=below:{\tiny 1} [ , label=above:{\tiny 2} ] [ , label=left:{\tiny 3} [ , label=above:{\tiny 4} ] ] ]
@@ -590,7 +585,7 @@ La relación se establece mediante dos reglas fundamentales:
 \begin{enumerate}
     \item \textbf{Caso Base (Orden 1):} El único árbol de orden $1$ ($\tau$) corresponde exactamente a la función vectorial $f$:
     \[ \tau \iff f \]
-    \item \textbf{Paso Inductivo (Ramificación / \textit{Grafting}):} Si tenemos diferenciales elementales $F_1, F_2, \dots, F_M$ correspondientes a árboles $t_1, t_2, \dots, t_M$, el diferencial formado por la derivada de Fréchet:
+    \item \textbf{Paso Inductivo (Ramificación/\textit{Grafting}):} Si tenemos diferenciales elementales $F_1, F_2, \dots, F_M$ correspondientes a árboles $t_1, t_2, \dots, t_M$, el diferencial formado por la derivada de Fréchet:
     \[ \{F_1 F_2 \dots F_M\} \iff f^{(M)}(F_1, \dots, F_M) \]
     corresponde al nuevo árbol obtenido al injertar los árboles $t_1, \dots, t_M$ sobre una nueva raíz común.
 \end{enumerate}
