@@ -1,0 +1,218 @@
+
+\chapter{Diagramas estabilidad y tablas (Lambert)}
+% DIAGRAMA 1: Sintaxis general
+\begin{center}
+\begin{tikzpicture}
+    \node[draw, thick, align=center, inner sep=3mm] (prob) {Problema};
+    \node[draw, thick, align=center, inner sep=3mm, right=1.5cm of prob] (impCp) {Imponer $C_p$};
+    \node[right=0.5cm of impCp] (arrow1) {$\Rightarrow$};
+    \node[draw, thick, align=center, inner sep=3mm, right=0.5cm of arrow1] (yprop) {$y(x)$ posee la\\propiedad de estabilidad};
+
+    \node[draw, thick, align=center, inner sep=3mm, below=1.5cm of prob] (meth) {Método};
+    \node[draw, thick, align=center, inner sep=3mm, right=1.5cm of meth] (impCm) {Imponer $C_m$};
+    \node[right=0.5cm of impCm] (arrow2) {$\Rightarrow$};
+    \node[draw, thick, align=center, inner sep=3mm, right=0.5cm of arrow2] (ynprop) {$\{y_n\}$ posee una\\propiedad de\\estabilidad análoga};
+
+    \draw[->, thick] (prob) -- (impCp);
+    \draw[->, thick] (meth) -- (impCm);
+    % Flecha diagonal invertida y conectada a las esquinas para no atravesar cajas
+    \draw[->, thick] (impCp.south west) -- (meth.north east);
+\end{tikzpicture}
+\end{center}
+
+% DIAGRAMA 2: Zero-stability
+\begin{center}
+\begin{tikzpicture}
+    \node[draw, thick, align=center, inner sep=3mm] (prob) {Problema};
+    \node[draw, thick, align=center, inner sep=3mm, right=1.5cm of prob] (lip) {Condición de Lipschitz\\$\|f(x,y) - f(x,y^*)\| \le L\|y-y^*\|$};
+    \node[right=0.5cm of lip] (arrow1) {$\Rightarrow$};
+    \node[draw, thick, align=center, inner sep=3mm, right=0.5cm of arrow1] (tot) {Problema\\totalmente estable};
+
+    \node[draw, thick, align=center, inner sep=3mm, below=1cm of prob] (meth) {Método};
+    \node[draw, thick, align=center, inner sep=3mm, right=1.5cm of meth] (root) {$\rho(\zeta)$ satisface la\\condición de la raíz};
+    \node[right=3.5cm of root] (arrow2) {$\Rightarrow$};
+    \node[draw, thick, align=center, inner sep=3mm, right=0.5cm of arrow2] (zero) {Método\\cero-estable};
+
+    \draw[->, thick] (prob) -- (lip);
+    \draw[->, thick] (meth) -- (root);
+    % Flecha diagonal invertida y conectada a las esquinas para no atravesar cajas
+    \draw[->, thick] (lip.south west) -- (meth.north east);
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.1cm}
+% DIAGRAMA 3: Convergence (Alternative zero-stability)
+\begin{center}
+\begin{tikzpicture}
+    \node[draw, thick, align=center, inner sep=3mm] (prob) {Problema};
+    \node[draw, thick, align=center, inner sep=3mm, right=1.5cm of prob] (lip) {Condición de Lipschitz\\$\|f(x,y) - f(x,y^*)\| \le L\|y-y^*\|$};
+    \node[right=0.5cm of lip] (arrow1) {$\Rightarrow$};
+    \node[draw, thick, align=center, inner sep=3mm, right=0.5cm of arrow1] (tot) {Problema\\totalmente estable};
+
+    \node[draw, thick, align=center, inner sep=3mm, below=1cm of prob] (meth) {Método};
+    \node[draw, thick, align=center, inner sep=3mm, right=1.5cm of meth] (cons) {Método consistente\\y cero-estable};
+    \node[right=3cm of cons] (arrow2) {$\Rightarrow$};
+    \node[draw, thick, align=center, inner sep=3mm, right=0.5cm of arrow2] (conv) {$\{y_n\}$ converge\\a $y(x)$};
+
+    \draw[->, thick] (prob) -- (lip);
+    \draw[->, thick] (meth) -- (cons);
+    % Flecha diagonal invertida y conectada a las esquinas para no atravesar cajas
+    \draw[->, thick] (lip.south west) -- (meth.north east);
+\end{tikzpicture}
+\end{center}
+\vfill
+
+
+
+
+
+
+
+
+
+
+
+
+\section*{Tablas de Runge-Kutta e Integración de Árboles} 
+
+% --- COLUMNA IZQUIERDA ---
+\begin{minipage}[t]{0.48\textwidth}
+\subsection*{Tabla 5.1: Propiedades Combinatorias}\label{ap1} 
+\begin{center}
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{3pt}
+\small
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Tree} & \textbf{Name} & $r(t)$ & $\sigma(t)$ & $\gamma(t)$ & $\alpha(t)$ \\
+\midrule
+\pDot & $\tau$ & $1$ & $1$ & $1$ & $1$ \\
+\midrule
+\tTau & $[\tau]$ & $2$ & $1$ & $2$ & $1$ \\
+\midrule
+\tBranchThree & $[\tau^2]$ & $3$ & $2$ & $3$ & $1$ \\
+\tChainThree & $[[\tau]]$ & $3$ & $1$ & $6$ & $1$ \\
+\midrule
+\tFanFour & $[\tau^3]$ & $4$ & $6$ & $4$ & $1$ \\
+\tMixFour & $[\tau[\tau]]$ & $4$ & $1$ & $8$ & $3$ \\
+\tBranchFour & $[[\tau^2]]$ & $4$ & $2$ & $12$ & $1$ \\
+\tChainFour & $[[[\tau]]]$ & $4$ & $1$ & $24$ & $1$ \\
+\midrule
+\tChainFive & $[[[[\tau]]]]$ & $5$ & $1$ & $120$ & $1$ \\
+\tFanFive & $[\tau^4]$ & $5$ & $24$ & $5$ & $1$ \\
+\tTreeFiveThree & $[\tau[\tau^2]]$ & $5$ & $2$ & $15$ & $4$ \\
+\tTreeFiveFour & $[[\tau]^2]$ & $5$ & $2$ & $20$ & $3$ \\
+\tTreeFiveFive & $[\tau^3]_2$ & $5$ & $6$ & $10$ & $2$ \\
+\tTreeFiveSix & $[[\tau],\tau]_2$ & $5$ & $1$ & $30$ & $4$ \\
+\tTreeFiveSeven & $[[\tau]_2,\tau]$ & $5$ & $1$ & $40$ & $3$ \\
+\tTreeFiveEight & $[[\tau^2]]_3$ & $5$ & $2$ & $60$ & $1$ \\
+\tTreeFiveNine & $[\tau^2[\tau]]$ & $5$ & $2$ & $12$ & $5$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}%
+\hfill
+% --- COLUMNA DERECHA ---
+\begin{minipage}[t]{0.48\textwidth}
+\subsection*{Tabla 5.2: Diferenciales Elementales}
+\begin{center}
+\renewcommand{\arraystretch}{1.1}
+\small
+\begin{tabular}{cccc}
+\toprule
+\textbf{Order} & \textbf{Tree} & $t$ & $F(t)$ \\
+\midrule
+1 & \pDot & $\tau$ & $f$ \\
+\midrule
+2 & \tTau & $[\tau]$ & $\{f\}$ \\
+\midrule
+3 & \tBranchThree & $[\tau^2]$ & $\{f^2\}$ \\
+  & \tChainThree & $[\tau]_2$ & $\{_2 f\}_2$ \\
+\midrule
+4 & \tFanFour & $[\tau^3]$ & $\{f^3\}$ \\
+  & \tMixFour & $[\tau[\tau]]_2$ & $\{f\{f\}\}_2$ \\
+  & \tBranchFour & $[\tau^2]_2$ & $\{_2 f^2\}_2$ \\
+  & \tChainFour & $[\tau]_3$ & $\{_3 f\}_3$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.4cm}
+
+\subsection*{Tabla 5.4: Condiciones de Orden}
+\begin{center}
+\renewcommand{\arraystretch}{1.1}
+\small
+\begin{tabular}{ccccc}
+\toprule
+& & & \multicolumn{2}{c}{\textbf{Order conditions}} \\
+\cmidrule{4-5}
+\textbf{Tree} & $t$ & $r(t)$ & $\psi(t)$ & $= \frac{1}{\gamma(t)}$ \\
+\midrule
+\pDot & $\tau$ & $1$ & $\sum_{i} b_i$ & $= 1$ \\
+\midrule
+\tTau & $[\tau]$ & $2$ & $\sum_{i} b_i c_i$ & $= \frac{1}{2}$ \\
+\midrule
+\tBranchThree & $[\tau^2]$ & $3$ & $\sum_{i} b_i c_i^2$ & $= \frac{1}{3}$ \\
+\tChainThree & $[[\tau]]$ & $3$ & $\sum_{ij} b_i a_{ij} c_j$ & $= \frac{1}{6}$ \\
+\midrule
+\tFanFour & $[\tau^3]$ & $4$ & $\sum_{i} b_i c_i^3$ & $= \frac{1}{4}$ \\
+\tMixFour & $[\tau[\tau]]$ & $4$ & $\sum_{ij} b_i c_i a_{ij} c_j$ & $= \frac{1}{8}$ \\
+\tBranchFour & $[[\tau^2]]$ & $4$ & $\sum_{ij} b_i a_{ij} c_j^2$ & $= \frac{1}{12}$ \\
+\tChainFour & $[[[\tau]]]$ & $4$ & $\sum_{ijk} b_i a_{ij} a_{jk} c_k$ & $= \frac{1}{24}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+\vfill
+
+
+\subsection*{Tabla 5.3: Ponderaciones $\psi_i(t)$ y $\psi(t)$}
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\small
+\begin{tabular}{cccc}
+\toprule
+\textbf{Tree} & $t$ & $\psi_i(t), \, i = 1, 2, \dots, s$ & $\psi(t)$ \\
+\midrule
+\pDot & $\tau$ & $\sum_{j} a_{ij} \, (= c_i)$ & $\sum_{i} b_i$ \\
+\midrule
+\tTau & $[\tau]$ & $\sum_{j} a_{ij} c_j$ & $\sum_{i} b_i c_i$ \\
+\midrule
+\tBranchThree & $[\tau^2]$ & $\sum_{j} a_{ij} c_j^2$ & $\sum_{i} b_i c_i^2$ \\
+\tChainThree & $[[\tau]]$ & $\sum_{j} a_{ij} \sum_{k} a_{jk} c_k$ & $\sum_{ij} b_i a_{ij} c_j$ \\
+\midrule
+\tFanFour & $[\tau^3]$ & $\sum_{j} a_{ij} c_j^3$ & $\sum_{i} b_i c_i^3$ \\
+\tMixFour & $[\tau[\tau]]$ & $\sum_{j} a_{ij} c_j \sum_{k} a_{jk} c_k$ & $\sum_{ij} b_i c_i a_{ij} c_j$ \\
+\tBranchFour & $[[\tau^2]]$ & $\sum_{j} a_{ij} \sum_{k} a_{jk} c_k^2$ & $\sum_{ij} b_i a_{ij} c_j^2$ \\
+\tChainFour & $[[[\tau]]]$ & $\sum_{j} a_{ij} \sum_{k} a_{jk} \sum_{m} a_{km} c_m$ & $\sum_{ijk} b_i a_{ij} a_{jk} c_k$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\subsection*{Tabla 5.5: Árboles elementales y derivadas de Fréchet \hfill}
+\begin{center}
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{3pt}
+\small
+\begin{tabular}{cccc}
+\toprule
+$r(t)$ & $t$ & $F\{t\}$ & Scalar form \\
+\midrule
+1 & $\tau$ & $f$ & $f$ \\[0.4em]
+\hline
+2 & $[\tau]$ & $\{f\} = f^{(1)}\{f\}$ & $f_y f$ \\[0.4em]
+\hline
+3 & $[\tau^2]$ & $\{f^2\} = f^{(2)}\{f, f\}$ & $f_{yy} f^2$ \\
+  & $[\tau]_2$ & $\{f\}_2 = f^{(1)}\{f^{(1)}\{f\}\}$ & $(f_y)^2 f$ \\[0.4em]
+\hline
+4 & $[\tau^3]$ & $\{f^3\} = f^{(3)}\{f, f, f\}$ & $f_{yyy} f^3$ \\
+  & $[\tau[\tau]]_2$ & $\{f\{f\}\}_2 = f^{(2)}\{f, \{f\}\}$ & $f_{yy} f f_y f$ \\
+  & $[\tau^2]_2$ & $\{f^2\}_2 = f^{(1)}\{\{f^2\}\}$ & $f_y f_{yy} f^2$ \\
+  & $[\tau]_3$ & $\{f\}_3 = f^{(1)}\{\{f\}_2\}$ & $(f_y)^3 f$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vfill

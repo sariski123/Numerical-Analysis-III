@@ -1,0 +1,1331 @@
+\chapter{Teor\'ia} \justifying
+Ecuaciones diferenciales 2 tipos:
+\begin{itemize}
+    \item Lineales $y''+y=0$ (fáciles) $\Rightarrow P(D)y=0$. D operador derivada.
+    \item No Lineales $y''+\sin(y)=0$.
+\end{itemize}
+
+Resolución: $y''+y=0 \Rightarrow P(D)y=0 \Rightarrow (D^2+1)=0 \Rightarrow p_c = x^2+1$ pol carac.
+
+Si en vez del operador derivada $D$ elegimos el operador siguiente, $E$ tal que $E(y_n) = y_{n+1}$ y diferencia, $\nabla$ tal que $\nabla(y_n) = y_n - y_{n-1} = (I - E^{-1})y_n$, con la sucesión $\{y_n\}_{n=0}^{\infty}$ obtenemos ecuaciones en diferencias $P(E)y_n = 0$.
+
+Casos según $p_c$:
+\begin{enumerate}
+    \item Raíces reales distintas
+    \begin{enumerate}[noitemsep]
+        \item $p_c = x-\lambda $
+        \begin{itemize}[noitemsep]
+            \item $y'-\lambda y = 0 \Rightarrow y(x) = c \, e^{\lambda x}$
+            \item $y_{n+1}-\lambda y_n = 0 \Rightarrow y_n = c(\lambda)^n$
+        \end{itemize}
+        \item $p_c = (x-\lambda_1)\cdots(x-\lambda_n)$
+        \begin{itemize}
+            \item $y^{(n)} \dots + \lambda_1\cdots\lambda_n y = 0 \Rightarrow y(x) = c_1 e^{\lambda_1 x} + \dots + c_n e^{\lambda_n x}$
+            \item $y_{n+n} \dots + \lambda_1\cdots\lambda_n y_n = 0 \Rightarrow y_n = c_1 \lambda_1^n + \dots + c_n \lambda_n^n$
+        \end{itemize}
+    \end{enumerate}
+    \item Raíces dobles reales
+    \begin{enumerate}[noitemsep]
+        \item $p_c = (x-\lambda_1)^2$
+        \begin{itemize}[noitemsep]
+            \item $y''-2\lambda_1 y' + \lambda_1^2 y = 0 \Rightarrow y(x) = c_1 e^{\lambda_1 x} + c_2 x e^{\lambda_1 x}$
+            \item  $y_{n+2}-2\lambda_1 y_{n+1} + \lambda_1^2 y_n = 0 \Rightarrow y_n = c_1 \lambda_1^n + c_2 n \lambda_1^n$
+        \end{itemize}
+        \item $p_c = (x-\lambda_1)^m $ 
+        \begin{itemize}[noitemsep]
+            \item $y^{(m)} + \dots + \lambda_1^m y = 0 \Rightarrow y(x) = c_1 e^{\lambda_1 x} + c_2 x e^{\lambda_1 x} + \dots + c_m x^{m-1} e^{\lambda_1 x}$
+            \item $y_{m+n} +\dots + \lambda_1^m y_n = 0 \Rightarrow y_n = c_1 \lambda_1^n + c_2 n \lambda_1^n + \dots + c_m n^{m-1} \lambda_1^n$
+        \end{itemize}
+    \end{enumerate}
+    \item Raíces complejas. $\varrho = \sqrt{a^2+b^2}$, $\theta = \arctan(b/a) $
+    \begin{enumerate}[noitemsep]
+        \item $p_c = x^2 -2ax + (a^2 + b^2) = (x-a+bi)(x-a-bi) \Rightarrow r_1=a+bi, \, r_2 = a-bi$
+        \begin{itemize}[noitemsep]
+            \item $y'' - 2ay' + (a^2 + b^2)y = 0$ 
+            \begin{align*}
+                  y(x) & = A e^{(a+bi)x} + B e^{(a-bi)x} = e^{ax} \left( A e^{ibx} + B e^{-ibx} \right)  \\  & = e^{ax} \left[ (A+B)\cos(bx) + i(A-B)\sin(bx) \right]  \\  & = e^{ax}(c_1 \cos(bx) + c_2 \sin(bx))
+            \end{align*}
+            \item $y_{n+2} - 2ay_{n+1} + (a^2 + b^2)y_n = 0$
+            \begin{align*}
+                y_n & = A r_1^n + B r_2^n = A(\varrho e^{i\theta})^n + B(\varrho e^{-i\theta})^n  \\  & = \varrho^n \left[ (A+B)\cos(\theta n) + i(A-B)\sin(\theta n) \right]   \\  & = \varrho^n(c_1 \cos(\theta n) + c_2 \sin(\theta n))
+            \end{align*}
+        \end{itemize}
+        \item $p_c = (x-a+bi)^m (x-a-bi)^m$
+        \begin{itemize}[noitemsep]
+            \item $y^{(m)} + \cdots + b^{2m} y = 0 \Rightarrow$ \begin{align*}
+                y(x) = e^{a x}& \Big[ c_1 \cos b x + c_2 \sin b x +  x(c_3 \cos b x + c_4 \sin b x) + \cdots + x^{m-1}(c_{2m-1} \cos b x + c_{2m} \sin b x)\Big] \\ 
+                 = e^{a x} &  \sum_{k=0}^{m-1} x^k \left( c_{2k+1} \cos(b x) + c_{2k+2} \sin(b x) \right) 
+            \end{align*}
+            \item $y_{m+n} + \cdots + b^{2m} y_n = 0 \Rightarrow$ \begin{align*}
+               y_n = \varrho^n &  \Big[ c_1 \cos \theta n + c_2 \sin \theta n +  n(c_3 \cos \theta n + c_4 \sin \theta n) +  \cdots + n^{m-1}(c_{2m-1} \cos \theta n + c_{2m} \sin \theta n) \Big] \\ =  \varrho^n & \sum_{k=0}^{m-1} n^k \left( c_{2k+1} \cos(\theta n) + c_{2k+2} \sin(\theta n) \right)            
+            \end{align*} 
+        \end{itemize}
+    \end{enumerate}
+\end{enumerate}
+
+\section{Convergencia, estabilidad y consistencia (Lambert p. 32)}
+
+\begin{defi}
+    Un método numérico es una ecuación:
+\begin{equation}
+    \sum_{j=0}^k \alpha_j y_{n+j} = h \phi_f(y_{n+k}, \dots, y_n, x_n; h) \tag{2.4}
+\end{equation}
+donde el subíndice $f$ indica la dependencia de $\phi$ en $y_{n+k} \dots y_n, x_n$ por la función $f(x,y) = y'$.
+
+Se imponen dos condiciones para que sea método:
+\begin{equation}
+\begin{aligned}
+1. & \, \phi_{f=0}(y_{n+k}, \dots, y_n, x_n; h) \equiv 0, \\
+2. & \, \displaystyle \|\phi_f(y_{n+k}, \dots, y_n, x_n, h) - \phi_f(y^*_{n+k}, \dots, y^*_n, x_n, h)\| \le M \sum_{j=0}^k \|y_{n+j} - y^*_{n+j}\|.
+\end{aligned}
+\tag{2.5}
+\end{equation}
+ siendo $M$ una constante, y 2) una consecuencia de la condición de Lipschitz para la existencia de soluciones (Teorema del Valor Medio).
+
+\end{defi} 
+\begin{defi}
+    Un método es convergente si para todo problema de valor inicial se cumple
+$$ \lim_{\substack{h \to 0 \\ x = a+nh}} y_n = y(x) $$
+\end{defi} 
+
+\begin{defi}
+    El operador local de error truncado en $k$ es:
+$$ \mathscr L = \sum_{j=0}^k \alpha_j y(x_{n+j}) - h \phi_f(y(x_{n+k}), \dots, y(x_n), x_n; h) = \mathcal{O}(h^p) \text{ al menos} $$
+y mide la diferencia entre la solución real y la del método numérico.
+\end{defi}
+
+\begin{defi}
+    Un método se dice consistente si para cualquier c.i.:
+$$ \lim_{h \to 0} \frac{1}{h}\mathscr L = 0 $$
+(consistente con el sistema de ecuaciones diferenciales).
+\end{defi}
+
+\begin{defi}
+    Se define el primer polinomio caracter\'istico $\rho$ del método numérico como:
+$$ \rho(\zeta) = \sum_{j=0}^k \alpha_j \zeta^j $$
+\end{defi} 
+
+\begin{prop} Un método es consistente si y solo si satisface:
+\begin{enumerate}[itemsep=1em]
+    \item $\rho(1) = 0$
+    \item $\dfrac{\phi_f(y(x_n), \dots, y(x_n), x_n, 0)}{\rho'(1)} = f(x_n, y(x_n))$
+\end{enumerate}
+\end{prop}
+
+\begin{defi}
+    Dada $y'=f(x,y)$, $y(a)=\eta$, y una perturbación $\varepsilon$, $y^{*\prime}=f(x,y^*)+\varepsilon(x)$ $y^*(a)=\eta+\varepsilon$, decimos que un sistema es \textit{totalmente estable} si existe $S \ge 0$ t.q. $\forall x \in [a,b]$,
+$$ ||y(x) - y^*(x)|| \le S \varepsilon$$
+\end{defi} 
+   
+ \begin{defi}  
+Sean $\{\delta_n, n=0, 1, \dots, N\}$ y $\{\delta_n^*, n=0, 1, \dots, N\}$ dos perturbaciones cualesquiera del sistema diferencial, y sean $\{z_n, n=0, 1, \dots, N\}$ y $\{z_n^*, n=0, 1, \dots, N\}$ las soluciones perturbadas resultantes. Entonces, si existen constantes $S$ y $h_0$ tales que, para todo $h \in (0, h_0]$:
+   $$\vert{}\vert{}z_n - z_n^*\vert{}\vert{} \le S\varepsilon, \quad 0 \le n \le N$$siempre que:$$\vert{}\vert{}\delta_n - \delta_n^*\vert{}\vert{} \le \varepsilon, \quad 0 \le n \le N$$
+se dice que un método es \textit{zero-stable}. 
+\end{defi}
+
+\begin{defi}[alternativa] Se dice que un método es \textit{zero-stable} si satisface la condición de la raíz (es decir, si todas las raíces de su primer polinomio característico tienen un módulo menor o igual a uno, y aquellas de módulo uno son simples).
+\end{defi}
+
+\begin{teo}
+    [2.1] La condición necesaria y suficiente para que el método dado por (2.4) y (2.5) sea zero-estable es que satisfaga la condición de la raíz.
+\end{teo}
+\begin{teo}
+    [2.2] Las condiciones necesarias y suficientes para que un método num\'erico sea convergente son que sea tanto consistente como zero-estable.
+\end{teo} 
+
+\begin{obs}
+    Existen dos tipos de estabilidad, que vemos a continuaci\'on
+    \begin{center}
+\begin{tikzpicture}[xscale=1.2, yscale=1]
+
+    % 1. Estable
+    \node[anchor=west] at (0, 0) {\underline{Estable}};
+    % Líneas onduladas paralelas
+    \draw (2.5, 0.2) .. controls (3.5, 0.4) and (4.5, -0.1) .. (5.5, 0.2) .. controls (6.5, 0.5) and (7.5, 0.1) .. (8.5, 0.2);
+    \draw (2.5,-0.2) .. controls (3.5, 0.0) and (4.5,-0.5) .. (5.5,-0.2) .. controls (6.5, 0.1) and (7.5,-0.3) .. (8.5,-0.2);
+    % Barra vertical y etiqueta
+    \draw (8.5, 0.6) -- (8.5, -0.6);
+    \node[anchor=west] at (9.0, 0) {$S_\varepsilon = cte.$};
+    \fill (2.5, 0.2) circle (1.5pt);
+    \fill (2.5, -0.2) circle (1.5pt);
+
+
+    % 2. Asintóticamente estable (Modificado)
+    \node[anchor=west, align=left] at (0, -2.5) {\underline{Asintóticamente}\\\quad \underline{estable}};
+    % Puntos iniciales
+    \fill (3.5, -2.0) circle (1.5pt);
+    \fill (3.5, -3.0) circle (1.5pt);
+    % Curvas que se acercan asintóticamente sin llegar a tocarse
+    \draw (3.5, -2.0) to[out=0, in=180] (8.5, -2.4);
+    \draw (3.5, -3.0) to[out=0, in=180] (8.5, -2.6);
+    % Etiqueta
+    \node[anchor=west] at (9.0, -2.5) {$S_\varepsilon \xrightarrow{t \to \infty} 0$};
+
+
+    % 3. Inestable
+    \node[anchor=west] at (0, -5.5) {\underline{Inestable}};
+    % Etiquetas y puntos iniciales
+    \node[anchor=east] at (3.4, -5.5) {$x_0 + \varepsilon$};
+    \fill (3.5, -5.5) circle (1.5pt);
+    \node[anchor=east] at (3.4, -6.0) {$x_0$};
+    \fill (3.5, -6.0) circle (1.5pt);
+    % Curvas divergentes
+    \draw (3.5, -5.5) to[out=0, in=200] (8.5, -4.0);
+    \draw (3.5, -6.0) to[out=0, in=160] (8.5, -7.0);
+    % Etiqueta final
+    \node[anchor=west] at (9.0, -5.5) {$S_\varepsilon \longrightarrow \infty$};
+
+\end{tikzpicture}
+\end{center}
+\end{obs}
+\begin{ejem}
+    En la ecuaci\'on $y'=\lambda y$ con las condiciones iniciales $y_o$ y la perturbada $y_o+\varepsilon$, se tienen las soluciones $y(x) = y_o e^{\lambda x}, \, y(x) = (y_o + \varepsilon) e^{\lambda x}$, de forma que 
+    $$\begin{array}{cc}
+         y_o + e^{\lambda x}   \\
+        - \,  (y_o + \varepsilon) e^{\lambda x} \\ \hline
+        \varepsilon e^{\lambda x} 
+    \end{array}\Rightarrow \lim_{\lambda \to \infty} \varepsilon e^{\lambda x}  = 0 \iff \lambda \leq 0$$
+    siendo $\lambda$ claramente la ra\'iz de $p_c = x-\lambda$. As\'i, si $\lambda < 0$ es asint\'oticamente estable, si $\lambda=0$ es estable y si $\lambda> 0$ es inestable.
+\end{ejem}
+
+\section{Análisis de la estabilidad en función de las raíces $r_i$ del polinomio característico}
+\subsection*{Ecuaciones diferenciales}
+\begin{itemize}
+    \item \textbf{Raíces reales simples}
+    \begin{itemize}
+        \item $r_i < 0 \implies$ Asintóticamente estable.
+        \item $r_i = 0 \implies$ Estable.
+        \item $r_i > 0 \implies$ Inestable.
+    \end{itemize}
+    
+    \item \textbf{Raíces complejas simples}
+    \begin{itemize}        
+        \item $a=\Re(r_i) < 0 \implies$ Asint\'oticamente estable.
+        \item $a=\Re(r_i) = 0 \implies$ Estable.
+        \item $a=\Re(r_i) > 0 \implies$ Inestable.
+    \end{itemize}
+    
+    \item \textbf{Raíces dobles o múltiples (reales o complejas)}
+    \begin{itemize}
+        \item Siempre inestables (la solución se multiplica por la variable temporal).
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Ecuaciones en diferencias}
+\begin{itemize}
+    \item \textbf{Raíces simples (reales o complejas)}
+    \begin{itemize}
+        \item $|r_i| < 1 \implies$ Asintóticamente estable.
+        \item $|r_i| = 1 \implies$ Estable.
+        \item $|r_i| > 1 \implies$ Inestable.
+    \end{itemize}
+    
+    \item \textbf{Raíces dobles o múltiples}
+    \begin{itemize}
+        \item $|r_i| < 1 \implies$ Asintóticamente estable.
+        \item $|r_i| = 1 \implies$ Inestable.
+        \item $|r_i| > 1 \implies$ Inestable.
+    \end{itemize}
+\end{itemize}
+\begin{obs}
+    Para poder utilizar estos m\'etodos num\'ericos en ecuaciones de orden mayor que 1 necesitamos pasarlas a sistemas aut\'onomos, de forma que ya $y_i'=f(x,y_i)$, es decir, que $Y'=F(Y)$ siendo $Y = (y_1, \ldots, y_n)$. 
+\end{obs}
+\section{M\'etodos Runge-Kutta}
+\begin{defi}
+    El m\'etodo Runge-Kutta de $s$-etapas general para el problema
+    $$y' = f(x,y) \qquad y(a)=\eta \qquad f:\bb R \times \bb R^m \longrightarrow \bb R^m$$
+    se define como
+    $$y_{n+1} = y_n + h \sum_{i=1}^s b_i k_i$$
+    donde 
+    $$k_i = f \left( x_n +c_i h, \, y_n + h \sum_{j=1}^s a_{ij} k_j \right)\qquad i=1,2,\ldots, s$$
+\end{defi}
+
+Debemos asumir siempre que se cumple que 
+$$c_i = \sum_{j=1}^s a_{ij} \qquad i=1,2,\ldots, s$$
+
+Es conveniente presentar los coeficientes como una \textit{matriz de Butcher}
+$$\begin{array}{c|cccc}
+     c_1 & a_{11} & a_{12} & \cdots &  a_{1s} \\
+     c_2 & a_{21} & a_{22} & \cdots &  a_{2s} \\ 
+     \vdots & \vdots & &  & \vdots \\ 
+     c_s & a_{s1} & a_{s2} & \cdots &  a_{ss} \\ \hline
+     & b_1 & b_2 & \cdots & b_s
+\end{array}$$
+Definimos los vectores $s$-dimensionales $c$ y $b$ y la matriz $s\times s$ $A$ como
+$$c=[c_1, c_2, \ldots, c_s]^t \quad b = [b_1, b_2, \ldots, b_s]^t \quad A = [a_{ij}]$$
+Nótese que, según la condici\'on de $c_i$, las componentes de $c$ son las sumas de las filas de $A$. Claramente, un método de Runge-Kutta de $s$ etapas queda completamente especificado por su tabla de Butcher:
+\begin{equation*}
+    \begin{array}{c|c}
+        c & A \\
+        \hline
+        & b^T
+    \end{array}
+\end{equation*}
+Una forma alternativa de la definci\'on del m\'etodo, que en algunos contextos resulta más cómoda, es
+$$ y_{n+1} = y_n + h \sum_{i=1}^{s} b_i f(x_n + c_i h, Y_i)$$
+donde
+$$ Y_i = y_n + h \sum_{j=1}^{s} a_{ij} f(x_n + c_j h, Y_j) \qquad i = 1, 2, \dots, s$$
+Se puede ver que ambas formas son equivalentes si hacemos la interpretación
+$$k_i = f(x_n + c_i h, Y_i) \qquad i = 1, 2, \dots, s$$
+Al sustituir $$k = 1, \quad \alpha_1 = 1, \quad \alpha_0 = -1, \quad \phi_f(y_n, x_n; h) = \sum_{i=1}^{s} b_i k_i$$
+donde
+$$k_i = f\left(x_n + c_i h, , y_n + h \sum_{j=1}^{s} a_{ij} k_j\right) \qquad i = 1, 2, \dots, s$$
+vemos que los m\'etodos num\'ericos antes definidos contienen los métodos de Runge-Kutta.
+
+Recordando que las condiciones necesarias y suficientes para que un m\'etodo sea consistente son
+$$\sum_{j=0}^{k} \alpha_j = 0, \qquad \frac{\phi_f(y(x_n), y(x_n), \dots, y(x_n), x_n; 0)}{\sum_{j=0}^{k} j \alpha_j} = f(x_n, y(x_n))$$
+Aplicando estas condiciones a los m\'etodos Runge-Kutta vemos que la condición necesaria y suficiente para que un método general de Runge-Kutta sea consistente es
+$$\phi_f(y(x_n), x_n; 0) = f(x_n, y(x_n)) \iff \sum_{i=1}^{s} b_i = 1$$
+
+As\'i pues, el método de Runge-Kutta explícito de 3 etapas se puede escribir como   
+$$ \begin{aligned}     y_{n+1} &= y_n + h(b_1 k_1 + b_2 k_2 + b_3 k_3) \\     k_1 &= f(x_n, y_n) \\     k_2 &= f(x_n + h c_2, y_n + h c_2 k_1) \\     k_3 &= f(x_n + h c_3, y_n + h(c_3 - a_{32})k_1 + h a_{32} k_2) \end{aligned}$$
+Asumimos que $f(x, y)$ es suficientemente diferenciable e introducimos la notación abreviada   
+$$f := f(x, y), \quad f_x := \frac{\partial f(x,y)}{\partial x}, \quad f_{xx} := \frac{\partial^2 f(x,y)}{\partial x^2}, \quad f_{xy} (\equiv f_{yx}) := \frac{\partial^2 f(x,y)}{\partial x \partial y}$$ 
+etc., todo evaluado en el punto $(x_n, y(x_n))$. Entonces, al expandir $y(x_{n+1})$ alrededor de $x_n$ como una serie de Taylor, tenemos   $$y(x_{n+1}) = y(x_n) + h y^{(1)}(x_n) + \frac{1}{2}h^2 y^{(2)}(x_n) + \frac{1}{6}h^3 y^{(3)}(x_n) + O(h^4).$$
+Ahora,   
+$$\left\{ \begin{aligned}     y^{(1)}(x_n) &= f \\     y^{(2)}(x_n) &= f_x + f_y y' = f_x + f f_y \\     y^{(3)}(x_n) &= f_{xx} + f_{xy} f + f(f_{yx} + f_{yy} f) + f_y(f_x + f f_y) \\     &= f_{xx} + 2f f_{xy} + f^2 f_{yy} + f_y(f_x + f f_y) \end{aligned} \right.$$
+Abreviemos la notación nuevamente definiendo   
+$$F := f_x + f f_y, \quad G := f_{xx} + 2f f_{xy} + f^2 f_{yy}$$
+de modo que podemos escribir la expansión para $y(x_{n+1})$ como   
+$$y(x_{n+1}) = y(x_n) + hf + \frac{1}{2}h^2 F + \frac{1}{6}h^3 (F f_y + G) + O(h^4)$$
+Para poder usar la expresión correspondiente, necesitamos una expansión similar para $y_{n+1}$. Expandiendo el término $k_1$, tenemos $k_1 = f$ y   $$k_2 = f + h c_2 (f_x + k_1 f_y) + \frac{1}{2}h^2 c_2^2 (f_{xx} + 2k_1 f_{xy} + k_1^2 f_{yy}) + O(h^3)$$
+Al sustituir $f$ por $k_1$ y utilizando la notación introducida previamente, obtenemos   
+$$k_2 = f + h c_2 F + \frac{1}{2}h^2 c_2^2 G + O(h^3).$$
+Podemos tratar $k_3$ de forma similar   
+$$\begin{aligned} k_3 = f &+ h \{c_3 f_x + [(c_3 - a_{32})k_1 + a_{32}k_2]f_y\} \\ &+ \frac{1}{2}h^2 \{c_3^2 f_{xx} + 2c_3 [(c_3 - a_{32})k_1 + a_{32}k_2] f_{xy} \\ &+ [(c_3 - a_{32})k_1 + a_{32}k_2]^2 f_{yy}\} + O(h^3). \end{aligned}$$
+\begin{ejems} \, 
+    \begin{itemize}
+        \item Euler expl\'icito: $y_{n+1} = y_n + h f_n \qquad f_n = f(x_n,\, y_n)$
+        \item Euler impl\'icito: $y_{n+1} = y_n + h f_{n+1} \qquad f_{n+1} = \phi_f $
+        \item Runge-Kutta: $y_{n+1} = y_n + h(b_1 f_n + b_2 f_{n+1}) $
+        
+        \hspace{1.5cm} $y_{n+1} = y_n + h(b_1 k_1 + b_2 k_2) $ donde $k_1 = f(x_n,\, y_n), \, k_2 = f(x_n,\, y_n+h \cdot k_1)$
+        \item Mutlipaso: 
+        $$y_{n+1} = y_n + h \left( f_n + \frac{1}{2} \nabla f_n  + \frac{1}{4} \underbrace{\nabla^2 f_n}_{\nabla f_n-\nabla f_{n-1}} \right)$$
+    \end{itemize}
+\end{ejems}
+
+
+\begin{defi}
+    Se define el orden de un m\'etodo RK como el $p$ tal que
+    $$\mathscr L = y(x_n +h) - y(x_n) - \sum b_i x_i = F(y_1) h^{p+1} + \mc O (h^{p+2})$$
+\end{defi}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section*{Lambert p. 84 y 85}
+
+Dada la notación para un sistema de ecuaciones diferenciales autónomo:
+$$ y' = f(y) \qquad \frac{d}{dt} = \left[ \left( \pd{}{^1y}   \right)  \underbrace{\frac{d\, ^1y}{dt}}_{^1f} + \left( \pd{}{^2y}   \right)  \underbrace{\frac{d \, ^2y}{dt}}_{^2f}\right] $$
+Donde $y = [y^{(1)}, y^{(2)}]^T$ y $f = [f^1, f^2]^T$.
+
+Definimos las derivadas parciales con la notación:
+$$ f_j = \frac{\partial f}{\partial y^j}, \quad {^i}f_{jk} = \frac{\partial^2 f^i}{\partial y^j \partial y^k} $$
+
+Derivadas sucesivas de la solución:
+\begin{align*}
+    y' &= y^{(1)} = \begin{pmatrix} {^1}f \\ {^2}f \end{pmatrix} = \begin{pmatrix} y^{(1)} \\ y^{(2)} \end{pmatrix} \\
+    y^{(2)} &= \frac{d}{dt} y^{(1)} = \left( \left(\frac{\partial}{\partial y^1}\right) \frac{dy^1}{dt} + \left(\frac{\partial}{\partial y^2}\right) \frac{dy^2}{dt} \right) y^{(1)} \\
+    &= \left( \frac{\partial f^1}{\partial y^1}\frac{dy^1}{dt} + \frac{\partial f^1}{\partial y^2}\frac{dy^2}{dt}, \, \frac{\partial f^2}{\partial y^1}\frac{dy^1}{dt} + \frac{\partial f^2}{\partial y^2}\frac{dy^2}{dt} \right) \\
+    &= \left( {^1}f_1 f^1 + {^1}f_2 f^2, \, {^2}f_1 f^1 + {^2}f_2 f^2 \right) = \begin{pmatrix} y^{(2)} \\ {^2}y^{(2)} \end{pmatrix} \\
+    &= \begin{pmatrix} 
+        {^1}f_1 & {^1}f_2 \\ 
+        {^2}f_1 & {^2}f_2 
+    \end{pmatrix} \begin{pmatrix} f^1 \\ f^2 \end{pmatrix} \iff y^{(2)} = \frac{\partial f}{\partial y} f
+\end{align*}
+
+Para la tercera derivada:
+$$ y^{(3)} = \frac{d}{dt} y^{(2)} = \frac{d}{dt} \begin{pmatrix} y^{(2)} \\ {^2}y^{(2)} \end{pmatrix} = \left( \frac{d}{dt} {^1}y^{(2)}, \, \frac{d}{dt} {^2}y^{(2)} \right) $$
+
+Desarrollando los términos de la derivada total superior:
+\begin{align*}
+    {^1}y^{(3)} &= \frac{d}{dt} {^1}y^{(2)} = \frac{d}{dt} \left( {^1}f_1 f^1 + {^1}f_2 f^2 \right) \\
+    &= \left( \frac{\partial}{\partial y^1} \frac{dy^1}{dt} + \frac{\partial}{\partial y^2} \frac{dy^2}{dt} \right) ({^1}f_1 f^1 + {^1}f_2 f^2) \\
+    &= {^1}f_{11} f^1 f^1 + {^1}f_{12} f^2 f^1 + {^1}f_1 \left[ {^1}f_1 f^1 + {^1}f_2 f^2 \right] \\
+    &\quad + {^1}f_{21} f^1 f^2 + {^1}f_{22} (f^2)^2 + {^1}f_2 \left[ {^2}f_1 f^1 + {^2}f_2 f^2 \right]
+\end{align*}
+
+\newpage
+
+\section*{Lambert p. 83}
+
+Desarrollo en serie de Taylor multivariable de la función $f$:
+$$ f(x+\Delta x, y+\Delta y) = f(x,y) + \left(\Delta x \frac{\partial f}{\partial x} + \Delta y \frac{\partial f}{\partial y}\right) + \frac{1}{2}\left(\Delta x^2 \frac{\partial^2 f}{\partial x^2} + 2\Delta x \Delta y \frac{\partial^2 f}{\partial x \partial y} + \Delta y^2 \frac{\partial^2 f}{\partial y^2}\right) + \mathcal{O}(h^3) $$
+
+\subsection*{Ejemplo p. 85}
+Para el caso $m=2, M=2$:
+$$ f^{(2)}(k_1, k_2) = \begin{pmatrix} 
+    {^1}f_{11} k_1^1 k_2^1 + {^1}f_{12} k_1^1 k_2^2 + {^1}f_{21} k_1^2 k_2^1 + {^1}f_{22} k_1^2 k_2^2 \\ 
+    {^2}f_{11} k_1^1 k_2^1 + {^2}f_{12} k_1^1 k_2^2 + {^2}f_{21} k_1^2 k_2^1 + {^2}f_{22} k_1^2 k_2^2 
+\end{pmatrix} $$
+
+Evaluado en $k_1 = f$ y $k_2 = f$:
+$$ f^{(2)}(f, f) = \begin{pmatrix} 
+    {^1}f_{11} (f^1)^2 + 2{^1}f_{12} f^1 f^2 + {^1}f_{22} (f^2)^2 \\ 
+    {^2}f_{11} (f^1)^2 + 2{^2}f_{12} f^1 f^2 + {^2}f_{22} (f^2)^2 
+\end{pmatrix} $$
+
+Para el caso $m=1, M=3$ (derivada de Fréchet anidada):
+\begin{align*}
+    f^{(3)}\left(f^{(1)}(f)\right) &= f^{(3)}\left( \begin{pmatrix} {^1}f_1 f^1 + {^1}f_2 f^2 \\ {^2}f_1 f^1 + {^2}f_2 f^2 \end{pmatrix} \right) = f^{(3)}(h) \\
+    &= f^{(3)}\left( \begin{pmatrix} h^1 \\ h^2 \end{pmatrix} \right) \\
+    &= \begin{pmatrix} 
+        {^1}f_1^2 \, {^1}\tilde{f} + {^1}f_1 {^1}f_2 {^2}\tilde{f} + {^1}f_2 {^2}f_1 {^1}\tilde{f} + {^1}f_2^2 {^2}\tilde{f} \\ 
+        {^2}f_1^2 \, {^1}\tilde{f} + {^2}f_1 {^2}f_2 {^2}\tilde{f} + {^2}f_2 {^2}f_1 {^1}\tilde{f} + {^2}f_2^2 {^2}\tilde{f} 
+    \end{pmatrix}
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section*{Ejercicio 5.5.1 (i) y (ii)}
+\textbf{Sistema de ecuaciones diferenciales:}
+$$ u' = uv, \quad v' = u + v $$
+Definimos el vector de variables $y = [u, v]^T$ y el campo vectorial $f = [uv, u + v]^T$.
+Se pide calcular $f^{(1)}(f^{(1)}(f))$ y $f^{(2)}(f, f)$, y comprobar que $y^{(3)} = f^{(1)}(f^{(1)}(f)) + f^{(2)}(f, f)$.
+
+\subsection*{Solución paso a paso:}
+Calculamos la primera derivada de Fréchet (Jacobiana):
+$$ f^{(1)} = \frac{\partial f}{\partial y} = \begin{pmatrix} \frac{\partial(uv)}{\partial u} & \frac{\partial(uv)}{\partial v} \\ \frac{\partial(u+v)}{\partial u} & \frac{\partial(u+v)}{\partial v} \end{pmatrix} = \begin{pmatrix} v & u \\ 1 & 1 \end{pmatrix} $$
+
+Aplicando la primera diferencial elemental $\{f\} = f^{(1)}(f)$:
+$$ \{f\} = \begin{pmatrix} v & u \\ 1 & 1 \end{pmatrix} \begin{pmatrix} uv \\ u+v \end{pmatrix} = \begin{pmatrix} v(uv) + u(u+v) \\ 1(uv) + 1(u+v) \end{pmatrix} = \begin{pmatrix} v^2u + u^2 + uv \\ uv + u + v \end{pmatrix} $$
+
+Aplicando por segunda vez para obtener $\{\{f\}\} = f^{(1)}(\{f\})$:
+$$ \{\{f\}\} = \begin{pmatrix} v & u \\ 1 & 1 \end{pmatrix} \begin{pmatrix} v^2u + u^2 + uv \\ uv + u + v \end{pmatrix} = \begin{pmatrix} v^3u + 2u^2v + uv^2 + u^2 + uv \\ uv^2 + u^2 + 2uv + u + v \end{pmatrix} $$
+
+Para el término $\{f^2\} = f^{(2)}(f, f)$, calculamos el tensor Hessiano:
+$$ f^{(2)}(f, f) = \begin{pmatrix} 0 + 2uv(u+v) + 0 \\ 0 + 0 + 0 \end{pmatrix} = \begin{pmatrix} 2uv(u+v) \\ 0 \end{pmatrix} $$
+
+Finalmente, la tercera derivada total de la solución es la suma:
+$$ y^{(3)} = \{f^2\} + \{\{f\}\} =\cdots $$
+
+Se considera el sistema de ecuaciones diferenciales:
+\begin{align*}
+    u' &= uvw \\
+    v' &= u(v + w) = uv + uw \\
+    w' &= v(v + w) = v^2 + vw
+\end{align*}
+
+Definimos el vector de variables $\mathbf{y} = [u, v, w]^T$ y el campo vectorial $\mathbf{f}(\mathbf{y}) = [uvw, \, u(v+w), \, v(v+w)]^T$.
+
+Denotamos las componentes del campo como:
+$$ f^1 = uvw, \quad f^2 = u(v+w), \quad f^3 = v(v+w) $$
+
+\subsection*{1. Cálculo de las derivadas parciales de primer orden ($^i f_j = \frac{\partial f^i}{\partial y^j}$)}
+
+Calculamos la matriz Jacobiana $f^{(1)}$ componente a componente:
+\begin{align*}
+    {^1}f_1 &= \frac{\partial f^1}{\partial u} = vw, & {^1}f_2 &= \frac{\partial f^1}{\partial v} = uw, & {^1}f_3 &= \frac{\partial f^1}{\partial w} = uv \\
+    {^2}f_1 &= \frac{\partial f^2}{\partial u} = v + w, & {^2}f_2 &= \frac{\partial f^2}{\partial v} = u, & {^2}f_3 &= \frac{\partial f^2}{\partial w} = u \\
+    {^3}f_1 &= \frac{\partial f^3}{\partial u} = 0, & {^3}f_2 &= \frac{\partial f^3}{\partial v} = 2v + w, & {^3}f_3 &= \frac{\partial f^3}{\partial w} = v
+\end{align*}
+
+\subsection*{2. Cálculo de las derivadas parciales de segundo orden (${^i}f_{jk} = \frac{\partial^2 f^i}{\partial y^j \partial y^k}$)}
+
+\begin{itemize}
+    \item Para $f^1 = uvw$:
+    $$ {^1}f_{11} = {^1}f_{22} = {^1}f_{33} = 0 $$
+    $$ {^1}f_{12} = \frac{\partial}{\partial v}(vw) = w, \quad {^1}f_{13} = v, \quad {^1}f_{23} = u $$
+
+    \item Para $f^2 = u(v+w)$:
+    $$ {^2}f_{11} = 0, \quad {^2}f_{12} = 1, \quad {^2}f_{13} = 1, \quad {^2}f_{22} = 0, \quad {^2}f_{23} = 0, \quad {^2}f_{33} = 0 $$
+    Es decir, en forma compacta: ${^2}f_{12} = 1, \, {^2}f_{13} = 1$ y el resto son nulas (${^2}f_{jk} = 0$ para el resto).
+
+    \item Para $f^3 = v(v+w) = v^2 + vw$:
+    $$ {^3}f_{11} = {^3}f_{12} = {^3}f_{13} = {^3}f_{33} = 0 $$
+    $$ {^3}f_{22} = \frac{\partial}{\partial v}(2v + w) = 2, \quad {^3}f_{23} = \frac{\partial}{\partial w}(2v + w) = 1, \quad {^3}f_{32} = 1 $$
+\end{itemize}
+
+\subsection*{3. Construcción de las diferenciales elementales}
+
+Evaluando la primera derivada de Fréchet operando sobre $\mathbf{f}$, es decir, $\{f\} = f^{(1)}(\mathbf{f})$:
+$$ \{f\} = \begin{pmatrix} 
+    {^1}f_1 f^1 + {^1}f_2 f^2 + {^1}f_3 f^3 \\ 
+    {^2}f_1 f^1 + {^2}f_2 f^2 + {^2}f_3 f^3 \\ 
+    {^3}f_1 f^1 + {^3}f_2 f^2 + {^3}f_3 f^3 
+\end{pmatrix} $$
+
+Sustituyendo los valores obtenidos:
+\begin{align*}
+    \{f\}_1 &= (vw)(uvw) + (uw)(u(v+w)) + (uv)(v(v+w)) \\
+    \{f\}_2 &= (v+w)(uvw) + u(u(v+w)) + u(v(v+w)) \\
+    \{f\}_3 &= 0 + (2v+w)(u(v+w)) + v(v(v+w))
+\end{align*}
+
+Y aplicando la descomposición de la tercera derivada total de la solución $\mathbf{y}^{(3)}$ mediante las componentes de Fréchet:
+$$ \mathbf{y}^{(3)} = f^{(2)}(\mathbf{f}, \mathbf{f}) + f^{(1)}(f^{(1)}(\mathbf{f})) = \{f^2\} + \{\{f\}\} $$
+
+Donde el término tensorial de segundo orden $f^{(2)}(\mathbf{f}, \mathbf{f})$ aporta las combinaciones cuadráticas de las derivadas segundas ${^i}f_{jk} f^j f^k$ para cada componente del sistema tridimensional.
+
+
+
+
+
+
+
+
+\section{Árboles con Raíces y su Representación Visual}
+
+En la teoría de Runge-Kutta, existe una correspondencia biunívoca entre las diferenciales elementales y los árboles con raíces. El número de árboles de orden $n$, denotado como $a_n$, viene dado por la serie generatriz. 
+
+Para cada uno de estos árboles de orden $r(t)$, se calculan analíticamente sus tres parámetros clave:
+\begin{enumerate}
+    \item \textbf{Orden $r(t)$:} Número total de nodos del árbol.
+    \item \textbf{Simetría $\sigma(t)$:} Número de automorfismos estructurales del árbol.
+    \item \textbf{Densidad $\gamma(t)$:} Parámetro fundamental que define el coeficiente exacto de la serie de Taylor ($1/\gamma(t)$). Se calcula multiplicando el número de nodos del árbol por las densidades de los subárboles que cuelgan de su raíz.
+\end{enumerate}
+\begin{defi} \textit{El \textbf{orden} $r(t)$, la \textbf{simetría} $\sigma(t)$ y la \textbf{densidad} $\gamma(t)$ de un árbol $t$ se definen mediante}
+\begin{equation*}
+    r(\tau) = \sigma(\tau) = \gamma(\tau) = 1,
+\end{equation*}
+\textit{y}
+\begin{align*}
+    r([t_1^{n_1} t_2^{n_2} \dots]) &= 1 + n_1 r(t_1) + n_2 r(t_2) + \dots \quad \text{(= número de nodos)} \\
+    \sigma([t_1^{n_1} t_2^{n_2} \dots]) &= n_1! \, n_2! \dots (\sigma(t_1))^{n_1} (\sigma(t_2))^{n_2} \dots \\
+    \gamma([t_1^{n_1} t_2^{n_2} \dots]) &= r([t_1^{n_1} t_2^{n_2} \dots]) (\gamma(t_1))^{n_1} (\gamma(t_2))^{n_2} \dots
+\end{align*}
+
+\noindent Finalmente, sea $\alpha(t)$ el número de formas esencialmente distintas de etiquetar los nodos del árbol $t$ con los números enteros $1, 2, \dots, r(t)$ de modo que las etiquetas aumenten a lo largo de cada arco saliente.
+
+Disponemos desde la combinatoria de una forma sencilla de calcular $\alpha(t)$, a saber:
+\begin{equation*}
+    \alpha(t) = \frac{r(t)!}{\sigma(t) \gamma(t)}.
+\end{equation*}
+\end{defi}
+
+
+
+
+
+
+
+Para $n = 5$, el número total de árboles es exactamente $9$, cuya fórmula combinatoria general de conteo es
+\begin{align*}
+a_5 &= [x^4] \prod_{k=1}^{\infty} (1 - x^k)^{-a_k} \\[0.5em]
+&= [x^4] \left( (1-x)^{-1} (1-x^2)^{-1} (1-x^3)^{-2} (1-x^4)^{-4} \right) \\[0.5em]
+&= [x^4] \left(1 + x + x^2 + x^3 + x^4\right) \left(1 + x^2 + x^4\right) \left(1 + 2x^3\right) \left(1 + 4x^4\right) \\[0.5em]
+&= \underbrace{4}_{\text{part. } (4)} + \underbrace{2 \cdot 1}_{\text{part. } (3+1)} + \underbrace{1}_{\text{part. } (2+2)} + \underbrace{1}_{\text{part. } (2+1+1)} + \underbrace{1}_{\text{part. } (1+1+1+1)} \\[0.5em]
+&= 4 + 2 + 1 + 1 + 1 = \mathbf{9}
+\end{align*}
+
+A continuación, se muestran las representaciones gráficas mediante diagramas de nodos (con el paquete \texttt{tikz}/\texttt{forest}) para los 9 árboles de orden 5, acompañados de su notación algebraica en corchetes $[\tau]$:
+
+\begin{center}
+\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{ccccccccc}
+
+% 1. [\tau]_4 (Cadena lineal de 5 nodos hacia arriba)
+\begin{forest}
+for tree={
+  grow=north,
+  circle, fill=black, inner sep=1pt, minimum size=2.5pt,
+  l sep=10pt, s sep=10pt
+}
+[
+  [
+    [
+      [
+        [ ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+&
+% 2. [\tau^4] (Raíz con 4 ramas abriéndose hacia arriba)
+\begin{forest}
+for tree={
+  grow=north,
+  circle, fill=black, inner sep=1pt, minimum size=2.5pt,
+  l sep=12pt, s sep=8pt
+}
+[
+  [ ]
+  [ ]
+  [ ]
+  [ ]
+]
+\end{forest}
+&
+% 3. [[\tau]\tau^2] (Raíz con rama lineal y abanico)
+\begin{forest}
+for tree={
+  grow=north,
+  circle, fill=black, inner sep=1pt, minimum size=2.5pt,
+  l sep=10pt, s sep=8pt
+}
+[
+  [ [ ] ]
+  [ ]
+  [ ]
+]
+\end{forest}
+&
+% 4. [[\tau^2]^2] o [[\tau], [\tau]] (Dos ramas bifurcadas hacia arriba)
+\begin{forest}
+for tree={
+  grow=north,
+  circle, fill=black, inner sep=1pt, minimum size=2.5pt,
+  l sep=10pt, s sep=8pt
+}
+[
+  [ [ ] ]
+  [ [ ] ]
+]
+\end{forest}
+&
+% 5. [\tau^3]_2 (Tallo con 3 ramas arriba en copa)
+\begin{forest}
+for tree={
+  grow=north,
+  circle, fill=black, inner sep=1pt, minimum size=2.5pt,
+  l sep=10pt, s sep=8pt
+}
+[
+  [
+    [ ]
+    [ ]
+    [ ]
+  ]
+]
+\end{forest} 
+&
+% 6. [[\tau], \tau]_2 (Bifurcación con una rama extendida)
+\begin{forest}
+for tree={
+  grow=north,
+  circle, fill=black, inner sep=1pt, minimum size=2.5pt,
+  l sep=10pt, s sep=8pt
+}
+[
+  [
+    [ [ ] ]
+    [ ]
+  ]
+]
+\end{forest}
+&
+% 7. [[\tau]_2, \tau] (VInculo asimétrico)
+\begin{forest}
+for tree={
+  grow=north,
+  circle, fill=black, inner sep=1pt, minimum size=2.5pt,
+  l sep=10pt, s sep=8pt
+}
+[
+  [ [ [ ] ] ]
+  [ ]
+]
+\end{forest}
+&
+% 8. [[[\tau^2]]_3] (Tallo doble con bifurcación en copa)
+\begin{forest}
+for tree={
+  grow=north,
+  circle, fill=black, inner sep=1pt, minimum size=2.5pt,
+  l sep=10pt, s sep=8pt
+}
+[
+  [
+    [
+      [ ]
+      [ ]
+    ]
+  ]
+]
+\end{forest}
+&
+% 9. [[\tau^2]\tau] (Raíz con bifurcación arriba y hoja lateral)
+\begin{forest}
+for tree={
+  grow=north,
+  circle, fill=black, inner sep=1pt, minimum size=2.5pt,
+  l sep=10pt, s sep=8pt
+}
+[
+  [
+    [ ]
+    [ ]
+  ]
+  [ ]
+]
+\end{forest}
+ \\
+$[\tau]_4$ & $[\tau^4]$ & $[[\tau]\tau^2]$ & $[[\tau^2]^2]$ & $[\tau^3]_2$ & $[[\tau], \tau]_2$ & $[[\tau]_2, \tau]$ & $[\tau^2]_3$ & $[[\tau^2]\tau]$  
+
+\end{tabular}
+\end{center}
+
+Por ejemplo, para el árbol $[\tau^4]$ (con 4 ramas idénticas de nodo simple colgando de la raíz):
+$$ \gamma([\tau^4]) = 5 \cdot (\gamma(\tau))^4 = 5 \cdot 1^4 = 5 $$
+Y su simetría considerando las 4 ramas idénticas es $\sigma([\tau^4]) = 4! = 24$, lo que permite hallar el número de etiquetados monótonos $\alpha(t)$ mediante:
+$$ \alpha(t) = \frac{r(t)!}{\sigma(t)\cdot \gamma(t)} $$
+
+
+\textbf{Ejemplos de cálculo de densidad $\gamma(t)$ y simetría $\sigma(t)$ para árboles:}
+\begin{align*}
+    \gamma([\tau]) &= 2, \quad \sigma([\tau]) = 1 \cdot \sigma(\tau) = 1 \\
+    \gamma([\tau^2]) &= 3, \quad \sigma([\tau^2]) = 2! \cdot \sigma(\tau)^2 = 2 \\
+    \gamma([\tau[\tau]]) &= 4, \quad \sigma([\tau[\tau]]) = 1 \\
+    \gamma([[\tau^2]]) &= 4, \quad \sigma([[\tau^2]]) = 1 \\
+    \gamma([\tau^3]) &= 4, \quad \sigma([\tau^3]) = 3! = 6 \\
+    \gamma([[\tau]_2]) &= 6, \quad \sigma([[\tau]_2]) = 1
+\end{align*}
+
+\begin{align*}
+    \psi_i([\tau^3]) &= \sum_{j=1}^{s} a_{ij} \psi_j(\tau)^3 = \sum_{j=1}^{s} a_{ij} c_j^3 \\
+    \psi_i(\tau) &= c_i \\
+    \psi([\tau^3]) &= \sum b_i \psi_i(\tau)^3 = \sum b_i c_i^3
+\end{align*}
+Podemos observarlo en forma de tabla en \hyperref[ap1]{Ap\'endice A}.
+\begin{ejer}
+    Calcular la expresi\'on del \'arbol 
+$$\begin{forest}
+for tree={
+  grow=north,
+  circle, fill=black, inner sep=1pt, minimum size=2.5pt,
+  l sep=10pt, s sep=8pt
+}
+[
+  [
+    [ ]
+    [ []
+        [ 
+        [] 
+        []
+        ]
+    [] ]
+    [ ]
+  ]
+]
+\end{forest}$$
+\end{ejer}
+\begin{sol}
+    Las primeras 3 ramas son $[\tau^2]_2$, las siguientes $[[\tau^2]_2\tau^2]$ y por \'ultimo $[[[\tau^2]_2\tau^2] \tau^2]_2$
+\end{sol}
+
+
+\section*{Derivadas de Fréchet y Teoría de Butcher}
+
+\subsection*{1. Definición de la $M$-ésima Derivada de Fréchet}
+Sea $z, f(z) \in \mathbb{R}^m$ un sistema autónomo de ecuaciones diferenciales. La $M$-ésima derivada de Fréchet de $f$, denotada por $f^{(M)}(z)$, es un operador multilineal sobre $\mathbb{R}^m \times \mathbb{R}^m \times \dots \times \mathbb{R}^m$ ($M$ veces), lineal en cada uno de sus operandos, cuya expresión por componentes es:
+
+\[
+f^{(M)}(z)(K_1, K_2, \dots, K_M) = \sum_{i=1}^{m} \sum_{j_1=1}^{m} \sum_{j_2=1}^{m} \dots \sum_{j_M=1}^{m} {^i}f_{j_1 j_2 \dots j_M} \left(^{j_1}K_1\right) \left(^{j_2}K_2\right) \dots \left(^{j_M}K_M\right) e_i
+\]
+
+Donde:
+\begin{itemize}
+    \item $K_t = \left[ {^1}K_t, {^2}K_t, \dots, {^m}K_t \right]^T \in \mathbb{R}^m$ para $t = 1, 2, \dots, M$ son los vectores operandos.
+    \item ${^i}f_{j_1 j_2 \dots j_M} = \frac{\partial^M}{\partial(^{j_1}z)\partial(^{j_2}z)\dots\partial(^{j_M}z)} {^i}f(z)$ son las derivadas parciales de orden $M$.
+    \item $e_i$ es el $i$-ésimo vector canónico en $\mathbb{R}^m$.
+\end{itemize}
+
+\subsection*{2. Desarrollo de las Derivadas Totales hasta el Orden 3}
+Mediante la teoría de Butcher y los árboles enraizados, las derivadas totales de la solución exacta $y^{(q)}$ se descomponen como combinaciones lineales de diferenciales elementales (expresadas con notación de Fréchet $\{\}$):
+
+\begin{align*}
+    \text{Orden 1 } (q=1): &\quad y^{(1)} = f = \{\tau\} \\
+    \text{Orden 2 } (q=2): &\quad y^{(2)} = f^{(1)}(f) = \{f\} \\
+    \text{Orden 3 } (q=3): &\quad y^{(3)} = f^{(2)}(f, f) + f^{(1)}(f^{(1)}(f)) = \{f^2\} + \{_2f\}_2
+\end{align*}
+
+\subsection*{3. Ejemplo Práctico hasta el Orden 3}
+Consideremos un sistema autónomo de dimensión $m = 2$ dado por $y = [u, v]^T$ y la función vectorial:
+\[
+f(y) = \begin{bmatrix} f_1(u,v) \\ f_2(u,v) \end{bmatrix} = \begin{bmatrix} uv \\ u + v \end{bmatrix}
+\]
+
+\textbf{Orden 1:}
+\[
+y^{(1)} = f(y) = \begin{bmatrix} uv \\ u + v \end{bmatrix}
+\]
+
+\textbf{Orden 2:}
+Se aplica la primera derivada de Fréchet (la matriz Jacobiana $J(y)$ multiplicada por $f(y)$):
+\[
+y^{(2)} = f^{(1)}(y)(f) = J(y) f(y) = \begin{bmatrix} \frac{\partial f_1}{\partial u} & \frac{\partial f_1}{\partial v} \\ \frac{\partial f_2}{\partial u} & \frac{\partial f_2}{\partial v} \end{bmatrix} \begin{bmatrix} uv \\ u + v \end{bmatrix} = \begin{bmatrix} v & u \\ 1 & 1 \end{bmatrix} \begin{bmatrix} uv \\ u + v \end{bmatrix} = \begin{bmatrix} uv^2 + u^2 + uv \\ uv + u + v \end{bmatrix}
+\]
+
+\textbf{Orden 3:}
+Utilizamos la descomposición $y^{(3)} = f^{(2)}(f, f) + f^{(1)}(f^{(1)}(f))$:
+\begin{enumerate}
+    \item \textbf{Primer término $f^{(2)}(f, f)$:} Utiliza las derivadas parciales de segundo orden operando con dos copias de $f$. Para la primera componente ($f_1 = uv$):
+    \[
+    \frac{\partial^2 f_1}{\partial u^2}(uv)^2 + 2\frac{\partial^2 f_1}{\partial u \partial v}(uv)(u+v) + \frac{\partial^2 f_1}{\partial v^2}(u+v)^2 = 0 + 2(1)(uv)(u+v) + 0 = 2uv(u+v)
+    \]
+    La segunda componente ($f_2 = u+v$) tiene derivadas segundas nulas, por lo que:
+    \[
+    f^{(2)}(f, f) = \begin{bmatrix} 2uv(u+v) \\ 0 \end{bmatrix}
+    \]
+    \item \textbf{Segundo término $f^{(1)}(f^{(1)}(f))$:} Aplicando la matriz Jacobiana nuevamente sobre el vector del orden 2:
+    \[
+    f^{(1)}(f^{(1)}(f)) = J(y) \cdot y^{(2)} = \begin{bmatrix} v & u \\ 1 & 1 \end{bmatrix} \begin{bmatrix} uv^2 + u^2 + uv \\ uv + u + v \end{bmatrix}
+    \]
+\end{enumerate}
+Sumando ambos términos se obtiene la tercera derivada total exacta $y^{(3)}$ del sistema.
+
+
+\subsection*{Correspondencia biunívoca}
+La correspondencia biunívoca (o uno a uno) entre los \textbf{diferenciales elementales} (expresados mediante las derivadas de Fréchet con llaves $\{\}$) y los \textbf{árboles enraizados} (\textit{rooted trees}) constituye la piedra angular de la teoría de Butcher para los métodos de Runge-Kutta[cite: 25]. 
+
+Esta correspondencia permite traducir un problema de análisis combinatorio y teoría de grafos en el cálculo algebraico de las condiciones de orden de un método numérico[cite: 24, 25].
+
+\subsubsection*{1. Principio de la Correspondencia Biunívoca}
+La relación se establece de forma inductiva y recursiva mediante dos reglas fundamentales entre la estructura de un árbol $t$ y su diferencial elemental $F(t)$[cite: 25]:
+
+\begin{enumerate}
+    \item \textbf{Caso Base (Orden 1):} El único árbol de orden $1$ (representado por $\tau$) corresponde exactamente al diferencial elemental de orden $1$, que es la función vectorial $f$[cite: 25]:
+    \[
+    \tau \iff f
+    \]
+    
+    \item \textbf{Paso Inductivo (Ramificación / \textit{Grafting}):} Si se tienen $M$ diferenciales elementales $F_1, F_2, \dots, F_M$ correspondientes a $M$ árboles $t_1, t_2, \dots, t_M$ de órdenes $r_1, r_2, \dots, r_M$, entonces el diferencial elemental formado por la derivada de Fréchet de orden $M$:
+    \[
+    \{F_1 F_2 \dots F_M\} \iff f^{(M)}(F_1, F_2, \dots, F_M)
+    \]
+    corresponde al nuevo árbol de orden $1 + \sum_{i=1}^M r_i$ obtenido al injertar los árboles $t_1, t_2, \dots, t_M$ sobre una nueva raíz común[cite: 25].
+\end{enumerate}
+
+\subsubsection*{2. Equivalencia Estructural entre Árboles y Notación de Fréchet}
+Gracias a esta correspondencia biunívoca, cada símbolo gráfico de un árbol enraizado se traduce de manera unívoca en una expresión con llaves \{\}[cite: 25, 33]:
+\begin{itemize}
+    \item \textbf{Orden 1:} Árbol $\tau \iff$ Diferencial elemental $f$[cite: 35].
+    \item \textbf{Orden 2:} Árbol $[\tau] \iff \{f\} = f^{(1)}(f)$[cite: 33, 35].
+    \item \textbf{Orden 3:} Árboles $[\tau^2] \iff \{f^2\} = f^{(2)}(f, f)$ y $[_2\tau]_2 \iff \{_2f\}_2 = f^{(1)}(f^{(1)}(f))$[cite: 33, 35].
+    \item \textbf{Orden 4:} Los cuatro árboles de cuarto orden guardan una correspondencia exacta con las cuatro derivadas de Fréchet de cuarto orden[cite: 32, 33, 35].
+\end{itemize}
+
+\subsubsection*{3. Consecuencia Fundamental}
+Dado que la correspondencia es biunívoca, \textbf{el número de árboles enraizados de un orden dado $r$ coincide exactamente con el número de diferenciales elementales} de ese mismo orden[cite: 25]. Esto permite utilizar las propiedades combinatorias de los árboles (como su densidad $\gamma(t)$, su simetría $\sigma(t)$ y el número de etiquetados $\alpha(t)$) para estructurar de forma sistemática todas las condiciones de orden de cualquier método de Runge-Kutta[cite: 25, 34].
+\begin{center}
+\begin{tabular}{cc}
+\textbf{Árboles con raíz} & \textbf{Diferenciales} \\
+$\bullet$ & $f$ \\
+$[\, \, ]$ & $\{\ \}$
+\end{tabular}
+\end{center}
+
+\noindent\rule{\linewidth}{0.4pt}
+
+\begin{align*}
+    \psi_i(\tau) &= \sum a_{ij} = c_i \quad \Rightarrow \quad \psi_i([\tau]) = \sum a_{ij} \psi_j(\tau) = \sum_{j} a_{ij} c_j \\
+    \psi(\tau) &= \sum b_i = 1 \quad \Rightarrow \quad \psi([\tau]) = \sum b_i \psi_i(\tau) = \sum b_i c_i \\
+    \psi_{s+1}(\tau) &= \sum a_{s+1, i} = \sum b_i
+\end{align*}
+
+\noindent\rule{\linewidth}{0.4pt}
+El c\'alculo expl\'icito de $\psi$ en orden 3 es
+\begin{align*}
+    \psi_i([\tau^2]) &= \sum a_{ij} \psi_j(\tau)^2 = \sum a_{ij} c_j^2 \\
+    \psi_i([\tau]_2) &= \sum a_{ij} \psi_j([\tau]) = \sum a_{ij} \sum_{k} a_{jk} c_k \\
+    \psi([\tau^2]) &= \sum b_i \psi_i(\tau)^2 = \sum b_i c_i^2 \\
+    \psi([\tau]_2) &= \sum b_i \left(\psi_i([\tau])\right) = \sum b_i \left(\sum a_{ij} c_j\right)
+\end{align*}
+\begin{align*}
+    \psi_i([\tau^3]) &= \sum a_{ij} \psi_j(\tau)^3 = \sum a_{ij} c_j^3 \\
+    \psi([\tau^3]) &= \sum b_i c_i^3 \\[0.5em]
+    \psi_i([\tau]_3) &= \sum a_{ij} \psi_j([\tau]_2) = \sum a_{ij} a_{jk} \psi_k([\tau]) = \sum a_{ij} a_{jk} a_{kl} c_l \quad \checkmark \\
+    \psi([\tau]_3) &= \sum b_i \psi_i([\tau]_2) = \sum b_i a_{ij} a_{jk} c_k \quad \checkmark \\[0.5em]
+    \psi_i([\tau^2]_2) &= \sum a_{ij} \psi_j([\tau])^2 = \sum a_{ij} \left(a_{jk} c_k\right)^2 \quad \checkmark \\
+    \psi([\tau^2]_2) &= \sum b_i \psi_i([\tau])^2 = \sum b_i a_{jk} c_k^2 \quad \checkmark \\[0.5em]
+    \psi_i([\tau[\tau]]) &= \sum a_{ij} \psi_j([\tau[\tau]]) = \sum a_{ij} c_j \psi_j([\tau]) = \sum a_{ij} c_j a_{jk} c_k \\
+    \psi([\tau[\tau]]) &= \sum b_i \psi_i([\tau[\tau]])
+\end{align*}
+
+\begin{ejer}
+[5.7.2] Demuestra que el m\'etodo siguiente tiene orden 4. Calcular $y'' + y = \frac{1}{10} y^3$ y ETL. 
+\[
+\begin{array}{c|ccc}
+0           & 0             & 0             & 0             \\[0.5em]
+\frac{1}{2} & \frac{5}{24}  & \frac{1}{3}   & -\frac{1}{24} \\[0.5em]
+1           & \frac{1}{6}   & \frac{2}{3}   & \frac{1}{6}   \\
+\hline
+            & \frac{1}{6}   & \frac{2}{3}   & \frac{1}{6}
+\end{array}
+\]
+
+\end{ejer}\begin{sol}
+    
+$$ \text{LTE} = \frac{h^{p+1}}{(p+1)!} \sum_{r(t)=p+1} \alpha(t) \left[1 - \gamma(t)\psi(t)\right] F(t) + \mathcal{O}(h^{p+2}) $$
+
+\textbf{Orden de la tabla:} Usar los árboles.
+
+\textbf{Orden 2:}
+$$ \sum b_i = \frac{1}{6} + \frac{1}{3} + \frac{2}{3} + \frac{1}{6} = 1 \quad \checkmark $$
+$$ [\tau] \rightsquigarrow \sum b_i c_i = \frac{1}{6}\cdot 0 + \frac{2}{3}\cdot \frac{1}{2} + \frac{1}{6}\cdot 1 = \frac{3}{6} = \frac{1}{2} \quad \checkmark $$
+
+\textbf{Orden 3:}
+$$ [\tau^2] \rightsquigarrow \sum b_i c_i^2 = \frac{1}{6}\cdot 0^2 + \frac{2}{3}\cdot \frac{1}{2^2} + \frac{1}{6}\cdot 1^2 = \frac{1}{3} + \frac{1}{6} = \frac{1}{2} $$
+$$ [\tau]_2 \rightsquigarrow \sum b_i a_{ij} c_j = \frac{1}{6}\left(\frac{1}{6} + \frac{2}{3} + \frac{1}{6}\right) + \frac{2}{3}(1) + \frac{1}{6} + \frac{1}{6}\left(\frac{5}{24}\cdot \frac{1}{2} + \frac{1}{3}\cdot \frac{1}{2} + \frac{1}{24}\cdot \frac{1}{2}\right) $$
+$$ = \frac{2}{3}\cdot \frac{1}{4} + \frac{1}{64} = 1 + \frac{1}{24} + \frac{1}{6} + \frac{1}{24} = \frac{24+1+4+1}{24} = \frac{30}{24} = \frac{5}{4} $$
+$$ \Rightarrow \frac{2}{3}\left(\sum a_{ij} c_j\right) + \frac{1}{6}\left(\sum a_{ij} c_j\right) + \frac{1}{6}\left(\sum a_{ij} c_j\right) = \frac{5}{24} \quad \text{?} \quad \frac{1}{6} $$
+$$ \frac{5+42+1}{24\cdot 2} = \frac{12}{48} = \frac{1}{4} $$
+
+Para el ETL hay que hacer los árboles de orden 4
+
+$$ [\tau^3] \rightsquigarrow \sum b_i c_i^3 = \frac{1}{6}\cdot 0 + \frac{2}{3}\cdot \frac{1}{2^3} + \frac{1}{6}\cdot 1 = \frac{1+2}{12} = \frac{3}{12} = \frac{1}{4} $$
+
+\begin{align*}
+    [\tau]_3 \rightsquigarrow \sum b_i a_{ij} a_{jk} c_k &= \frac{1}{6}\left(\sum a_{1j} a_{jk} c_j\right) + \frac{2}{3}\left(\sum a_{2j} a_{jk} c_j\right) + \frac{1}{6}\left(\sum a_{3j} a_{jk} c_j\right) \\
+    &= \frac{1}{6}\Big( \frac{2}{3}\left( \frac{5}{24}\left(\sum a_{jk} c_k\right) + \frac{1}{3}\left(\sum a_{2k} c_k\right) + \frac{1}{24}\left(\sum a_{3k} c_k\right) \right) \\
+    &\quad + \frac{1}{6}\left( \frac{1}{6}\left(\sum a_{1k} c_k\right) + \frac{1}{3}\left(\sum a_{2k} c_k\right) - \frac{1}{24}\left(\sum a_{3k} c_k\right) \right) \Big) \\
+    &= \frac{1}{3}\left[ \frac{5}{24}(0) + \frac{1}{3}\left(\frac{1}{6} - \frac{1}{24}\right) + \frac{1}{24}\left(\frac{1}{6} + \frac{1}{3}\right) \right] + \frac{1}{48} \\
+    &= \frac{1}{6}\left[ \frac{1}{6}(0) + \frac{1}{3}\left(\frac{1}{6} - \frac{1}{24}\right) + \frac{1}{24}\left(\frac{1}{6} + \frac{1}{3}\right) \right] \\
+    &= \frac{2}{3}\left[ \frac{1}{3}\cdot \frac{1}{8} + \frac{7}{24}\cdot \frac{1}{2} \right] + \frac{1}{6}\left[ \frac{1}{3}\cdot \frac{1}{8} - \frac{1}{24}\cdot \frac{1}{2} \right] \\
+    &= \left( \frac{1}{24} - \frac{1}{48} \right)\frac{2}{3} + \frac{1}{6}\cdot \frac{1}{6} \\
+    &= \frac{21}{3\cdot 48} + \frac{1}{36} = \frac{1}{24} \quad \checkmark
+\end{align*}
+
+\noindent Se calculan tambi\'en $[\tau[\tau^2]]$, $[\tau^2]_2$ y supongamos que dan tambi\'en $\checkmark$.
+
+Calculemos orden 5 para que \underline{no} dé bien. El c\'alculo es más fácil con $[\tau^4]$:
+$$ \psi([\tau^4]) = \sum b_i c_i^4 = \frac{2}{3}\cdot \frac{1}{2^4} + \frac{1}{6}\cdot 1 = \frac{1}{3}\cdot \frac{1}{2^3} + \frac{1}{6} \neq \frac{1}{5} $$
+
+\end{sol}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section*{Resolución y Análisis de un RK Implícito de 2 Etapas}
+\begin{ejer} Calcular un Runge-Kutta implícito de 2 etapas y la expresión del Error de Truncamiento Local (ETL) al integrar $y'' + y = y^2$. Programarlo.
+\end{ejer}
+\begin{sol}
+\begin{enumerate}
+\item \textbf{Planteamiento del Método y Condiciones de Orden}
+
+La tabla de Butcher para un método de 2 etapas es:
+\[
+\begin{array}{c|cc}
+c_1 & a_{11} & a_{12} \\
+c_2 & a_{21} & a_{22} \\
+\hline
+    & b_1    & b_2
+\end{array}
+\]
+El método es \textbf{implícito} si $a_{11} \neq 0$ \'o $a_{22} \neq 0$. 
+
+Para alcanzar orden 2, se deben satisfacer las condiciones de orden:
+\[
+\begin{cases}
+b_1 + b_2 = 1 \\
+b_1 c_1 + b_2 c_2 = \frac{1}{2}
+\end{cases}
+\]
+
+Seleccionando una parametrización particular, obtenemos el tablero:
+\[
+\begin{array}{c|cc}
+0   & 0   & 0   \\
+1   & \frac{1}{2} & \frac{1}{2} \\
+\hline
+    & \frac{1}{2} & \frac{1}{2}
+\end{array}
+\]
+
+Esto conduce a la fórmula de avance temporal:
+\begin{align*}
+y_{n+1} &= y_n + \frac{h}{2} \left[ f\left(x_n, y_n\right) + f\left(x_n + h, y_n + \frac{h}{2}(k_1 + k_2)\right) \right] \\
+&= y_n + \frac{h}{2} [k_1 + k_2]
+\end{align*}
+donde:
+\begin{align*}
+k_1 &= f(x_n, y_n) \\
+k_2 &= f\left(x_n + h, y_n + \frac{h}{2}(k_1 + k_2)\right)
+\end{align*}
+Al ser implícito, requiere el uso de un solucionador de ecuaciones no lineales (por ejemplo, método de Newton / \textit{Find Root}).
+
+\item \textbf{Conversión a Sistema de Primer Orden}
+
+Definimos $z = y'$ para transformar la EDO de segundo orden $y'' + y = y^2$ en un sistema de primer orden:
+\[
+Y' = \begin{pmatrix} y \\ z \end{pmatrix}' = \begin{pmatrix} z \\ -y + y^2 \end{pmatrix}
+\]
+Denotando las funciones componentes como ${}^1\!f = z$ y ${}^2\!f = -y + y^2$, calculamos sus derivadas parciales:
+\begin{align*}
+{}^1\!f_y &= 0, \quad {}^1\!f_z = 1 \\
+{}^2\!f_y &= -1 + 2y, \quad {}^2\!f_z = 0 \\
+{}^2\!f_{yy} &= 2
+\end{align*}
+
+\item \textbf{Análisis del Error de Truncamiento Local (ETL)} 
+
+La expresión general del error de truncamiento local basada en la teoría de árboles de Butcher para orden 3 es:
+\[
+\text{ETL} = \frac{h^3}{3!} \sum_{\gamma(t)=3} \alpha(t) \big(1 - \gamma(t)\psi(t)\big) F(t) + \mathcal{O}(h^4)
+\]
+
+Considerando los árboles de orden 3: $[\tau^2]$ y $[\tau]_2$:
+\begin{itemize}
+    \item Para $[\tau^2]$ (asociado a $\{f^2\}$): $\alpha(t) = 1, \; \gamma(t) = 3$.
+    \item Para $[\tau]_2$ (asociado a $\{f\}_2$): $\alpha(t) = 1, \; \gamma(t) = 6$.
+\end{itemize}
+$$\psi_1(\tau)=0, \quad \psi_2(\tau)=1  \Rightarrow \psi(\tau) = \sum b_i =1 \Rightarrow \psi_i([\tau]) = \sum a_{ij} \psi_j(\tau) = a_{i2} = \begin{cases}
+    0 & \text{ si } i=1 \\ \nicefrac{1}{2} & \text{ si } i=2
+\end{cases}$$
+$$\psi([\tau]) = \sum b_i \psi_i(\tau)=\frac{1}{2}$$
+
+Comprobando las condiciones de orden para este método:
+\[
+\psi([\tau^2]) = \sum_{i} b_i c_i^2 = \frac{1}{2}(0)^2 + \frac{1}{2}(1)^2 = \frac{1}{2} \neq \frac{1}{3}
+\]
+\[
+\psi([\tau]_2) = \sum_{i} \cdots = -\frac{1}{2}
+\]
+Como se observa, el método no cumple la condición de orden 3 ($\frac{1}{3}$), por lo que el término principal del error es de orden $h^3$.
+
+Podemos pues calcular el ETL
+$$\text{ETL} = \frac{h^3}{3!} \left[ \underbrace{\alpha([\tau^2]) (1-\gamma \psi)}_{-\nicefrac{1}{2}}F([\tau^2]) +  \underbrace{\alpha([\tau]_2) (1-\gamma \psi)}_{\nicefrac{1}{2}} F([\tau]_2)  \right] + \mc O(h^4) = $$
+Las diferenciales elementales asociadas a los árboles de orden 4 para el sistema vectorial $Y' = f(Y) = \begin{pmatrix} z \\ -y + y^2 \end{pmatrix}$ son:
+$$\begin{cases}
+    ^1\!f = z \\ ^2\!f =-y + y^2
+\end{cases} \Rightarrow \begin{cases}
+    ^1\!f_2 = 1 \\ ^2\!f_1 =-1 + 2y
+\end{cases} \Rightarrow \begin{cases}
+    ^1\!f_{21} = \, ^1\!f_{22} = 0 \\ ^2\!f_{11} =2
+\end{cases}$$
+por lo tanto,
+$$\{f\} = \begin{pmatrix}
+    -y+y^2 \\ (1+2y)z
+\end{pmatrix} \Rightarrow \{f\}_2 = \begin{pmatrix}
+    (-1+2y)z \\ (-1+2y)(-y+y^2)
+\end{pmatrix} \text{ y } \{f^2\} = \begin{pmatrix}
+    0 \\ 2z^2
+\end{pmatrix}$$
+se tiene que 
+$$\text{ETL} = -\frac{h^3}{12} \begin{pmatrix} (-1+2y)z \\ 2z^2(-1+2y)(-y+y^2)
+\end{pmatrix} + \mc O(h^4)$$
+\end{enumerate}
+\end{sol}
+\begin{ejer}
+    [5.7.4] Escribe como m\'etodo RK, calcula el orden y la expresión del Error de Truncamiento Local (ETL) al integrar $y'' + y = y^2$ del m\'etodo
+    \begin{align*}
+y_{n+\frac{2}{3}} &= y_n + \frac{h}{3} \left[ f\left(y_{n+\frac{2}{3}}\right) + f(y_n) \right] \\
+y_{n+1} &= y_n + \frac{h}{4} \left[ 3f\left(y_{n+\frac{2}{3}}\right) + f(y_n) \right]
+\end{align*}
+    Programarlo.
+    \end{ejer}
+\begin{sol}
+
+\begin{enumerate}
+    \item \textbf{Identificación de las Etapas y el Tablero de Butcher}
+
+    Definimos las etapas del método en función de los incrementos $k_1$ y $k_2$:
+\begin{align*}
+k_1 &= f(y_n) \\
+k_2 & =y_{n+\frac{2}{3}} = f\left(y_n + \frac{h}{3} k_1 + \frac{h}{3} k_2\right)
+\end{align*}
+Reescribiendo las ecuaciones del método en términos de $k_1$ y $k_2$:
+\begin{align*}
+y_{n+\frac{2}{3}} &= y_n + \frac{h}{3} (k_2 + k_1) \implies c_1 = 0, \; c_2 = \frac{2}{3} \\
+y_{n+1} &= y_n + \frac{h}{4} (3k_2 + k_1) = y_n + h\left(\frac{1}{4} k_1 + \frac{3}{4} k_2\right)
+\end{align*}
+
+De aquí extraemos la matriz de coeficientes $A$ y los pesos del vector $b^T$:
+$$c = \begin{pmatrix} 0 \\ \frac{2}{3} \end{pmatrix} \qquad A = \begin{pmatrix} 0 & 0 \\ \frac{1}{3} & \frac{1}{3} \end{pmatrix} \qquad b = \begin{pmatrix} \frac{1}{4} \\ \frac{3}{4} \end{pmatrix}$$
+Seleccionando una parametrización particular derivada de las notas de clase, consideremos los coeficientes del método analizado:
+\[
+\begin{array}{c|cc}
+0           & 0          & 0          \\
+\frac{2}{3} & \frac{1}{3}& \frac{1}{3} \\ \hline
+            & \frac{1}{4}& \frac{3}{4}
+\end{array}
+\]
+Verificamos las condiciones para este tablero:
+\begin{enumerate}
+    \item \textbf{Orden 1:}
+    \[
+    \sum_{i=1}^2 b_i = \frac{1}{4} + \frac{3}{4} = 1 \quad \checkmark \quad \left(\text{Requiere } \psi(\tau) = 1\right)
+    \]
+    \item \textbf{Orden 2:}
+    \[
+    \sum_{i=1}^2 b_i c_i = \frac{1}{4}(0) + \frac{3}{4}\left(\frac{2}{3}\right) = \frac{2}{4} = \frac{1}{2} \quad \checkmark \quad \left(\text{Requiere } \psi([\tau]) = \frac{1}{2}\right)
+    \]
+
+    \item \textbf{Orden 3:}
+    Evaluamos las dos condiciones correspondientes a los árboles de orden 3 ($[\tau^2]$ y $[[\tau]]$):
+    \begin{itemize}
+        \item Para $[\tau^2]$ ($\gamma = 3$):
+        \[
+        \psi([\tau^2]) = \sum_{i=1}^2 b_i c_i^2 = \frac{1}{4}(0)^2 + \frac{3}{4}\left(\frac{2}{3}\right)^2 = \frac{3}{4}\left(\frac{4}{9}\right) = \frac{3}{9} = \frac{1}{3} \quad \checkmark
+        \]
+        \item Para $[[\tau]]$ ($\gamma = 6$):
+        \[
+        \psi([[\tau]]) = \sum_{i,j=1}^2 b_i a_{ij} c_j = b_2 \left( a_{21}c_1 + a_{22}c_2 \right) = \frac{3}{4} \left( \frac{1}{3}(0) + \frac{1}{3}\left(\frac{2}{3}\right) \right) = \frac{3}{4}\left(\frac{2}{9}\right) = \frac{6}{36} = \frac{1}{6} \quad \checkmark
+        \]
+    \end{itemize}
+
+    \item \textbf{Orden 4:}
+    Evaluamos una de las condiciones de orden 4 (por ejemplo, para el árbol $[\tau^3]$, $\gamma = 4$):
+    \[
+    \psi([\tau^3]) = \sum_{i=1}^2 b_i c_i^3 = \frac{1}{4}(0)^3 + \frac{3}{4}\left(\frac{2}{3}\right)^3 = \frac{3}{4}\left(\frac{8}{27}\right) = \frac{6}{27} = \frac{2}{9}\neq \frac{1}{4} \quad \cross
+    \]
+    Dado que el valor teórico requerido para orden 4 es $\frac{1}{\gamma} = \frac{1}{4}$, y $\frac{2}{9} \neq \frac{1}{4}$, \textbf{la condición de orden 4 no se cumple}.
+\end{enumerate}
+
+\item \textbf{Cálculo Explícito de las ponderaciones $\psi(t)$ y $\psi_i(t)$}
+
+Para el análisis de los árboles, la función de peso por etapa $\psi_i(t)$ y la ponderación global $\psi(t)$ se definen recursivamente. 
+
+Para el árbol de orden 2 $[\tau]_2$ ($\psi([\tau]_2)$):
+\begin{itemize}
+    \item La función auxiliar por etapa es:
+    \[
+    \psi_i([\tau]) = \sum_{j=1}^{s} a_{ij} c_j
+    \]
+    \item La ponderación global del árbol es:
+    \[
+    \psi([\tau]) = \sum_{i=1}^{s} b_i \psi_i([\tau]) = \sum_{i=1}^{s} b_i \left( \sum_{j=1}^{s} a_{ij} c_j \right)
+    \]
+\end{itemize}
+
+\begin{align*}
+    \psi([\tau]_3) = & \sum b_i  a_{ij} a_{jk} c_k = b_2 a_{22} a_{22} c_2 = \frac{3}{4} \cdot \frac{1}{3} \cdot \frac{1}{3} \cdot \frac{2}{3} = \frac{1}{4} \cdot \frac{2}{9} = \frac{1}{18} \neq \frac{1}{24} \\ 
+    \psi([\tau^2]_2) = & \sum b_i  a_{ij} c_j^2 = b_2 a_{22} c_2^2 = \frac{3}{4} \cdot \frac{4}{27} = \frac{1}{9} \neq \frac{1}{24} \\
+    \psi([\tau[\tau]]) = & \sum b_i c_i a_{ij} c_j = b_2 c_2 a_{22} c_2 = \frac{3}{4} \cdot \frac{2}{3} \cdot \frac{1}{3} \cdot \frac{2}{3} = \frac{1}{9} \neq \frac{1}{12} 
+\end{align*}
+$$\{f^3\} = \begin{pmatrix}
+    0 \\ 0 
+\end{pmatrix} \qquad \{f\{f\}\} = \begin{pmatrix}
+    0 \\ 2z(-y+y^2) 
+\end{pmatrix} \qquad \{f\}_3 = \begin{pmatrix}
+    (2y-1)(y^2-y) \\ z (2y-1)^2
+\end{pmatrix}$$
+\item \textbf{Conversión a Sistema de Primer Orden}
+
+Definimos $z = y'$ para transformar la EDO $y'' + y = y^2$ en un sistema de primer orden. Como en el ejercicio anterior
+$Y' = \left(\begin{smallmatrix} y \\ z \end{smallmatrix}\right)' = \left(\begin{smallmatrix} z \\ -y + y^2 \end{smallmatrix}\right)$
+Sus derivadas parciales son:
+\begin{align*}
+{}^1\!f_y &= 0, \quad {}^1\!f_z = 1 \\
+{}^2\!f_y &= -1 + 2y, \quad {}^2\!f_z = 0
+\end{align*}
+
+\item \textbf{Análisis del Error de Truncamiento Local (ETL)}
+
+La expresión general del error de truncamiento local para árboles de orden $\gamma(t)=4$ es:
+\[
+\text{ETL} = \frac{h^4}{4!} \sum_{r(t)=4} \alpha(t) \big(1 - \gamma(t)\psi(t)\big) F(t) + \mathcal{O}(h^5)
+\]
+
+Evaluando los árboles de orden 4, calculamos $\alpha(1-\gamma \psi)$
+\begin{enumerate}
+    \item \textbf{Para $[\tau^3]$:} $\alpha = 1$, $\gamma = 4$, $\psi = \frac{1}{9} \implies 1 - 8\left(\frac{1}{9}\right) = 0$.
+    \item \textbf{Para $[\tau]_3$:} $\alpha = 1$, $\gamma = 24$, $\psi = \frac{1}{18} \implies 1 - 24\left(\frac{1}{18}\right) = \frac{1}{9}$.
+    \item \textbf{Para $[\tau^2]_2$:} $\alpha = 1$, $\gamma = 12$, $\psi = \frac{1}{9} \implies 1 - 12\left(\frac{1}{9}\right) = -\frac{1}{3}$.
+    \item \textbf{Para $[\tau[\tau]]$:} $\alpha = 3$, $\gamma = 8$, $\psi = \frac{1}{9} \implies 3 \left( 1 - 8\left(\frac{1}{9}\right)  \right) = - \frac{1}{3}$.
+\end{enumerate} 
+\end{enumerate}
+\end{sol}
+\section{RK Embbeding} \footnote{Lambert p.184}
+Ahora bien, sabemos por la sección §5.9 que es imposible que un método de 5 etapas tenga orden cinco, y debemos concluir que la estimación (5.64) no es válida. De hecho, se encuentra que el método de 5 etapas que consta de (5.63) con $b^T$ modificado como se indicó anteriormente tiene un orden de solo tres; sin embargo, tiene orden cinco en el caso especial cuando el sistema diferencial es lineal con coeficientes constantes. Aunque el método de Merson desempeñó un papel importante al señalar el camino hacia futuros desarrollos, es necesario advertir en contra de su uso para problemas generales, una advertencia que parecería necesaria ya que su uso todavía parece estar muy extendido. En la práctica, el método de Merson suele sobreestimar el error, a menudo de forma muy notable con pasos pequeños, y esto ha llevado a la creencia de que su uso es siempre seguro, aunque ineficiente. Sin embargo, hace algún tiempo England (1969) dio ejemplos en los que el método de Merson subestima el error.
+
+La esencia de la idea de Merson es deducir métodos de Runge-Kutta de órdenes $p$ y $p+1$, que comparten el mismo conjunto de vectores $\{k_i\}$; este proceso se conoce como \emph{inmersión} (o métodos embebidos). Para presentar los métodos embebidos, modificaremos la tabla de Butcher a la siguiente forma:
+
+\begin{equation}
+\begin{array}{c|c}
+c & A \\
+\hline
+& b^T \\
+& \hat{b}^T \\
+\hline
+& E^T
+\end{array}
+\tag{5.65}
+\end{equation}
+
+Esta notación debe interpretarse en el sentido de que el método definido por $c$, $A$ y $b^T$ tiene orden $p$ y el definido por $c$, $A$ y $\hat{b}^T$ tiene orden $p+1$. La diferencia entre los valores para $y_{n+1}$ generados por estos dos métodos es entonces una estimación del error de truncamiento local. El vector $E^T$ es $\hat{b}^T - b^T$, de modo que la estimación del error viene dada por $h \sum_{i=1}^{s} E_i k_i$, donde $E^T = [E_1, E_2, \dots, E_s]$. Conviene asociar a un método embebido de este tipo la etiqueta $(p, p + 1)$. Nótese que la solución para $y_{n+1}$ dada por el método de orden $p$ se utiliza como valor inicial para el siguiente paso, de modo que el método tiene orden $p$. Se podría utilizar el valor de orden $(p + 1)$ para $y_{n+1}$ como valor inicial para el siguiente paso, en cuyo caso el método tiene orden $p + 1$; en tales casos es apropiado modificar la etiqueta a $(p + 1, p)$. Este proceso es, por supuesto, la extrapolación local, discutida en la sección §4.3 en el contexto de los métodos predictor-corrector; las advertencias dadas allí siguen siendo aplicables.
+
+De la sección §5.9 se deduce que para un método embebido de cuarto orden se necesitará un mínimo de seis etapas. Un ejemplo de dicho método es el método de England $(4, 5)$ (England, 1969), dado por la tabla de Butcher modificada.
+
+En nuestra notación, sean dos m\'etodos con un orden de diferencia
+\begin{align*}
+    y_{n+1} = & y_n+ h \sum b_i k_i + F(...) h^{p+1} + \mc O(h^{p+2}) \\
+    \hat y _{n+1} = & y_n+ h \sum \hat b _i k_i + G(...) h^{p+2} + \mc O(h^{p+3})  
+ \end{align*}
+ se tiene que 
+ \begin{align*}
+    \hat y _{n+1}  - y_{n+1} = & h \sum (\underbrace{\hat b_i-b_i}_{E_i}) k_i + F(...) h^{p+1} 
+ \end{align*}
+ siendo $E_i$ una estimaci\'on del error, luego
+ $$h \sum E_i k_i = \text{Tolerancia}$$
+ de forma que podemos adaptar el incremento $h$ a la tolerancia que queramos, creando as\'i un m\'etodo adaptativo, de la forma
+ $$h_{nuevo} = \frac{\text{Tol}}{\sum E_i k_i}$$
+Son \'utiles para probelmas de \'orbitas exc\'entricas, ya que m\'as cerca del planeta la velocidad es mayor y por tanto se necesita m\'as precisi\'on.
+\begin{ejer}
+    [5.8.3] Calcula el orden y el LTE. Si es escalar calcular tambi\'en el orden y decir por qu'e es distinto.  
+    \begin{enumerate}[i)]
+        \item Deducir de la siguiente tabla que cuando un método de Runge-Kutta de cuarto orden se aplica a una ecuación escalar $y' = f(y)$, cuatro de las diferenciales elementales que aparecen en la expresión para el error de truncamiento local principal (PLTE) se reducen a la misma expresión $\phi(t)$. \footnote{p.174 Lambert}
+        \begin{center}
+$\begin{array}{c|cccc}
+0 & \\
+\frac{1}{2} & \frac{1}{2} \\
+-1 & \frac{1}{2} & -\frac{3}{2}   \\
+1 & 0 & \frac{4}{3} & -\frac{1}{3} \\
+\hline
+& \frac{1}{6} & \frac{2}{3} & 0 & \frac{1}{6}
+\end{array}$
+\end{center}
+        \item Considere el método explícito:
+\begin{center}
+$\begin{array}{c|cccc}
+0 & \\
+\alpha & \alpha & \\
+\frac{1}{2} & \frac{1}{2} - \frac{1}{8\alpha} & \frac{1}{8\alpha} &  \\
+1 & \frac{1}{2\alpha} - 1 & -\frac{1}{2\alpha} & 2 &  \\
+\hline
+& \frac{1}{6} & 0 & \frac{2}{3} & \frac{1}{6}
+\end{array}$
+\end{center}
+Demuestre que para todos los valores de $\alpha$ el orden es \emph{precisamente} cuatro cuando se aplica al sistema general $y' = f(y)$, $f \in \mathbb{R}^m$. En el caso en que $m = 1$, encuentre el valor de $\alpha$ para el cual el coeficiente de $\phi(t)$, definido en (i), es cero.
+    \end{enumerate}
+\end{ejer}
+\begin{sol}
+    
+\subsubsection*{Parte (i): Verificación del orden Y C\'ALCULO DE ETL}
+Evaluamos los sumatorios de Butcher (que denotaremos como $\psi$):
+
+\begin{itemize}
+    \item \textbf{Orden 1:} 
+    \[
+    \psi_1 = \sum_{i=1}^4 b_i = \frac{1}{6} + \frac{2}{3} + 0 + \frac{1}{6} = 1 \quad (\checkmark \text{ Se cumple})
+    \]
+    \item \textbf{Orden 2:} 
+    \[
+    \psi_2 = \sum_{i=1}^4 b_i c_i = \frac{1}{6}(0) + \frac{2}{3}\left(\frac{1}{2}\right) + 0(-1) + \frac{1}{6}(1) = \frac{1}{3} + \frac{1}{6} = \frac{1}{2} \quad (\checkmark \text{ Se cumple})
+    \]
+    \item \textbf{Orden 3:} 
+    \begin{align*}
+        \psi_{3,1} &= \sum_{i=1}^4 b_i c_i^2 = \frac{2}{3}\left(\frac{1}{4}\right) + \frac{1}{6}(1) = \frac{1}{3} \quad (\checkmark) \\
+        \psi_{3,2} &= \sum_{i=1}^4 b_i \sum_{j=1}^4 a_{ij} c_j = \frac{1}{6} \quad (\checkmark)
+    \end{align*}
+    \item \textbf{Orden 4 (Donde se produce el fallo):}
+    \begin{align*}
+        \psi_{4,1} &= \sum_{i=1}^4 b_i c_i^3 = \frac{1}{4} \quad (\checkmark) \\
+        \psi_{4,2} &= \sum_{i=1}^4 b_i c_i \sum_{j=1}^4 a_{ij} c_j = \frac{1}{6} \neq \frac{1}{8} \quad (\mathbf{\text{Falla}}) \\
+        \psi_{4,3} &= \sum_{i=1}^4 b_i \sum_{j=1}^4 a_{ij} c_j^2 = 0 \neq \frac{1}{12} \quad (\mathbf{\text{Falla}}) \\
+        \psi_{4,4} &= \sum_{i=1}^4 b_i \sum_{j=1}^4 \sum_{k=1}^4 a_{ij} a_{jk} c_k = \frac{1}{24} \quad (\checkmark)
+    \end{align*}
+\end{itemize}
+
+Como las condiciones de orden 4 fallan, el método tiene un \textbf{orden estricto $p = 3$}.
+
+\subsection*{2. Cálculo del Error de Truncamiento Local (ETL)}
+Utilizando la formulación en función de los sumatorios $\psi$ y las densidades inversas de los árboles elementales $\frac{1}{\gamma(t)}$ multiplicadas por las derivadas de Fréchet:
+
+\textcolor{red}{\begin{align*}
+\text{ETL} & = \frac{h^4}{4!} \sum_{r(t)=4} \alpha(t) \left( 1-\psi(t) \gamma(t) \right) F(t)(y_n) + \mathcal{O}(h^5) \\
+&= h^4 \left[ \frac{1}{2} \left( \psi_{4,2} - \frac{1}{8} \right) f''(f'f, f) + \frac{1}{2} \left( \psi_{4,3} - \frac{1}{12} \right) f' f''(f, f) \right] \\
+&= h^4 \left[ \frac{1}{2} \left( \frac{1}{6} - \frac{1}{8} \right) f''(f'f, f) + \frac{1}{2} \left( 0 - \frac{1}{12} \right) f' f''(f, f) \right] \\
+&= h^4 \left[ \frac{1}{2} \left( \frac{1}{24} \right) f''(f'f, f) + \frac{1}{2} \left( -\frac{1}{12} \right) f' f''(f, f) \right] \\
+&= h^4 \left[ \frac{1}{48} f''(f'f, f) - \frac{1}{24} f' f''(f, f) \right] + \mathcal{O}(h^5)
+\end{align*}}
+
+\subsubsection*{Parte (ii.a): Verificación del orden 4 y posible orden 5}
+Para que el método alcance el orden 4 de forma general, debe satisfacer exactamente las ecuaciones de los árboles elementales de Butcher hasta orden 4. Con los vectores $c = [0, \alpha, 1/2, 1]^T$ y $b = [1/6, 0, 2/3, 1/6]^T$, evaluamos analíticamente las condiciones:
+
+\begin{itemize}
+    \item \textbf{Orden 1:} $\sum b_i = \frac{1}{6} + 0 + \frac{2}{3} + \frac{1}{6} = 1$
+    \item \textbf{Orden 2:} $\sum b_i c_i = \frac{2}{3}\left(\frac{1}{2}\right) + \frac{1}{6}(1) = \frac{1}{2}$
+    \item \textbf{Orden 3:} 
+    \begin{align*}
+        \sum b_i c_i^2 &= \frac{2}{3}\left(\frac{1}{4}\right) + \frac{1}{6}(1) = \frac{1}{3} \\
+        \sum b_i a_{ij} c_j &= \frac{2}{3}\left(\frac{1}{8\alpha} \alpha\right) + \frac{1}{6}\left(-\frac{1}{2\alpha} \alpha + 2 \cdot \frac{1}{2}\right) = \frac{1}{12} + \frac{1}{12} = \frac{1}{6}
+    \end{align*}
+    \item \textbf{Orden 4:}
+    \begin{align*}
+        \sum b_i c_i^3 &= \frac{2}{3}\left(\frac{1}{8}\right) + \frac{1}{6}(1) = \frac{1}{4} \\
+        \sum b_i c_i a_{ij} c_j &= \frac{2}{3}\left(\frac{1}{2}\right)\left(\frac{1}{8}\right) + \frac{1}{6}(1)\left(\frac{1}{2}\right) = \frac{1}{8} \\
+        \sum b_i a_{ij} c_j^2 &= \frac{2}{3}\left(\frac{1}{8\alpha} \alpha^2\right) + \frac{1}{6}\left(-\frac{1}{2\alpha} \alpha^2 + 2 \cdot \frac{1}{4}\right) = \frac{\alpha}{12} - \frac{\alpha}{12} + \frac{1}{12} = \frac{1}{12} \\
+        \sum b_i a_{ij} a_{jk} c_k &= \frac{1}{6}\left(2 \cdot \frac{1}{8}\right) = \frac{1}{24}
+    \end{align*}
+    \item \textbf{Orden 5}
+    \begin{align*} 
+        \sum_{i=1}^4 b_i \sum_{j=1}^4 a_{ij} \sum_{k=1}^4 a_{jk} c_k^2 &= b_4 \sum_{j=1}^4 a_{4j} \left( \sum_{k=1}^4 a_{jk} c_k^2 \right) = b_4 \left( a_{42} \sum_{k=1}^4 a_{2k} c_k^2 + a_{43} \sum_{k=1}^4 a_{3k} c_k^2 \right) \\ &= \frac{1}{6} \left[ a_{42}(0) + a_{43} \left( a_{31} c_1^2 + a_{32} c_2^2 \right) \right] = \frac{1}{6} \left[ 2 \left( \left(\frac{1}{8\alpha}\right) \alpha^2 \right) \right] = \frac{1}{6} \left[ 2 \left( \frac{\alpha}{8} \right) \right] = \frac{1}{6} \left( \frac{\alpha}{4} \right) \\ &= \frac{\alpha}{24} = \frac{1}{60} \iff \alpha=\frac{2}{5} \end{align*}
+\end{itemize}
+Dado que todas las identidades se cumplen de manera exacta sin depender del parámetro $\alpha$ (siempre que $\alpha \neq 0$), queda demostrado que el método tiene precisamente orden 4 para cualquier sistema general multidimensional $f \in \mathbb{R}^m$. Para orden 5 hay que imponer condiciones a $\alpha$. 
+
+\end{sol}
+\section{Estabilidad lineal}
+\begin{defi}
+Para $Y' = F(Y)$, si $JF=A$ tiene autovalores $\lambda_1, \ldots, \lambda_n$ con $\lambda_1 << \cdots \lambda_i$ (Re$(\lambda_i)<0$) diremos que es \textit{stiff} o r\'igido. 
+\end{defi}
+\begin{ejem}
+    $\lambda_1=-1000, \lambda_2=-1$
+    $$Y' = \begin{pmatrix}
+        -1000 & 0 \\ 0 & -1
+    \end{pmatrix} Y$$
+    es stiff y se comporta bien con m\'etodos impl\'icitos o semi-impl\'icitos pero no con expl\'icitos.
+\end{ejem}
+\section{M\'etodos semi-impl\'icitos}
+$\displaystyle \int_a^b f(t) dt $ parece lo mismo que $y'=f(t), \, y(0)=a$ pero no lo es, se demostr\'o por un canadiense hace poco.
+\newpage
+
+

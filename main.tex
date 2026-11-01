@@ -1,0 +1,63 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  PREAMBLE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,a4paper,openany]{book}
+
+\usepackage{preamble}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  DOCUMENT  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% Boldface proof name
+% \let\oldproofname=\proofname
+% \renewcommand{\proofname}{\rm\bf{\oldproofname}}
+
+% PORTADA/PREFACIO/ÍNDICE --------------------------------------------
+\frontmatter
+\pagenumbering{roman}
+
+% Portada
+\input{titlepage}
+
+% Prefacio
+%\include{Chapters/preface}
+\cleardoublepage
+
+% Índice
+\let\cleardoublepage\clearpage %quita la página en blanco
+\tableofcontents
+
+
+
+% CUERPO -------------------------------------------------------------
+\mainmatter
+\pagenumbering{arabic}
+\fancychapterstyle
+
+%\include{Chapters/chapter1} 
+\include{Chapters/chapter1gem} 
+\include{Chapters/chapter2} 
+%\include{Chapters/chapter3} 
+%\include{Chapters/chapter4}
+
+% APÉNDICES ----------------------------------------------------------
+\appendix %estilo apéndices
+
+%\include{Appendixes/exams}
+
+\include{Appendixes/appendix}
+
+\cleardoublepage
+
+\standardchapterstyle
+
+% BIBLIOGRAFIA -------------------------------------------------------
+%\backmatter
+%\addcontentsline{toc}{chapter}{Referencias}
+\bibliographystyle{unsrt}
+\bibliography{bibliography.bib}
+% \nocite{bib:...} %citar bibliografia no empleada explicitamente
+%\nocite{*} %citar toda la bibliografía
+\end{document}
