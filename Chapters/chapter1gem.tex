@@ -635,8 +635,14 @@ donde $F(t)$ es el \textbf{diferencial elemental} asociado al árbol $t$, defini
 
 
 \section{RK Embbeding} 
-La esencia de la idea de Merson (y métodos embebidos) es deducir métodos de Runge-Kutta de órdenes $p$ y $p+1$ que comparten el mismo conjunto de evaluaciones $k_i$. La tabla de Butcher se modifica a la siguiente forma:
-
+La esencia de la idea de Merson (y métodos embebidos) es deducir métodos de Runge-Kutta de órdenes $p$ y $p+1$ que comparten el mismo conjunto de evaluaciones $k_i$
+\begin{align*}
+    y_{n+1} = & \, y_n+ h \sum b_i k_i + F(...) h^{p+1} + \mc O(h^{p+2}) \\
+    \hat y _{n+1} = & \, y_n+ h \sum \hat b _i k_i + G(...) h^{p+2} + \mc O(h^{p+3})  
+ \end{align*}
+ El método definido por $b^T$ tiene orden $p$ y el definido por $\hat{b}^T$ tiene orden $p+1$.
+ 
+ La tabla de Butcher se modifica a la siguiente forma:
 \begin{equation*}
 \begin{array}{c|c}
 c & A \\
@@ -647,16 +653,19 @@ c & A \\
 & E^T
 \end{array}
 \end{equation*}
-
-El método definido por $b^T$ tiene orden $p$ y el definido por $\hat{b}^T$ tiene orden $p+1$. La diferencia entre las soluciones $\hat{y}_{n+1} - y_{n+1}$ es una estimación del error de truncamiento local dada por $h \sum E_i k_i$ (donde $E^T = \hat{b}^T - b^T$).
- 
-De forma que podemos adaptar el incremento $h$ a la tolerancia que queramos, creando un m\'etodo adaptativo:
+ La diferencia entre las soluciones $\hat{y}_{n+1} - y_{n+1}$ es una estimación del error de truncamiento local dada por 
+ \begin{align*}
+    \hat y _{n+1}  - y_{n+1} = & \, h \sum (\underbrace{\hat b_i-b_i}_{E_i}) k_i + F(...) h^{p+1} 
+ \end{align*}
+ luego
+ $$h \sum E_i k_i = \text{Tolerancia}$$
+ de forma que podemos adaptar el incremento $h$ a la tolerancia que queramos, creando as\'i un m\'etodo adaptativo, de la forma
 $$h_{nuevo} = \frac{\text{Tol}}{\sum E_i k_i}$$
 Son \'utiles para problemas de \'orbitas exc\'entricas, ya que m\'as cerca del planeta la velocidad es mayor y se necesita m\'as precisi\'on.
 
 \section{Estabilidad lineal}
 \begin{defi}
-Para $Y' = F(Y)$, si la Jacobiana $JF=A$ tiene autovalores $\lambda_1, \ldots, \lambda_n$ con $\lambda_1 << \cdots \lambda_i$ (Re$(\lambda_i)<0$) diremos que el problema es \textit{stiff} o r\'igido. 
+Para $Y' = F(Y)$, si la matriz jacobiana $JF=A$ tiene autovalores $\lambda_1, \ldots, \lambda_n$ con $\lambda_1 << \cdots \lambda_i$ (Re$(\lambda_i)<0$) diremos que el problema es \textit{stiff} o r\'igido. 
 \end{defi} 
 \begin{ejem}
     $\lambda_1=-1000, \lambda_2=-1$
