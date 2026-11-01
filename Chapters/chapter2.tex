@@ -428,10 +428,8 @@ Comprobar la convergencia (hipótesis del método), convertir a sistema de prime
 
 
 \section{Parcial II}
-
-
 \begin{ejer}
-    [5.5.1 (ii)] Consideremos $m = 2$, dado por $y = [u, v]^T$ y $f(y) = \left(\begin{smallmatrix} uv \\ u + v \end{smallmatrix} \right)$.
+    [5.5.1(ii)] Consideremos $m = 2$, dado por $y = [u, v]^T$ y $f(y) = \left(\begin{smallmatrix} uv \\ u + v \end{smallmatrix} \right)$.
 \end{ejer}
 \begin{sol}
     \begin{itemize}
@@ -635,7 +633,8 @@ Evaluamos los sumatorios de Butcher (que denotaremos como $\psi$):
 
 Como las condiciones de orden 4 fallan, el método tiene un \textbf{orden estricto $p = 3$}.
 
-\subsection*{Cálculo del Error de Truncamiento Local (ETL)}
+\noindent \textbf{Cálculo del Error de Truncamiento Local (ETL)} 
+
 Utilizando la formulación en función de los sumatorios $\psi(t)$, $\alpha(t)$ y las densidades de los árboles elementales $\gamma(t)$ multiplicadas por las derivadas de Fréchet
 \begin{align*}
 \text{ETL} & = \frac{h^4}{4!} \sum_{r(t)=4} \alpha(t) \left( 1-\psi(t) \gamma(t) \right) F(t) + \mathcal{O}(h^5) \\
@@ -645,7 +644,7 @@ Utilizando la formulación en función de los sumatorios $\psi(t)$, $\alpha(t)$ 
 &= \frac{h^4}{4!}  \left[ 3 \left( \frac{-1}{3}  \right) \{f\{f\}\} +  \{f^2\}_2 \right] \\
 &= \frac{h^4}{4!}  \left[ - \{f\{f\}\} + \{f^2\}_2 \right] + \mathcal{O}(h^5)
 \end{align*}
-y si $m=1$, es decir, trabajamos en $\bb R^1$, en ese caso $\{f\} = f_y f$, luego $\{f\}_2 = f_y f_{yy} f^2 = f_{yy} f f_{y} f = \{f\{f\}\}$ \hyperref[ap1]{Tabla 5.5}, y entonces ETL $= \mc O(h^5)$ y el m\'etodo es de orden 4. 
+y si $m=1$, es decir, trabajamos en $\bb R^1$, en ese caso $\{f\} = f_y f$, luego $\{f\}_2 = f_y f_{yy} f^2 = f_{yy} f f_{y} f = \{f\{f\}\}$ (por la \hyperref[ap1]{Tabla 5.5}), y entonces ETL $= \mc O(h^5)$ y el m\'etodo es de orden 4. 
 
 \subsubsection*{Parte (ii): Verificación del orden 4 y posible orden 5}
 Para que el método alcance el orden 4 de forma general, debe satisfacer exactamente las ecuaciones de los árboles elementales de Butcher hasta orden 4. Con los vectores $c = [0, \alpha, \nicefrac{1}{2}, 1]^T$ y $b = [\nicefrac{1}{6}, 0, \nicefrac{2}{3}, \nicefrac{1}{6}]^T$, evaluamos analíticamente las condiciones:
