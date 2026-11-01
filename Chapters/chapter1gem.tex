@@ -1,5 +1,5 @@
 \chapter{Teor\'ia} \justifying
-Ecuaciones diferenciales 2 tipos:
+Existen 2 tipos de ecuaciones diferenciales 2 tipos:
 \begin{itemize}
     \item Lineales $y''+y=0$ (fáciles) $\Rightarrow P(D)y=0$. D operador derivada.
     \item No Lineales $y''+\sin(y)=0$.
@@ -306,47 +306,38 @@ $$\begin{aligned} k_3 = f &+ h \{c_3 f_x + [(c_3 - a_{32})k_1 + a_{32}k_2]f_y\} 
 % SECCIÓN REORGANIZADA: TEORÍA DE BUTCHER
 % ---------------------------------------------------------
 
+\section{Teoría de Butcher: Derivadas de Fréchet, \'arboles y correspondencia}
+\subsection{Introducci\'on}
 Las ideas que estamos a punto de describir se remontan a un artículo de Merson (1957), pero su desarrollo en una teoría importante se debe a J. C. Butcher, en una larga serie de artículos que comenzaron a mediados de la década de 1960. El lector que desee ver una descripción completa de la teoría puede consultar el libro de Butcher (1987) que, dicho sea de paso, contiene la bibliografía disponible más completa sobre el tema de los métodos numéricos para ecuaciones diferenciales ordinarias, con unas 2000 entradas. En las secciones siguientes presentaremos solo una versión simplificada de la teoría, con el objetivo de permitir al lector utilizar la teoría para establecer las condiciones de orden (y la estructura del error de truncamiento local) y apreciar algunas de las consecuencias. En particular, no daremos ninguna prueba de los teoremas involucrados, y nuestro tratamiento de los aspectos algebraicos no será riguroso (¡posiblemente hasta el punto de ofender a algunos lectores!).
 
 Recordemos que, si bien hay una pérdida de generalidad al asumir que el problema de valor inicial \textit{escalar} es autónomo, no hay tal pérdida en el caso de un problema que involucra un sistema de ecuaciones diferenciales ordinarias. Ahora estamos tratando con sistemas, y se logra una simplificación útil asumiendo la forma autónoma
-
 \begin{equation}
 y' = f(y), \quad y(a) = \eta, \qquad f : \mathbb{R}^m \to \mathbb{R}^m, \quad m > 1 \tag{5.22}
 \end{equation}
-
 Comencemos por ver en qué dificultades nos metemos al tratar de adaptar el enfoque de la sección anterior al caso de sistemas. El primer problema con el que nos encontramos es la contraparte de (5.14), donde necesitamos expresar las derivadas totales de $y$ en términos de $f$ y sus derivadas parciales. Para el caso autónomo \textit{escalar} (5.14) se lee
-
 \begin{equation}
 y^{(1)} = f, \quad y^{(2)} = f_y f, \quad y^{(3)} = f_{yy} f^2 + f_y^2 f. \tag{5.23}
 \end{equation}
-
-¿Cuáles son las expresiones correspondientes cuando $y, f \in \mathbb{R}^m$? Para mantener las cosas simples, consideremos el caso $m = 2$, de modo que $y = [\!^1y, ^2y]^T$, $f = [\!^1f, ^2f]^T$. Introduciendo la notación
-
+¿Cuáles son las expresiones correspondientes cuando $y, f \in \mathbb{R}^m$? Para mantener las cosas simples, consideremos el caso $m = 2$, de modo que $y = [\,\!^1y, \!^2y]^T$, $f = [\, \!^1f, \!^2f]^T$. Introduciendo la notación
 \[
-^i f_j := \frac{\partial (^i f)}{\partial (^j y)}, \quad ^i f_{jk} := \frac{\partial^2 (^i f)}{\partial (^j y) \partial (^k y)} \quad \text{etc.}
+\!^i f_j := \frac{\partial (\, \!^i f)}{\partial (\, \!^j y)}, \quad \!^i f_{jk} := \frac{\partial^2 (\, \!^i f)}{\partial (\, \!^j y) \partial (\, \!^k y)} \quad \text{etc.}
 \]
-
-tenemos $\!^1 y^{(1)} = \!^1 f$, $^2 y^{(1)} = ^2 f$, de donde encontramos al derivar que
-
+tenemos $\!^1 y^{(1)} = \!^1 f$, $\!^2 y^{(1)} = \!^2 f$, de donde encontramos al derivar que
 \begin{equation*}
-\!^1 y^{(2)} = \!^1 f_1 (\!^1 f) + \!^1 f_2 (^2 f), \quad ^2 y^{(2)} = ^2 f_1 (\!^1 f) + ^2 f_2 (^2 f)
+\!^1 y^{(2)} = \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (\, \!^2 f), \quad \!^2 y^{(2)} = \!^2 f_1 (\, \!^1 f) + \!^2 f_2 (\, \!^2 f)
 \end{equation*}
-
 o
-
 \begin{equation}
-y^{(2)} = \begin{pmatrix} \!^1 f_1 & \!^1 f_2 \\ ^2 f_1 & ^2 f_2 \end{pmatrix} f \tag{5.24}
+y^{(2)} = \begin{pmatrix} \!^1 f_1 & \!^1 f_2 \\ \!^2 f_1 & \!^2 f_2 \end{pmatrix} f \tag{5.24}
 \end{equation}
-
 y
-
 \begin{equation}
 \left.
 \begin{aligned}
-\!^1 y^{(3)} &= \!^1 f_{11} (\!^1 f)^2 + \!^1 f_{12} (\!^1 f)(^2 f) + \!^1 f_1 [\!^1 f_1 (\!^1 f) + \!^1 f_2 (^2 f)] \\
-&\quad + \!^1 f_{21} (^2 f)(\!^1 f) + \!^1 f_{22} (^2 f)^2 + \!^1 f_2 [^2 f_1 (\!^1 f) + ^2 f_2 (^2 f)] \\
-^2 y^{(3)} &= ^2 f_{11} (\!^1 f)^2 + ^2 f_{12} (\!^1 f)(^2 f) + ^2 f_1 [\!^1 f_1 (\!^1 f) + \!^1 f_2 (^2 f)] \\
-&\quad + ^2 f_{21} (^2 f)(\!^1 f) + ^2 f_{22} (^2 f)^2 + ^2 f_2 [^2 f_1 (\!^1 f) + ^2 f_2 (^2 f)].
+\!^1 y^{(3)} &= \!^1 f_{11} (\, \!^1 f)^2 + \!^1 f_{12} (\, \!^1 f)(\, \!^2 f) + \!^1 f_1 \left[\, \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (\, \!^2 f)\right] \\
+&\quad + \!^1 f_{21} (\, \!^2 f)(\, \!^1 f) + \!^1 f_{22} (\, \!^2 f)^2 + \!^1 f_2 \left[\, \!^2 f_1 (\, \!^1 f) + \!^2 f_2 (\, \!^2 f)\right] \\
+\!^2 y^{(3)} &= \!^2 f_{11} (\, \!^1 f)^2 + \!^2 f_{12} (\, \!^1 f)(^2 f) +\!^2 f_1 \left[\, \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (^2 f)\right] \\
+&\quad +\!^2 f_{21} (^2 f)(\!^1 f) +\!^2 f_{22} (^2 f)^2 +\!^2 f_2 \left[^2 f_1 (\, \!^1 f) +\!^2 f_2 (^2 f)\right].
 \end{aligned}
 \right\} \tag{5.25}
 \end{equation}
@@ -360,16 +351,16 @@ Pongamos ahora $m = 2$, y veamos si podemos interpretar los resultados (5.24) y 
 \textbf{Caso $M = 1$}
 \begin{align}
 f^{(1)}(z)(K_1) &= \sum_{i=1}^2 \sum_{j_1=1}^2 {}^i f_{j_1} ({}^{j_1} K_1) e_i \nonumber \\
-&= \begin{bmatrix} \!^1 f_1 (\!^1 K_1) + \!^1 f_2 (^2 K_1) \\ ^2 f_1 (\!^1 K_1) + ^2 f_2 (^2 K_1) \end{bmatrix} \tag{5.28}
+&= \begin{bmatrix} \!^1 f_1 (\, \!^1 K_1) + \!^1 f_2 (^2 K_1) \\\!^2 f_1 (\, \!^1 K_1) +\!^2 f_2 (^2 K_1) \end{bmatrix} \tag{5.28}
 \end{align}
 donde
 \[
-^i f_1 = \frac{\partial (^i f)}{\partial (\!^1 z)}, \quad ^i f_2 = \frac{\partial (^i f)}{\partial (^2 z)}, \quad i = 1, 2.
+^i f_1 = \frac{\partial (^i f)}{\partial (\, \!^1 z)}, \quad ^i f_2 = \frac{\partial (^i f)}{\partial (^2 z)}, \quad i = 1, 2.
 \]
 
 Ahora reemplazamos $z$ por $y$, y $K_1$ por $f$ (notando que los cuatro son vectores de dimensión 2). La ecuación (5.28) ahora se lee
 \begin{equation}
-f^{(1)}(y)(f(y)) = \begin{bmatrix} \!^1 f_1 (\!^1 f) + \!^1 f_2 (^2 f) \\ ^2 f_1 (\!^1 f) + ^2 f_2 (^2 f) \end{bmatrix} = y^{(2)} \tag{5.29}
+f^{(1)}(y)(f(y)) = \begin{bmatrix} \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (^2 f) \\\!^2 f_1 (\, \!^1 f) +\!^2 f_2 (^2 f) \end{bmatrix} = y^{(2)} \tag{5.29}
 \end{equation}
 por (5.24). En el contexto de la derivación de los métodos de Runge-Kutta, realmente no necesitamos que se nos diga que las derivadas parciales de $f$ se deben tomar con respecto al componente de $y$ (¿qué más hay?), de modo que podemos acortar la notación en (5.29) a
 \begin{equation}
@@ -379,16 +370,16 @@ Así, la segunda derivada de $y$ es la primera derivada de Fréchet de $f$ opera
 
 \textbf{Caso $M = 2$}
 \begin{align*}
-f^{(2)}(z)(K_1, K_2) &= \sum_{i=1}^2 \sum_{j_1=1}^2 \sum_{j_2=1}^2 {}^i f_{j_1 j_2} ({}^{j_1} K_1) ({}^{j_2} K_2) e_i \\
-&= \begin{bmatrix} \!^1 f_{11} (\!^1 K_1)(\!^1 K_2) + \!^1 f_{12} (\!^1 K_1)(^2 K_2) + \!^1 f_{21} (^2 K_1)(\!^1 K_2) + \!^1 f_{22} (^2 K_1)(^2 K_2) \\ ^2 f_{11} (\!^1 K_1)(\!^1 K_2) + ^2 f_{12} (\!^1 K_1)(^2 K_2) + ^2 f_{21} (^2 K_1)(\!^1 K_2) + ^2 f_{22} (^2 K_1)(^2 K_2) \end{bmatrix}.
+f^{(2)}(z)(K_1, K_2) &= \sum_{i=1}^2 \sum_{j_1=1}^2 \sum_{j_2=1}^2 \,^i f_{j_1 j_2} ({}^{j_1} K_1) ({}^{j_2} K_2) e_i \\
+&= \begin{bmatrix} \!^1 f_{11} (\, \!^1 K_1)(\!^1 K_2) + \!^1 f_{12} (\, \!^1 K_1)(^2 K_2) + \!^1 f_{21} (^2 K_1)(\!^1 K_2) + \!^1 f_{22} (^2 K_1)(^2 K_2) \\ \!^2 f_{11} (\, \!^1 K_1)(\,\!^1 K_2) + \!^2 f_{12} (\, \!^1 K_1)(^2 K_2) + \!^2 f_{21} (\,\!^2 K_1)(\!^1 K_2) + \!^2 f_{22} (^2 K_1)(^2 K_2) \end{bmatrix}.
 \end{align*}
 Reemplazamos $z$ por $y$ y ponemos $K_1 = K_2 = f$ para obtener
 \begin{equation}
-f^{(2)}(y)(f(y), f(y)) = \begin{bmatrix} \!^1 f_{11} (\!^1 f)^2 + 2(\!^1 f_{12})(\!^1 f)(^2 f) + \!^1 f_{22} (^2 f)^2 \\ ^2 f_{11} (\!^1 f)^2 + 2(^2 f_{12})(\!^1 f)(^2 f) + ^2 f_{22} (^2 f)^2 \end{bmatrix}, \tag{5.31}
+f^{(2)}(y)(f(y), f(y)) = \begin{bmatrix} \!^1 f_{11} (\, \!^1 f)^2 + 2(\!^1 f_{12})(\!^1 f)(^2 f) + \!^1 f_{22} (^2 f)^2 \\ \!^2 f_{11} (\, \!^1 f)^2 + 2(^2 f_{12})(\!^1 f)(^2 f) + \!^2 f_{22} (^2 f)^2 \end{bmatrix}, \tag{5.31}
 \end{equation}
 donde la notación del lado izquierdo indica que las derivadas parciales son con respecto a los componentes de $y$, no de $z$. Al comparar con (5.25), vemos que el lado derecho de (5.31) representa algunos, pero no todos, de los términos del lado derecho de (5.25), y que obtenemos $y^{(3)}$ sumando al lado derecho de (5.31) el vector
 \begin{equation}
-\begin{bmatrix} \!^1 f_1 [\!^1 f_1 (\!^1 f) + \!^1 f_2 (^2 f)] + \!^1 f_2 [^2 f_1 (\!^1 f) + ^2 f_2 (^2 f)] \\ ^2 f_1 [\!^1 f_1 (\!^1 f) + \!^1 f_2 (^2 f)] + ^2 f_2 [^2 f_1 (\!^1 f) + ^2 f_2 (^2 f)] \end{bmatrix}. \tag{5.32}
+\begin{bmatrix} \!^1 f_1 [\, \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (^2 f)] + \!^1 f_2 [^2 f_1 (\, \!^1 f) + \!^2 f_2 (^2 f)] \\ \!^2 f_1 [\, \!^1 f_1 (\, \!^1 f) + \!^1 f_2 (^2 f)] + \!^2 f_2 [^2 f_1 (\, \!^1 f) + \!^2 f_2 (^2 f)] \end{bmatrix}. \tag{5.32}
 \end{equation}
 
 Ahora bien, si en (5.29) reemplazamos el operando $f(y)$ por el operando $f^{(1)}(y)(f(y))$ (dado por la propia (5.29)), el resultado es precisamente (5.32). Por tanto, acortando la notación como en (5.30), (5.25) se puede escribir como
@@ -399,10 +390,10 @@ Comparando esto con la última de (5.23) (el resultado correspondiente para el c
 
 Por supuesto, hemos probado los resultados (5.30) y (5.33) sólo para el caso $m = 2$, pero no es difícil ver que se cumplirán para todo $m$. Así, hemos visto que $y^{(2)}$ es una única derivada de Fréchet de orden 1 y que $y^{(3)}$ es una combinación lineal de derivadas de Fréchet de órdenes 1 y 2. En general, $y^{(p)}$ resulta ser una combinación lineal de derivadas de Fréchet de órdenes hasta $p - 1$. Los componentes en tales combinaciones lineales se llaman \textit{diferenciales elementales}; son las contrapartes para sistemas de términos como $F$ y $G$ (véase (5.15)) para problemas escalares, y son los bloques de construcción naturales para los métodos de Runge-Kutta. Se definen recursivamente de la siguiente manera:
 
-\textbf{Definición} Los \textit{diferenciales elementales} $F_s : \mathbb{R}^m \to \mathbb{R}^m$ de $f$ y su orden se definen recursivamente por
-
-(i) $f$ es el único diferencial elemental de orden 1, y \\
-(ii) si $F_s, s = 1, 2, \dots, M$ son diferenciales elementales de órdenes $r_s$ respectivamente, entonces la derivada de Fréchet
+\begin{defi} Los \textit{diferenciales elementales} $F_s : \mathbb{R}^m \to \mathbb{R}^m$ de $f$ y su orden se definen recursivamente por
+\begin{itemize}
+ \item [(i)] $f$ es el único diferencial elemental de orden 1, y \\
+ \item [(ii)] si $F_s, s = 1, 2, \dots, M$ son diferenciales elementales de órdenes $r_s$ respectivamente, entonces la derivada de Fréchet
 \begin{equation}
 f^{(M)}(F_1, F_2, \dots, F_M) \tag{5.34}
 \end{equation}
@@ -410,18 +401,15 @@ es un diferencial elemental de orden
 \begin{equation}
 1 + \sum_{s=1}^M r_s. \tag{5.35}
 \end{equation}
-
-
-
-\section{Teoría de Butcher: Derivadas de Fréchet, Árboles y Correspondencia}
-
+\end{itemize}
+\end{defi}
 El análisis tradicional del error mediante la expansión en series de Taylor multivariable se vuelve inmanejable para órdenes superiores a 3 en sistemas de ecuaciones. La Teoría de Butcher introduce una notación matemática y gráfica que simplifica drásticamente este proceso mediante el uso de derivadas de Fréchet y su correspondencia biunívoca con árboles enraizados.
 
-\subsection{Derivadas de Fréchet y Diferenciales Elementales}
+\subsection{Derivadas de Fréchet y diferenciales elementales}
 
-Dada la notación para un sistema de ecuaciones diferenciales autónomo $y' = f(y)$, definimos el vector de variables $y = [\!^1y, ^2y, \dots, ^my]^T$ y el campo vectorial $f = [\!^1f, ^2f, \dots, ^mf]^T$.
+Dada la notación para un sistema de ecuaciones diferenciales autónomo $y' = f(y)$, definimos el vector de variables $y = [\, \!^1y, \!^2y, \dots, \!^my]^T$ y el campo vectorial $f = [\, \!^1f, \!^2f, \dots, \!^mf]^T$.
 Definimos las derivadas parciales con la notación por componentes:
-$$ {^i}f_j = \frac{\partial ^if}{\partial ^jy}, \quad {^i}f_{jk} = \frac{\partial^2 {^i}f}{\partial ^jy \partial ^ky} $$
+$$ {\!^i}f_j = \frac{\partial \!x^if}{\partial \!x^jy}, \quad {\!^i}f_{jk} = \frac{\partial^2 {\!^i}f}{\partial \!^jy \partial \!^ky} $$
 
 \begin{defi}[$M$-ésima Derivada de Fréchet]
 Sea $z, f(z) \in \mathbb{R}^m$. La $M$-ésima derivada de Fréchet de $f$, denotada por $f^{(M)}(z)$, es un operador multilineal sobre $\mathbb{R}^m \times \dots \times \mathbb{R}^m$ ($M$ veces), lineal en cada uno de sus operandos, cuya expresión por componentes es:
@@ -441,7 +429,7 @@ Mediante la notación de Fréchet con llaves $\{\}$, las derivadas totales de la
     *(Corresponde a la matriz Jacobiana multiplicada por $f$)*.
     \item \textbf{Orden 3:} 
     Aplicando la regla de la cadena multivariable:
-    $$y^{(3)} = \frac{d}{dt} y^{(2)} = f^{(2)}(f, f) + f^{(1)}(f^{(1)}(f)) = \{f^2\} + \{_2f\}_2$$
+    $$y^{(3)} = \frac{d}{dt} y^{(2)} = f^{(2)}(f, f) + f^{(1)}(f^{(1)}(f)) = \{f^2\} + \{f\}_2$$
     Donde el término bilineal $f^{(2)}(k_1, k_2)$ se construye con las matrices Hessianas (derivadas segundas).
 \end{itemize}
 
@@ -470,7 +458,7 @@ Mediante la notación de Fréchet con llaves $\{\}$, las derivadas totales de la
     \]
     \item \textbf{Orden 3:} Descomposición $y^{(3)} = \{f^2\} + \{\{f\}\}$:
     \begin{enumerate}
-        \item \textit{Término $\{f^2\} = f^{(2)}(f, f)$:} Usando derivadas de 2º orden. Para $f\!^1=uv$, las derivadas no nulas son cruzadas. Para $f^2=u+v$ son nulas:
+        \item \textit{Término $\{f^2\} = f^{(2)}(f, f)$:} Usando derivadas de 2º orden. Para $\!^1 f=uv$, las derivadas no nulas son cruzadas. Para $\!^2 f=u+v$ son nulas:
         \[
         f^{(2)}(f, f) = \begin{pmatrix} 0(uv)^2 + 2(1)(uv)(u+v) + 0(u+v)^2 \\ 0 \end{pmatrix} = \begin{pmatrix} 2uv(u+v) \\ 0 \end{pmatrix}
         \]
@@ -488,7 +476,7 @@ Mediante la notación de Fréchet con llaves $\{\}$, las derivadas totales de la
 \begin{sol}
 \begin{itemize}
     \item Derivadas de 1$^{er}$ orden (Jacobiana): ${\!^1}f_1 = vw, \, {\!^1}f_2 = uw, \, {\!^1}f_3 = uv \dots$
-    \item Derivadas de 2º orden (${^i}f_{jk}$): Para $f\!^1$, solo las cruzadas no son nulas (${\!^1}f_{12}=w$, etc). Para $f^2$, ${^2}f_{12}={^2}f_{13}=1$. Para $f^3$, ${^3}f_{22}=2, {^3}f_{23}=1, {^3}f_{32}=1$.
+    \item Derivadas de 2º orden (${^i}f_{jk}$): Para $f^1$, solo las cruzadas no son nulas (${\!^1}f_{12}=w$, etc). Para $f^2$, ${^2}f_{12}={^2}f_{13}=1$. Para $f^3$, ${^3}f_{22}=2, {^3}f_{23}=1, {^3}f_{32}=1$.
     \item La primera diferencial elemental $\{f\}$ es:
     $$ \{f\} = \begin{pmatrix} 
         (vw)(uvw) + (uw)(u(v+w)) + (uv)(v(v+w)) \\ 
@@ -707,7 +695,7 @@ Son \'utiles para problemas de \'orbitas exc\'entricas, ya que m\'as cerca del p
 \section{Estabilidad lineal}
 \begin{defi}
 Para $Y' = F(Y)$, si la Jacobiana $JF=A$ tiene autovalores $\lambda_1, \ldots, \lambda_n$ con $\lambda_1 << \cdots \lambda_i$ (Re$(\lambda_i)<0$) diremos que el problema es \textit{stiff} o r\'igido. 
-\end{defi}
+\end{defi} 
 \begin{ejem}
     $\lambda_1=-1000, \lambda_2=-1$
     $$Y' = \begin{pmatrix}
@@ -718,5 +706,5 @@ Para $Y' = F(Y)$, si la Jacobiana $JF=A$ tiene autovalores $\lambda_1, \ldots, \
 
 \section{M\'etodos semi-impl\'icitos}
 $\displaystyle \int_a^b f(t) dt $ parece lo mismo que $y'=f(t), \, y(0)=a$ pero no lo es, se demostr\'o por un canadiense hace poco.
-
+\vfill
 \newpage
