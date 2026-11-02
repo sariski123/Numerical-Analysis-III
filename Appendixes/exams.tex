@@ -26,16 +26,7 @@ Para Heun (orden 2): $k_2 = f(x_n + h, y_n + h k_1)$.
 
 \vspace{0.3cm}
 \noindent \textbf{2. Controlador de paso (Step-size control):} \\
-El vector diferencia $E^T$ permite estimar el error cometido en el paso $h$:
-\[
-\epsilon_{n+1} = h \sum_{i=1}^{s} E_i k_i = \frac{h}{2} (k_2 - k_1)
-\]
-Si se nos pidiese una programación en paso variable, sabiendo que el método base usado para el error es de orden $p=1$, el factor óptimo para cambiar el paso $h$ se rige por la ley asintótica del error $\epsilon \approx C h^{p+1}$. Por tanto, el controlador de paso se razona como:
-\[
-h_{nuevo} = h_{actual} \cdot \theta \left( \frac{\text{Tolerancia}}{\| \epsilon_{n+1} \|} \right)^{\frac{1}{p+1}} \implies \mathbf{h_{nuevo} = h_{actual} \cdot 0.9 \sqrt{\frac{\text{Tol}}{\| \epsilon_{n+1} \|}}}
-\]
-\textit{(Donde $\theta \approx 0.9$ es un factor de seguridad heurístico para evitar rechazos frecuentes).}
-
+Como $b = \begin{pmatrix} \frac{1}{2} \\ \frac{1}{2} \end{pmatrix}$ y $\hat{b} = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$, tenemos $E = b - \hat{b} = \begin{pmatrix} -\frac{1}{2} \\ \frac{1}{2} \end{pmatrix}$.$$\sum E_i k_i = -\frac{1}{2} k_1 + \frac{1}{2} k_2 = \frac{k_2 - k_1}{2}$$Sustituyendo en la fórmula de los apuntes:$$\mathbf{h_{nuevo} = \frac{\text{Tol}}{\frac{k_2 - k_1}{2}} = \frac{2 \cdot \text{Tol}}{k_2 - k_1}}$$
     \end{sol}
 \item Expresión del ETL del RK de orden 2 anterior para $y'' = -y^2$.
 \begin{sol}
@@ -44,7 +35,7 @@ Para el método de Heun deducido en el apartado anterior, al ser de orden 2, el 
 \text{ETL} = \frac{h^3}{3!} \left[ \alpha([\tau^2]) \big(1 - 3\psi([\tau^2])\big) F([\tau^2]) + \alpha([\tau]_2) \big(1 - 6\psi([\tau]_2)\big) F([\tau]_2) \right]
 \]
 
-Evaluando los sumatorios $\psi$ para el método de Heun ($c_1=0, c_2=1, b_1=1/2, b_2=1/2, a_{21}=1$):
+Evaluando los sumatorios $\psi$ para el método de Heun ($c_1=0, c_2=1, b_1=\frac{1}{2}, b_2=\frac{1}{2}, a_{21}=1$):
 \begin{itemize}
     \item $\psi([\tau^2]) = \sum b_i c_i^2 = \frac{1}{2}(1)^2 = \frac{1}{2} \implies 1 - 3\left(\frac{1}{2}\right) = -\frac{1}{2}$
     \item $\psi([\tau]_2) = \sum b_i a_{ij} c_j = \frac{1}{2}(1)(0) = 0 \implies 1 - 6(0) = 1$
@@ -56,7 +47,7 @@ Por lo que la fórmula queda:
 \]
 
 \vspace{0.3cm}
-\noindent \textbf{Aplicación al sistema $y'' = -y^2$:} \\
+\noindent \textbf{Aplicación al sistema $y'' = -y^2$} \\
 Definimos variables de primer orden $u = y$ y $v = y'$, obteniendo el sistema:
 \[
 Y' = f(Y) = \begin{pmatrix} v \\ -u^2 \end{pmatrix}
