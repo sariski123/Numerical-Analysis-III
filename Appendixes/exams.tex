@@ -1,8 +1,9 @@
 \chapter{Parcial II 25/26} 
-\section*{Resolución de Examen - Parcial RK}
+\begin{enumerate}[a)]
+    \item Usando el método de Euler explicito calcular un método RK embedded. Razonar el cambiador de paso que utilizarías si se te pidiese una programación en paso variable
 
-\subsection*{a) Método RK Embedded usando Euler explícito y controlador de paso}
-
+    \begin{sol}
+        
 Un método \textit{embedded} (inmerso) consiste en construir dos métodos de Runge-Kutta de distintos órdenes (normalmente $p$ y $p+1$) que comparten las mismas evaluaciones $k_i$, de modo que su diferencia proporciona una estimación del error de truncamiento local sin coste computacional adicional.
 
 Dado que nos piden usar el \textbf{método de Euler explícito} (que es de orden $p=1$), necesitamos construir un método de orden 2 ($p+1=2$) que lo contenga. El más clásico es el \textbf{método de Heun} (o RK de 2 etapas). 
@@ -12,14 +13,14 @@ Dado que nos piden usar el \textbf{método de Euler explícito} (que es de orden
 Para Euler explícito: $k_1 = f(x_n, y_n)$. \\
 Para Heun (orden 2): $k_2 = f(x_n + h, y_n + h k_1)$.
 \[
-\begin{array}{c|cc}
+\begin{array}{c|ccl}
 0 & 0 & 0 \\
 1 & 1 & 0 \\
 \hline
-  & 1/2 & 1/2 \quad \leftarrow \text{Pesos } b^T \text{ (Orden 2, Heun)} \\
-  & 1 & 0 \quad \leftarrow \text{Pesos } \hat{b}^T \text{ (Orden 1, Euler)} \\
+  & \frac{1}{2} & \frac{1}{2} & \quad \leftarrow \text{Pesos } b^T \text{ (Orden 2, Heun)} \\
+  & 1 & 0 & \quad \leftarrow \text{Pesos } \hat{b}^T \text{ (Orden 1, Euler)} \\
 \hline
-  & -1/2 & 1/2 \quad \leftarrow E^T = b^T - \hat{b}^T \text{ (Estimador de error)}
+  & -\frac{1}{2} & \frac{1}{2} & \quad \leftarrow E^T = b^T - \hat{b}^T \text{ (Estimador de error)}
 \end{array}
 \]
 
@@ -35,9 +36,9 @@ h_{nuevo} = h_{actual} \cdot \theta \left( \frac{\text{Tolerancia}}{\| \epsilon_
 \]
 \textit{(Donde $\theta \approx 0.9$ es un factor de seguridad heurístico para evitar rechazos frecuentes).}
 
-\vspace{0.8cm}
-\subsection*{b) Expresión del ETL del RK de orden 2 anterior para $y'' = -y^2$}
-
+    \end{sol}
+\item Expresión del ETL del RK de orden 2 anterior para $y'' = -y^2$.
+\begin{sol}
 Para el método de Heun deducido en el apartado anterior, al ser de orden 2, el Error de Truncamiento Local principal (ETL) viene dado por los árboles de orden 3 ($\gamma([\tau^2]) = 3$ y $\gamma([\tau]_2) = 6$):
 \[
 \text{ETL} = \frac{h^3}{3!} \left[ \alpha([\tau^2]) \big(1 - 3\psi([\tau^2])\big) F([\tau^2]) + \alpha([\tau]_2) \big(1 - 6\psi([\tau]_2)\big) F([\tau]_2) \right]
@@ -86,11 +87,9 @@ Sustituyendo en el ETL:
 \text{ETL} = \frac{h^3}{6} \left[ -\frac{1}{2} \begin{pmatrix} 0 \\ -2v^2 \end{pmatrix} + \begin{pmatrix} -2uv \\ 2u^3 \end{pmatrix} \right] = \mathbf{\frac{h^3}{6} \begin{pmatrix} -2y'y \\ (y')^2 + 2y^3 \end{pmatrix}}
 \]
 \textit{(expresado deshaciendo el cambio de variable $u=y, v=y'$).}
-
+\end{sol}   
 \vspace{0.8cm}
-\subsection*{c) Región de estabilidad del método}
-
-La tabla de Butcher aislada que se nos da en la imagen es:
+\item Calcular la región de estabilidad del método con tabla de Butcher
 \[
 \begin{array}{c|c}
 1 & 1 \\
@@ -98,6 +97,7 @@ La tabla de Butcher aislada que se nos da en la imagen es:
   & 1
 \end{array}
 \]
+\begin{sol}
 Este es el \textbf{método de Euler implícito} (o Euler hacia atrás). 
 Para encontrar su región de estabilidad, lo aplicamos a la ecuación de prueba de Dahlquist $y' = \lambda y$:
 \[
@@ -124,7 +124,8 @@ La región de estabilidad absoluta $\mathcal{R}$ está formada por los $z \in \m
 \vspace{0.3cm}
 \noindent\textbf{Conclusión:} \\
 La región de estabilidad es \textbf{todo el plano complejo excluyendo el interior del disco abierto de radio 1 centrado en $z = 1$}. Al contener completamente el semiplano izquierdo ($\text{Re}(z) \le 0$), se trata de un método \textit{A-estable} (incondicionalmente estable para problemas disipativos), lo que es característico de los métodos implícitos.
-
+\end{sol}
+\end{enumerate}
 \chapter{Parcial I Recuperaci\'on 26/27}
 \begin{ejer}{1 (1.5 puntos)}
 \textbf{1. Ecuaciones Diferenciales Ordinarias (0.75 pts):} Escriba explícitamente 1 ecuación diferencial ordinaria autónoma y lineal de tercer orden escalar que sea estable pero no asintóticamente. Muestre su solución general, analice su estabilidad y escríbala en forma de sistema equivalente de primer orden $x' = Ax$.
