@@ -691,42 +691,176 @@ Dado que todas las identidades hasta orden 4 se cumplen de manera exacta sin dep
 
 
 
-
+AÑADIR D\'IA 03/11
 
 \begin{ejer}    
-    Calcular la regi\'on de estabilidad del m\'etodo 
+    Calcular la regi\'on de estabilidad de los m\'etodos
 $$\begin{array}{c|cc}
+    \frac{1}{2} & \frac{1}{2}  \\
+    \hline  & 1
+\end{array} \qquad \begin{array}{c|cc}
     0 & 0 & 0 \\
     1 & 1 & 0 \\
     \hline  & \frac{1}{2} & \frac{1}{2}
-\end{array}$$
-e integrar $y'= \left( \begin{smallmatrix}
-    -1 & 0 \\ 0 & -1000
-\end{smallmatrix} \right) y$ y calcula el paso m\'aximo $h_{\max}$.
-\end{ejer}
-
-
-\begin{ejer}    
-    Calcular la regi\'on de estabilidad del m\'etodo, dado $\gamma = \frac{1-\sqrt{2}}{2}$,
-$$\begin{array}{c|cc}
+\end{array} \qquad \begin{array}{c|cc}
     \gamma & \gamma & 0 \\
     1 & 1-\gamma & \gamma \\
     \hline  & 1-\gamma & \gamma
-\end{array}$$
-e integrar $y'= \left( \begin{smallmatrix}
-    -1 & 0 \\ 0 & -1000
-\end{smallmatrix} \right) y$ y calcula el paso m\'aximo $h_{\max}$.
-\end{ejer}
-
-
-\begin{ejer}    
-    Calcular la regi\'on de estabilidad del m\'etodo 
-$$\begin{array}{c|cc}
+\end{array} \qquad \begin{array}{c|cc}
     0 & 0 & 0 \\
     1 & \frac{1}{2} & \frac{1}{2} \\
     \hline  & \frac{1}{2} & \frac{1}{2}
-\end{array}$$
-e integrar $y'= \left( \begin{smallmatrix}
+\end{array} $$
+donde $\gamma = \frac{1-\sqrt{2}}{2}$, e integrar $y'= \left( \begin{smallmatrix}
     -1 & 0 \\ 0 & -1000
-\end{smallmatrix} \right) y$ y calcula el paso m\'aximo $h_{\max}$. Programarlo
+\end{smallmatrix} \right) y$ y calcula el paso m\'aximo $h_{\max}$.
 \end{ejer}
+\begin{sol}
+    Consideramos la ecuación de prueba de Dahlquist $y' = \lambda y$ (con $z = h\lambda$) para calcular de forma directa la función de estabilidad $R(z)$ de cada método, e integramos el sistema rígido:
+\[
+y' = \begin{pmatrix} -1 & 0 \\ 0 & -1000 \end{pmatrix} y
+\]
+cuyos autovalores son $\lambda_1 = -1$ y $\lambda_2 = -1000$.
+
+\begin{enumerate}[\bfseries Método 1:]
+    \item \textbf{Punto Medio Implícito}
+    \[
+    \begin{array}{c|c}
+    \frac{1}{2} & \frac{1}{2} \\[0.3em]
+    \hline
+    \rule{0pt}{1.2em} & 1
+    \end{array}
+    \]
+    
+    \begin{enumerate}[a)]
+        \item \textbf{Cálculo directo de $R(z)$:}
+        Planteamos la etapa $Y_1$:
+        \[
+        Y_1 = y_n + h\left(\frac{1}{2}\right)\lambda Y_1 = y_n + \frac{z}{2} Y_1 \implies Y_1\left(1 - \frac{z}{2}\right) = y_n \implies Y_1 = \frac{y_n}{1 - z/2}
+        \]
+        Actualizamos $y_{n+1}$:
+        \[
+        y_{n+1} = y_n + h(1)\lambda Y_1 = y_n + z Y_1 = y_n \left(1 + \frac{z}{1 - z/2}\right) = y_n \left(\frac{2 + z}{2 - z}\right)
+        \]
+        \[
+        \mathbf{R(z) = \frac{2 + z}{2 - z}}
+        \]
+        
+        \item \textbf{Región de estabilidad y paso máximo $h_{\max}$:}
+        \begin{itemize}
+            \item \textbf{Región de estabilidad:} $|R(z)| \le 1 \iff \text{Re}(z) \le 0$ (método $A$-estable).
+            \item \textbf{Intervalo de estabilidad real:} $(-\infty, 0]$.
+            \item \textbf{Paso máximo:} Dado que $\lambda_1 = -1$ y $\lambda_2 = -1000$ son reales negativos, $z_i \in (-\infty, 0]$ para todo $h > 0$.
+            \[
+            \mathbf{h_{\max} = \infty \quad (\text{Incondicionalmente estable})}
+            \]
+        \end{itemize}
+    \end{enumerate}
+
+    \vspace{0.5cm}
+    \item \textbf{Heun (RK2 Explícito)}
+    \[
+    \begin{array}{c|cc}
+    0 & 0 & 0 \\[0.3em]
+    1 & 1 & 0 \\[0.3em]
+    \hline
+    \rule{0pt}{1.2em} & \frac{1}{2} & \frac{1}{2}
+    \end{array}
+    \]
+    
+    \begin{enumerate}[a)]
+        \item \textbf{Cálculo directo de $R(z)$:}
+        Escribimos las etapas para $y' = \lambda y$:
+        \begin{enumerate}[1.]
+            \item $Y_1 = y_n$
+            \item $Y_2 = y_n + z Y_1 = y_n(1 + z)$
+        \end{enumerate}
+        Actualizamos $y_{n+1}$:
+        \[
+        y_{n+1} = y_n + \frac{z}{2} Y_1 + \frac{z}{2} Y_2 = y_n \left(1 + \frac{z}{2} + \frac{z}{2}(1 + z)\right) = y_n \left(1 + z + \frac{z^2}{2}\right)
+        \]
+        \[
+        \mathbf{R(z) = 1 + z + \frac{z^2}{2}}
+        \]
+        
+        \item \textbf{Región de estabilidad y paso máximo $h_{\max}$:}
+        \begin{itemize}
+            \item \textbf{Intervalo de estabilidad real:} $-1 \le 1 + x + \frac{x^2}{2} \le 1 \implies x \in [-2, 0]$.
+            \item \textbf{Paso máximo:} Viene limitado por el autovalor dominante $\lambda_2 = -1000$:
+            \[
+            -1000 h \ge -2 \implies \mathbf{h_{\max} = \frac{2}{1000} = 2 \times 10^{-3}}
+            \]
+        \end{itemize}
+    \end{enumerate}
+
+    \vspace{0.5cm}
+    \item \textbf{SDIRK2 con $\gamma = \frac{1-\sqrt{2}}{2}$}
+    \[
+    \begin{array}{c|cc}
+    \gamma & \gamma & 0 \\[0.3em]
+    1 & 1-\gamma & \gamma \\[0.3em]
+    \hline
+    \rule{0pt}{1.2em} & 1-\gamma & \gamma
+    \end{array}
+    \]
+    
+    \begin{enumerate}[a)]
+        \item \textbf{Cálculo directo de $R(z)$:}
+        Como la fila de pesos $b^T = [1-\gamma, \gamma]$ es idéntica a la segunda fila de $A$, la solución coincide con la segunda etapa: $y_{n+1} = Y_2$.
+        \begin{enumerate}[1.]
+            \item Etapa 1 ($Y_1$): $Y_1 = y_n + z\gamma Y_1 \implies Y_1 = \dfrac{y_n}{1 - z\gamma}$
+            \item Etapa 2 ($Y_2$): $Y_2 = y_n + z(1-\gamma)Y_1 + z\gamma Y_2 \implies Y_2(1 - z\gamma) = y_n + z(1-\gamma)\dfrac{y_n}{1 - z\gamma}$
+        \end{enumerate}
+        Despejando $Y_2$:
+        \[
+        Y_2 = y_n \frac{1 - z\gamma + z(1-\gamma)}{(1 - z\gamma)^2} = y_n \frac{1 + z(1 - 2\gamma)}{(1 - z\gamma)^2}
+        \]
+        Como $1 - 2\gamma = 1 - (1 - \sqrt{2}) = \sqrt{2}$:
+        \[
+        \mathbf{R(z) = \frac{1 + z\sqrt{2}}{(1 - z\gamma)^2}}
+        \]
+        
+        \item \textbf{Región de estabilidad y paso máximo $h_{\max}$:}
+        \begin{itemize}
+            \item \textbf{Intervalo de estabilidad real:} Al imponer $|R(x)| \le 1$ para $x \le 0$, la cota inferior activa es $x \ge \dfrac{1 - 2\sqrt{2} + \sqrt{3}}{2\gamma^2} \approx -1.124$.
+            \item \textbf{Paso máximo:} Limitado por $\lambda_2 = -1000$:
+            \[
+            -1000 h \ge -1.124 \implies \mathbf{h_{\max} \approx 1.124 \times 10^{-3}}
+            \]
+        \end{itemize}
+    \end{enumerate}
+
+    \vspace{0.5cm}
+    \item \textbf{Regla del Trapecio Implícita}
+    \[
+    \begin{array}{c|cc}
+    0 & 0 & 0 \\[0.3em]
+    1 & \frac{1}{2} & \frac{1}{2} \\[0.3em]
+    \hline
+    \rule{0pt}{1.2em} & \frac{1}{2} & \frac{1}{2}
+    \end{array}
+    \]
+    
+    \begin{enumerate}[a)]
+        \item \textbf{Cálculo directo de $R(z)$:}
+        Al ser la fila $b^T$ idéntica a la segunda fila de $A$, la solución es $y_{n+1} = Y_2$:
+        \begin{enumerate}[1.]
+            \item $Y_1 = y_n$
+            \item $Y_2 = y_n + \frac{z}{2} Y_1 + \frac{z}{2} Y_2 \implies Y_2\left(1 - \frac{z}{2}\right) = y_n\left(1 + \frac{z}{2}\right) \implies Y_2 = y_n \left(\frac{2 + z}{2 - z}\right)$
+        \end{enumerate}
+        \[
+        \mathbf{R(z) = \frac{2 + z}{2 - z}}
+        \]
+        
+        \item \textbf{Región de estabilidad y paso máximo $h_{\max}$:}
+        \begin{itemize}
+            \item \textbf{Región de estabilidad:} Semiplano izquierdo $\text{Re}(z) \le 0$ ($A$-estable).
+            \item \textbf{Intervalo de estabilidad real:} $(-\infty, 0]$.
+            \item \textbf{Paso máximo:} Incondicionalmente estable para autovalores con parte real negativa.
+            \[
+            \mathbf{h_{\max} = \infty}
+            \]
+        \end{itemize}
+    \end{enumerate}
+\end{enumerate}
+\end{sol}
