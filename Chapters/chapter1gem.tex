@@ -677,5 +677,102 @@ Para $Y' = F(Y)$, si la matriz jacobiana $JF=A$ tiene autovalores $\lambda_1, \l
 
 \section{M\'etodos semi-impl\'icitos}
 $\displaystyle \int_a^b f(t) dt $ parece lo mismo que $y'=f(t), \, y(0)=a$ pero no lo es, se demostr\'o por un canadiense hace poco.
+
+\section{Teoría de estabilidad lineal para métodos Runge-Kutta}
+\begin{enumerate} 
+\item Reducción a la ecuación escalar de prueba
+
+Para un sistema lineal $Y' = A Y$, utilizando la transformación $Y = Q Z$ donde $A = Q^{-1} \Lambda Q$, con $\Lambda = \text{diag}[\lambda_1, \dots, \lambda_m]$, $(QY)' = \Lambda (QY)$, el sistema se desacopla en ecuaciones escalares independientes $Z' = \Lambda Z$, es decir, 
+$$\begin{cases}
+    z_1' = \lambda_1 z_1 \\ \vdots \\ z_n' = \lambda_n z_n
+\end{cases}$$
+Por tanto, basta con estudiar la ``ecuación escalar de prueba''
+\begin{equation}
+y' = \lambda y, \quad \lambda \in \mathbb{C}, \quad \text{Re}(\lambda) < 0
+\end{equation}
+
+\item Función de estabilidad $R( h\lambda)$
+Al aplicar un método de Runge-Kutta general a la ecuación de prueba $y'=\lambda y$, se obtiene una relación de recurrencia de un solo paso:
+\begin{equation*} 
+y_{n+1} = R( h\lambda) y_n
+\end{equation*}
+donde a $R(\lambda h)$ se le llama la funci\'on de estabilidad del m\'etodo.
+\begin{ejem}
+    Al aplicar al m\'etodo de Euler Expl\'icito a la ecuaci\'on de prueba, se obtiene
+    $$y_{n+1} = y_n + h \lambda y_n = (1 + h \lambda) y_n = R(\lambda h) y_n$$
+    En este caso, $R( h\lambda) = 1 + h \lambda $.
+\end{ejem}
+El método converge o es ``absolutamente estable'' para los valores de $ h\lambda$ que satisfacen
+\begin{equation}
+|R( h\lambda)| < 1
+\end{equation}
+como hemos visto en la primera parte del curso. 
+\end{enumerate}
+\begin{defi}
+    Llamamos regi\'on de estabilidad a la regi\'on del plano complejo donde el m\'etodo converge, es decir, donde $|R( h \lambda)| < 1$. Llamamos frontera de estabilidad a la curva del plano complejo donde $|R( h \lambda)| = 1$.
+\end{defi}
+\begin{ejem}
+    Continuando con el ejemplo anterior, la regi\'on de estabilidad del m\'etodo de Euler expl\'icito es
+    $$\mathcal{R} = \{ z \in \mathbb{C} : |R(z)| < 1 \} = \{ z \in \mathbb{C} : |1 + z| < 1 \}$$
+    Para el c\'alculo expl\'icito, calculamos su frontera de estabilidad
+    $$|1+h \lambda | =1 \iff 1+h \lambda = e^{i\theta} \iff \lambda h = e^{i\theta} - 1, \quad \theta \in [0, 2\pi)$$
+    que es la circunferencia de radio $1$ centrada en $-1$.  
+    $$\begin{tikzpicture}
+        \draw[->] (-2.5,0) -- (.5,0) node[right] {$\text{Re}(z)$};
+        \draw[->] (0,-1) -- (0,1) node[above] {$\text{Im}(z)$};
+        \draw[thick, blue] (-1,0) circle(1);
+    \end{tikzpicture}$$
+    Falta decidir si la regi\'on de estabilidad es el interior o el exterior de la circunferencia. Para ello, tomamos un punto de prueba, por ejemplo $z=-1$, y vemos que $|R(-1)| = 0 < 1$, por lo que el interior de la circunferencia pertenece a la regi\'on de estabilidad. 
+    
+    Por tanto, la regi\'on de estabilidad del m\'etodo de Euler expl\'icito es el interior de la circunferencia.
+\end{ejem}
+
+\section{Definiciones de estabilidad}
+
+\begin{enumerate}[\bfseries 1.]
+    \item \textbf{$A$-estabilidad ($A$-stability)}
+    
+    Un método numérico para ecuaciones diferenciales ordinarias se dice \textbf{$A$-estable} si su región de estabilidad absoluta $\mathcal{R}$ contiene a todo el semiplano izquierdo complejo:
+    \[
+    \mathcal{R} = \{ z \in \mathbb{C} : |R(z)| \le 1 \} \supseteq \{ z \in \mathbb{C} : \text{Re}(z) \le 0 \}
+    \]
+    
+    \begin{itemize}
+        \item \textbf{Significado práctico:} Al aplicarlo a la ecuación de prueba $y' = \lambda y$ con $\text{Re}(\lambda) < 0$, la solución numérica satisface:
+        \[
+        \lim_{n \to \infty} y_n = 0
+        \]
+        para cualquier tamaño de paso $h > 0$ (es decir, $h_{\max} = \infty$).
+    \end{itemize}
+
+    \vspace{0.5cm}
+
+    \item \textbf{$L$-estabilidad ($L$-stability)}
+    
+    Un método numérico se dice \textbf{$L$-estable} si satisface dos condiciones:
+    \begin{enumerate}[i)]
+        \item Es $A$-estable.
+        \item Su función de estabilidad $R(z)$ cumple:
+        \[
+        \lim_{\text{Re}(z) \to -\infty} R(z) = 0
+        \]
+    \end{enumerate}
+
+    \begin{itemize}
+        \item \textbf{Significado práctico:} Además de ser incondicionalmente estable, amortigua de forma inmediata las componentes extremadamente rígidas (\textit{stiff}, donde $\text{Re}(h\lambda) \to -\infty$) en un solo paso.
+        \item \textbf{Ejemplo comparativo:}
+        \begin{itemize}
+            \item La \textbf{Regla del Trapecio} es $A$-estable pero \textbf{no} $L$-estable, pues:
+            \[
+            \lim_{z \to -\infty} R(z) = \lim_{z \to -\infty} \frac{2+z}{2-z} = -1
+            \]
+            (mantiene oscilaciones no amortiguadas de alta frecuencia).
+            \item El método \textbf{SDIRK2} o \textbf{Euler Implícito} sí son $L$-estables, pues:
+            \[
+            \lim_{z \to -\infty} R(z) = \lim_{z \to -\infty} \frac{1}{1-z} = 0
+            \]
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
 \vfill
 \newpage
