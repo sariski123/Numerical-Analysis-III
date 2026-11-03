@@ -291,7 +291,7 @@ $$\begin{aligned} k_3 = f &+ h \{c_3 f_x + [(c_3 - a_{32})k_1 + a_{32}k_2]f_y\} 
         \item Runge-Kutta: $y_{n+1} = y_n + h(b_1 f_n + b_2 f_{n+1}) $
         
         \hspace{1.5cm} $y_{n+1} = y_n + h(b_1 k_1 + b_2 k_2) $ donde $k_1 = f(x_n,\, y_n), \, k_2 = f(x_n,\, y_n+h \cdot k_1)$
-        \item Mutlipaso: $y_{n+1} = y_n + h \left( f_n + \frac{1}{2} \nabla f_n  + \frac{1}{4} \underbrace{\nabla^2 f_n}_{\nabla f_n-\nabla f_{n-1}} \right)$
+        \item Multipaso: $y_{n+1} = y_n + h \left( f_n + \frac{1}{2} \nabla f_n  + \frac{1}{4} \underbrace{\nabla^2 f_n}_{\nabla f_n-\nabla f_{n-1}} \right)$
     \end{itemize}
 \end{ejems}
 
@@ -309,7 +309,6 @@ $$\begin{aligned} k_3 = f &+ h \{c_3 f_x + [(c_3 - a_{32})k_1 + a_{32}k_2]f_y\} 
 \section{Teoría de Butcher: Derivadas de Fréchet, \'arboles y correspondencia} 
 \subsection{Introducci\'on} 
 %Las ideas que estamos a punto de describir se remontan a un artículo de Merson (1957), pero su desarrollo en una teoría importante se debe a J. C. Butcher, en una larga serie de artículos que comenzaron a mediados de la década de 1960. El lector que desee ver una descripción completa de la teoría puede consultar el libro de Butcher (1987) que, dicho sea de paso, contiene la bibliografía disponible más completa sobre el tema de los métodos numéricos para ecuaciones diferenciales ordinarias, con unas 2000 entradas. En las secciones siguientes presentaremos solo una versión simplificada de la teoría, con el objetivo de permitir al lector utilizar la teoría para establecer las condiciones de orden (y la estructura del error de truncamiento local) y apreciar algunas de las consecuencias. En particular, no daremos ninguna prueba de los teoremas involucrados, y nuestro tratamiento de los aspectos algebraicos no será riguroso (¡posiblemente hasta el punto de ofender a algunos lectores!).
-
 \footnote{Lambert p. 157-162}Recordemos que, si bien hay una pérdida de generalidad al asumir que el problema de valor inicial \textit{escalar} es autónomo, no hay tal pérdida en el caso de un problema que involucra un sistema de ecuaciones diferenciales ordinarias. Ahora estamos tratando con sistemas, y se logra una simplificación útil asumiendo la forma autónoma
 \begin{equation}
 y' = f(y), \quad y(a) = \eta, \qquad f : \mathbb{R}^m \to \mathbb{R}^m, \quad m > 1 \tag{5.22}
@@ -674,10 +673,9 @@ Para $Y' = F(Y)$, si la matriz jacobiana $JF=A$ tiene autovalores $\lambda_1, \l
     \end{pmatrix} Y$$
     es stiff y se comporta bien con m\'etodos impl\'icitos o semi-impl\'icitos pero no con expl\'icitos.
 \end{ejem}
-
-\section{M\'etodos semi-impl\'icitos}
+\begin{obs}
 $\displaystyle \int_a^b f(t) dt $ parece lo mismo que $y'=f(t), \, y(0)=a$ pero no lo es, se demostr\'o por un canadiense hace poco.
-
+\end{obs}
 \section{Teoría de estabilidad lineal para métodos Runge-Kutta}
 \begin{enumerate} 
 \item Reducción a la ecuación escalar de prueba
@@ -687,11 +685,12 @@ $$\begin{cases}
     z_1' = \lambda_1 z_1 \\ \vdots \\ z_n' = \lambda_n z_n
 \end{cases}$$
 Por tanto, basta con estudiar la ``ecuación escalar de prueba''
-\begin{equation}
+\begin{equation*}
 y' = \lambda y, \quad \lambda \in \mathbb{C}, \quad \text{Re}(\lambda) < 0
-\end{equation}
+\end{equation*}
 
 \item Función de estabilidad $R( h\lambda)$
+
 Al aplicar un método de Runge-Kutta general a la ecuación de prueba $y'=\lambda y$, se obtiene una relación de recurrencia de un solo paso:
 \begin{equation*} 
 y_{n+1} = R( h\lambda) y_n
