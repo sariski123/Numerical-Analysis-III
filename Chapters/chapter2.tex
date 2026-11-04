@@ -715,14 +715,7 @@ donde $\gamma = \frac{1-\sqrt{2}}{2}$, e integrar $y'= \left( \begin{smallmatrix
     -1 & 0 \\ 0 & -1000
 \end{smallmatrix} \right) y$ y calcula el paso m\'aximo $h_{\max}$.
 \end{ejer}
-\begin{sol}
-    Consideramos la ecuación de prueba de Dahlquist $y' = \lambda y$ (con $z = h\lambda$) para calcular de forma directa la función de estabilidad $R(z)$ de cada método, e integramos el sistema rígido:
-\[
-y' = \begin{pmatrix} -1 & 0 \\ 0 & -1000 \end{pmatrix} y
-\]
-cuyos autovalores son $\lambda_1 = -1$ y $\lambda_2 = -1000$.
-
-\begin{enumerate}[\bfseries Método 1:]
+\begin{sol}\begin{enumerate}[\bfseries Método 1:]
     \item \textbf{Punto Medio Implícito}
     \[
     \begin{array}{c|c}
@@ -733,14 +726,18 @@ cuyos autovalores son $\lambda_1 = -1$ y $\lambda_2 = -1000$.
     \]
     
     \begin{enumerate}[a)]
-        \item \textbf{Cálculo directo de $R(z)$:}
-        Planteamos la etapa $Y_1$:
+        \item \textbf{Deducción directa de $R(z)$ en función de $y_n$ y $y_{n+1}$:}
+        La ecuación general del método expresa el estado $y_{n+1}$ evaluando el campo en el punto medio entre $y_n$ y $y_{n+1}$:
         \[
-        Y_1 = y_n + h\left(\frac{1}{2}\right)\lambda Y_1 = y_n + \frac{z}{2} Y_1 \implies Y_1\left(1 - \frac{z}{2}\right) = y_n \implies Y_1 = \frac{y_n}{1 - z/2}
+        y_{n+1} = y_n + h f\left(t_n + \frac{h}{2}, \, \frac{y_n + y_{n+1}}{2}\right)
         \]
-        Actualizamos $y_{n+1}$:
+        Para $y' = \lambda y$:
         \[
-        y_{n+1} = y_n + h(1)\lambda Y_1 = y_n + z Y_1 = y_n \left(1 + \frac{z}{1 - z/2}\right) = y_n \left(\frac{2 + z}{2 - z}\right)
+        y_{n+1} = y_n + h \lambda \left(\frac{y_n + y_{n+1}}{2}\right) = y_n + \frac{z}{2} y_n + \frac{z}{2} y_{n+1}
+        \]
+        Agrupando $y_{n+1}$ a la izquierda:
+        \[
+        y_{n+1} \left(1 - \frac{z}{2}\right) = y_n \left(1 + \frac{z}{2}\right) \implies y_{n+1} = y_n \left(\frac{2 + z}{2 - z}\right)
         \]
         \[
         \mathbf{R(z) = \frac{2 + z}{2 - z}}
@@ -748,7 +745,7 @@ cuyos autovalores son $\lambda_1 = -1$ y $\lambda_2 = -1000$.
         
         \item \textbf{Región de estabilidad y paso máximo $h_{\max}$:}
         \begin{itemize}
-            \item \textbf{Región de estabilidad:} $|R(z)| \le 1 \iff \text{Re}(z) \le 0$ (método $A$-estable).
+            \item \textbf{Región de estabilidad:} $|R(z)| \le 1 \iff \text{Re}(z) \le 0$ ($A$-estable).
             \item \textbf{Intervalo de estabilidad real:} $(-\infty, 0]$.
             \item \textbf{Paso máximo:} Dado que $\lambda_1 = -1$ y $\lambda_2 = -1000$ son reales negativos, $z_i \in (-\infty, 0]$ para todo $h > 0$.
             \[
@@ -769,15 +766,17 @@ cuyos autovalores son $\lambda_1 = -1$ y $\lambda_2 = -1000$.
     \]
     
     \begin{enumerate}[a)]
-        \item \textbf{Cálculo directo de $R(z)$:}
-        Escribimos las etapas para $y' = \lambda y$:
-        \begin{enumerate}[1.]
-            \item $Y_1 = y_n$
-            \item $Y_2 = y_n + z Y_1 = y_n(1 + z)$
-        \end{enumerate}
-        Actualizamos $y_{n+1}$:
+        \item \textbf{Deducción directa de $R(z)$ en función de $y_n$ y $y_{n+1}$:}
+        Sustituyendo el paso explícito directamente en la fórmula de avance:
         \[
-        y_{n+1} = y_n + \frac{z}{2} Y_1 + \frac{z}{2} Y_2 = y_n \left(1 + \frac{z}{2} + \frac{z}{2}(1 + z)\right) = y_n \left(1 + z + \frac{z^2}{2}\right)
+        y_{n+1} = y_n + \frac{h}{2} \left[ f(t_n, y_n) + f(t_n + h, y_n + h f(t_n, y_n)) \right]
+        \]
+        Para $y' = \lambda y$:
+        \[
+        y_{n+1} = y_n + \frac{h}{2} \left[ \lambda y_n + \lambda (y_n + h \lambda y_n) \right] = y_n + \frac{z}{2} \left[ y_n + y_n (1 + z) \right]
+        \]
+        \[
+        y_{n+1} = y_n \left(1 + \frac{z}{2} + \frac{z}{2}(1 + z)\right) = y_n \left(1 + z + \frac{z^2}{2}\right)
         \]
         \[
         \mathbf{R(z) = 1 + z + \frac{z^2}{2}}
@@ -786,7 +785,7 @@ cuyos autovalores son $\lambda_1 = -1$ y $\lambda_2 = -1000$.
         \item \textbf{Región de estabilidad y paso máximo $h_{\max}$:}
         \begin{itemize}
             \item \textbf{Intervalo de estabilidad real:} $-1 \le 1 + x + \frac{x^2}{2} \le 1 \implies x \in [-2, 0]$.
-            \item \textbf{Paso máximo:} Viene limitado por el autovalor dominante $\lambda_2 = -1000$:
+            \item \textbf{Paso máximo:} Limitado por el autovalor dominante $\lambda_2 = -1000$:
             \[
             -1000 h \ge -2 \implies \mathbf{h_{\max} = \frac{2}{1000} = 2 \times 10^{-3}}
             \]
@@ -805,27 +804,34 @@ cuyos autovalores son $\lambda_1 = -1$ y $\lambda_2 = -1000$.
     \]
     
     \begin{enumerate}[a)]
-        \item \textbf{Cálculo directo de $R(z)$:}
-        Como la fila de pesos $b^T = [1-\gamma, \gamma]$ es idéntica a la segunda fila de $A$, la solución coincide con la segunda etapa: $y_{n+1} = Y_2$.
-        \begin{enumerate}[1.]
-            \item Etapa 1 ($Y_1$): $Y_1 = y_n + z\gamma Y_1 \implies Y_1 = \dfrac{y_n}{1 - z\gamma}$
-            \item Etapa 2 ($Y_2$): $Y_2 = y_n + z(1-\gamma)Y_1 + z\gamma Y_2 \implies Y_2(1 - z\gamma) = y_n + z(1-\gamma)\dfrac{y_n}{1 - z\gamma}$
-        \end{enumerate}
-        Despejando $Y_2$:
+        \item \textbf{Deducción directa de $R(z)$ en función de $y_n$ y $y_{n+1}$:}
+        Como la fila $b^T$ coincide con la segunda fila de $A$, la solución al final del paso es directamente la evaluación de la segunda etapa, donde la primera evaluación del campo $f$ satisface $f = \frac{\lambda y_n}{1 - z\gamma}$:
         \[
-        Y_2 = y_n \frac{1 - z\gamma + z(1-\gamma)}{(1 - z\gamma)^2} = y_n \frac{1 + z(1 - 2\gamma)}{(1 - z\gamma)^2}
+        y_{n+1} = y_n + h(1-\gamma) \left(\frac{\lambda y_n}{1 - z\gamma}\right) + h\gamma \lambda y_{n+1}
         \]
-        Como $1 - 2\gamma = 1 - (1 - \sqrt{2}) = \sqrt{2}$:
+        Expresando los términos en función de $z = h\lambda$:
+        \[
+        y_{n+1} = y_n \left[ 1 + \frac{z(1-\gamma)}{1 - z\gamma} \right] + z\gamma y_{n+1}
+        \]
+        Agrupando $y_{n+1}$ a la izquierda:
+        \[
+        y_{n+1} (1 - z\gamma) = y_n \left[ \frac{1 - z\gamma + z(1-\gamma)}{1 - z\gamma} \right] = y_n \frac{1 + z(1 - 2\gamma)}{1 - z\gamma}
+        \]
+        Despejando $y_{n+1}$:
+        \[
+        y_{n+1} = y_n \frac{1 + z(1 - 2\gamma)}{(1 - z\gamma)^2}
+        \]
+        Sustituyendo $1 - 2\gamma = 1 - (1 - \sqrt{2}) = \sqrt{2}$:
         \[
         \mathbf{R(z) = \frac{1 + z\sqrt{2}}{(1 - z\gamma)^2}}
         \]
         
         \item \textbf{Región de estabilidad y paso máximo $h_{\max}$:}
         \begin{itemize}
-            \item \textbf{Intervalo de estabilidad real:} Al imponer $|R(x)| \le 1$ para $x \le 0$, la cota inferior activa es $x \ge \dfrac{1 - 2\sqrt{2} + \sqrt{3}}{2\gamma^2} \approx -1.124$.
+            \item \textbf{Intervalo de estabilidad real:} Al imponer $|R(x)| \le 1$ para $x \le 0$, el extremo inferior contiguo al origen es $x \ge -1.1234$.
             \item \textbf{Paso máximo:} Limitado por $\lambda_2 = -1000$:
             \[
-            -1000 h \ge -1.124 \implies \mathbf{h_{\max} \approx 1.124 \times 10^{-3}}
+            -1000 h \ge -1.1234 \implies \mathbf{h_{\max} \approx 1.1234 \times 10^{-3}}
             \]
         \end{itemize}
     \end{enumerate}
@@ -842,12 +848,19 @@ cuyos autovalores son $\lambda_1 = -1$ y $\lambda_2 = -1000$.
     \]
     
     \begin{enumerate}[a)]
-        \item \textbf{Cálculo directo de $R(z)$:}
-        Al ser la fila $b^T$ idéntica a la segunda fila de $A$, la solución es $y_{n+1} = Y_2$:
-        \begin{enumerate}[1.]
-            \item $Y_1 = y_n$
-            \item $Y_2 = y_n + \frac{z}{2} Y_1 + \frac{z}{2} Y_2 \implies Y_2\left(1 - \frac{z}{2}\right) = y_n\left(1 + \frac{z}{2}\right) \implies Y_2 = y_n \left(\frac{2 + z}{2 - z}\right)$
-        \end{enumerate}
+        \item \textbf{Deducción directa de $R(z)$ en función de $y_n$ y $y_{n+1}$:}
+        La regla del trapecio expresa el avance del paso directamente como:
+        \[
+        y_{n+1} = y_n + \frac{h}{2} \left[ f(t_n, y_n) + f(t_n + h, y_{n+1}) \right]
+        \]
+        Para $y' = \lambda y$:
+        \[
+        y_{n+1} = y_n + \frac{h}{2} \left[ \lambda y_n + \lambda y_{n+1} \right] = y_n + \frac{z}{2} y_n + \frac{z}{2} y_{n+1}
+        \]
+        Agrupando $y_{n+1}$ a la izquierda:
+        \[
+        y_{n+1} \left(1 - \frac{z}{2}\right) = y_n \left(1 + \frac{z}{2}\right) \implies y_{n+1} = y_n \left(\frac{2 + z}{2 - z}\right)
+        \]
         \[
         \mathbf{R(z) = \frac{2 + z}{2 - z}}
         \]
