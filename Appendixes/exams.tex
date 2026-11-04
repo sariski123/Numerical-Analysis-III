@@ -116,6 +116,34 @@ La región de estabilidad absoluta $\mathcal{R}$ está formada por los $z \in \m
 \noindent\textbf{Conclusión:} \\
 La región de estabilidad es \textbf{todo el plano complejo excluyendo el interior del disco abierto de radio 1 centrado en $z = 1$}. Al contener completamente el semiplano izquierdo ($\text{Re}(z) \le 0$), se trata de un método \textit{A-estable} (incondicionalmente estable para problemas disipativos), lo que es característico de los métodos implícitos.
 \end{sol}
+\item Programar
+$$\begin{array}{c|cc}
+\frac{1}{2} & \frac{1}{2} \\
+1 & \frac{1}{2} & \\
+\hline
+  & \frac{1}{2} & \frac{1}{2}
+\end{array}$$
+
+\begin{lstlisting}[language=Mathematica]
+f[x_, y_] := -10 y;
+x0 = xn = 0; y0 = yn = 1;
+Nit = 10; h = 1./100; h2 = h/2;
+
+resultados = {{x0, y0}};
+
+Do[k1 = f[xn, yn];
+(*k2var es el s\'imbolo para la ecuaci\'on; k2 recibe \'unicamente el valor num\'erico*)
+ (*k2=f[xn+h,yn+h2{k1+k2}*) (*x/. omite la sustituci\'on x-> *)
+ k2 = k2 /. FindRoot[k2 - f[xn + h, yn + h2 (k1 + k2)], {k2, k1}];
+ yn = yn + h2 (k1 + k2);
+ xn = x0 + i h;
+ AppendTo[resultados, {xn, yn}];, {i, 1, Nit}]
+
+TableForm[resultados, TableHeadings -> {None, {"x", "y"}}]
+\end{lstlisting}
+
+
+
 \end{enumerate}
 \chapter{Parcial I Recuperaci\'on 26/27}
 \begin{ejer}{1 (1.5 puntos)}
