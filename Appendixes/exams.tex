@@ -130,11 +130,17 @@ La región de estabilidad es \textbf{todo el plano complejo excluyendo el interi
 \item Programar
 $$\begin{array}{c|cc}
 \frac{1}{2} & \frac{1}{2} \\
-1 & \frac{1}{2} & \\
+1 & \frac{1}{2} & \frac{1}{2} \\
 \hline
   & \frac{1}{2} & \frac{1}{2}
 \end{array}$$
-
+\begin{sol}
+    Tenemos que $c=\begin{pmatrix} \frac{1}{2} \\ 1 \end{pmatrix}$, $A = \begin{pmatrix} \frac{1}{2} & 0 \\ \frac{1}{2} & 0 \end{pmatrix}$ y $b^T = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \end{pmatrix}$, de forma que
+    \begin{align*}
+    k_1 &  =   f\left(t_n + c_1 h, y_n + a_{11} k_1 + \cancelto{0}{a_{12}} k_2 \right) =f\left(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_1\right) \\
+    k_2 & =   f\left(t_n + c_2 h, y_n + a_{21} k_1 + a_{22} k_2 \right)=  f\left(t_n + h, y_n + \frac{h}{2} (k_1 + k_2)\right) \\
+    y_{n+1} &  = y_n + h (b_1 k_1 + b_2 k_2) = y_n + \frac{h}{2} \left( k_1+k_2 \right) 
+    \end{align*}
 \begin{lstlisting}[language=Mathematica]
 f[x_, y_] := -10 y;
 x0 = xn = 0; y0 = yn = 1;
@@ -152,9 +158,7 @@ Do[k1 = f[xn, yn];
 
 TableForm[resultados, TableHeadings -> {None, {"x", "y"}}]
 \end{lstlisting}
-
-
-
+\end{sol}
 \end{enumerate}
 \chapter{Parcial I Recuperaci\'on 26/27}
 \begin{ejer}{1 (1.5 puntos)}
