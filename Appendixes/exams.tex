@@ -111,6 +111,17 @@ La región de estabilidad absoluta $\mathcal{R}$ está formada por los $z \in \m
 \[
 \left| \frac{1}{1-z} \right| \le 1 \implies 1 \le |1 - z| \implies \mathbf{|z - 1| \ge 1}
 \]
+Para calcular la región de estabilidad, usamos la función en Mathematica
+\begin{lstlisting}[language=Mathematica]
+RegionPlot[Abs[1/(1 - (a + b I))] < 1, {a, -Infinity, Infinity}, {b, -Infinity, 
+  Infinity}]
+\end{lstlisting}
+o bien resolvemos con \begin{lstlisting}[language=Mathematica]
+sol= z /. Solve[Abs[1/(1 - z)] == E^{i t}, {z}]
+g1=ParametricPlot[{Re[sol[[1]]], Im[sol[[1]]]}, {t, 0, 2 Pi}, PlotStyle -> Thick]
+g2=ParametricPlot[{Re[sol[[2]]], Im[sol[[2]]]}, {t, 0, 2 Pi}, PlotStyle -> Thick]
+Show[g1, g2, PlotRange -> All]
+\end{lstlisting}
 
 \vspace{0.3cm}
 \noindent\textbf{Conclusión:} \\
