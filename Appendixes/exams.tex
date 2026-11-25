@@ -149,7 +149,6 @@ Nit = 10; h = 1./100; h2 = h/2;
 resultados = {{x0, y0}};
 
 Do[k1 = f[xn, yn];
-(*k2var es el s\'imbolo para la ecuaci\'on; k2 recibe \'unicamente el valor num\'erico*)
  (*k2=f[xn+h,yn+h2{k1+k2}*) (*x/. omite la sustituci\'on x-> *)
  k2 = k2 /. FindRoot[k2 - f[xn + h, yn + h2 (k1 + k2)], {k2, k1}];
  yn = yn + h2 (k1 + k2);
